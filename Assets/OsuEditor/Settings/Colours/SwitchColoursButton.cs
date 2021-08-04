@@ -16,7 +16,7 @@ namespace Assets.OsuEditor.Settings.Colours
             int newNumber = handler.GetNumber();
             newNumber++;
             newNumber %= Global.Map.Colors.Count;
-            handler.SetNumber(newNumber);
+            handler.ChangeNumber(newNumber);
         }
     }
 }

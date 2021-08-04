@@ -10,34 +10,56 @@ namespace Assets.OsuEditor.Settings.Colours
     class ColourHandler : MonoBehaviour
     {
         [SerializeField] private Text text;
+        [SerializeField] private Slider r, g, b;
         private Image image;
-        private int number=0;
-        [SerializeField] Slider r, g, b;
+        private int number = 0;
+        
 
         void Awake()
         {
             image = GetComponent<Image>();
+            r.onValueChanged.AddListener(delegate { UpdateColourR(); });
+            g.onValueChanged.AddListener(delegate { UpdateColourG(); });
+            b.onValueChanged.AddListener(delegate { UpdateColourB(); });
         }
         void Start()
         {
-            SetNumber(0);
+            ChangeNumber(0);
         }
-        public void UpdateColour()
+        private void UpdateColourR()
         {
-            text.text = (number + 1).ToString();
+            var c = Global.Map.Colors[number];
+            c.r = r.value / 255f;
+            Global.Map.Colors[number] = c;
             image.color = Global.Map.Colors[number];
-          //  Debug.Log(image.color);
-
+        }
+        private void UpdateColourG()
+        {
+            var c = Global.Map.Colors[number];
+            c.g = g.value / 255f;
+            Global.Map.Colors[number] = c;
+            image.color = Global.Map.Colors[number];
+        }
+        private void UpdateColourB()
+        {
+            var c = Global.Map.Colors[number];
+            c.b = b.value / 255f;
+            Global.Map.Colors[number] = c;
+            image.color = Global.Map.Colors[number];
         }
 
-        public void SetNumber(int num)
+        public void ChangeNumber(int num)
         {
             if (num < 0 || num > Global.Map.Colors.Count) { throw new ArgumentException(); }
             number = num;
-            UpdateColour();
+            UpdateColourNumber();
             UpdateSliders();
         }
-
+        public void UpdateColourNumber()
+        {
+            text.text = (number + 1).ToString();
+            image.color = Global.Map.Colors[number];
+        }
         public int GetNumber()
         {
             return number;
@@ -45,9 +67,9 @@ namespace Assets.OsuEditor.Settings.Colours
 
         public void UpdateSliders()
         {
-            r.value = image.color.r * 255;
-            g.value = image.color.g * 255;
-            b.value = image.color.b * 255;
+            r.value = Global.Map.Colors[number].r * 255;
+            g.value = Global.Map.Colors[number].g * 255;
+            b.value = Global.Map.Colors[number].b * 255;
         }
     }
 }

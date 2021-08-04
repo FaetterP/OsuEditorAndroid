@@ -16,7 +16,7 @@ namespace Assets.OsuEditor.Settings.Colours
             if (Global.Map.Colors.Count < 8)
             {
                 Global.Map.Colors.Add(Color.white);
-                handler.SetNumber(Global.Map.Colors.Count - 1);
+                handler.ChangeNumber(Global.Map.Colors.Count - 1);
             }
             UpdateStatus();
             Global.Map.UpdateComboColours();

@@ -22,7 +22,7 @@ namespace Assets.OsuEditor.Settings.Colours
             var c = Global.Map.Colors[handler.GetNumber()];
             c.r = thisSlider.value / 255f;
             Global.Map.Colors[handler.GetNumber()] = c;
-            handler.SetNumber(handler.GetNumber());
+            handler.ChangeNumber(handler.GetNumber());
         }
     }
 }
