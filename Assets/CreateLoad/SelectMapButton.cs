@@ -9,10 +9,10 @@ using System.IO;
 
 namespace Assets.CreateLoad
 {
-    class SelectMapButton : IClickable
+    class SelectMapButton : MonoBehaviour
     {
         private string MapName;
-        public override void Click()
+        void OnMouseDown()
         {
             Global.FullPathToMap = Global.FullPathToMapFolder + MapName;
             SceneManager.LoadScene(4);

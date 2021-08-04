@@ -8,12 +8,12 @@ using UnityEngine.UI;
 
 namespace Assets.CreateLoad
 {
-    class CheckAllFields : IClickable
+    class CheckAllFields : MonoBehaviour
     {
         [SerializeField] InputField Artist, ArtistU, Title, TitleU;
         // [SerializeField] Text Err;
         [SerializeField] Canvas Disable, Enable;
-        public override void Click()
+        void OnMouseDown()
         {
             if (isAllFieldsFilled())
             {

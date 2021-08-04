@@ -7,9 +7,9 @@ using UnityEngine;
 
 namespace Assets.OsuEditor.Settings.TimingPoints
 {
-    class RemoveTimingPointButton : IClickable
+    class RemoveTimingPointButton : MonoBehaviour
     {
-        public override void Click()
+        void OnMouseDown()
         {
             Global.Map.TimingPoints.Remove(transform.parent.GetComponent<TimingPointElement>().timingPoint);
             transform.parent.parent.GetComponent<LoaderTimingPoints>().UpdateTimingPoints();

@@ -9,12 +9,12 @@ using UnityEngine.UI;
 
 namespace Assets.OsuEditor.Settings.TimingPoints.AddParent
 {
-    class DoneButton : IClickable
+    class DoneButton : MonoBehaviour
     {
         [SerializeField] private Controller Controller;
         [SerializeField] private Canvas Enable, Disable;
 
-        public override void Click()
+        void OnMouseDown()
         {
             if (Controller.status != 2) { return; }
 

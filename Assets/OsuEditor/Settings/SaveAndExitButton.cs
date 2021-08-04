@@ -8,9 +8,9 @@ using UnityEngine.UI;
 
 namespace Assets.OsuEditor.Settings
 {
-    class SaveAndExitButton : IClickable
+    class SaveAndExitButton : MonoBehaviour
     {
-        public override void Click()
+        void OnMouseDown()
         {
             Global.Map.SaveToFile();
             UnityEngine.SceneManagement.SceneManager.LoadScene(3);

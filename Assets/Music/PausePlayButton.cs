@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace Assets.Music
 {
-    class PausePlayButton : IClickable
+    class PausePlayButton : MonoBehaviour
     {
         [SerializeField]private Sprite toPlay = null, toPause = null;
         [SerializeField]private AudioSource music;
@@ -23,7 +23,7 @@ namespace Assets.Music
             thisImage.sprite = toPlay;
         }
 
-        public override void Click()
+        void OnMouseDown()
         {
             if (music.isPlaying)
             {

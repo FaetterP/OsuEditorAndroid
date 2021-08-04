@@ -6,10 +6,10 @@ using UnityEngine;
 
 namespace Assets.Utilities
 {
-    class OpenerUrl : IClickable
+    class OpenerUrl : MonoBehaviour
     {
         [SerializeField] private string URL_1 = "", URL_2 = "";
-        public override void Click()
+        void OnMouseDown()
         {
             Application.OpenURL(URL_1 + Global.Lang + URL_2);
         }

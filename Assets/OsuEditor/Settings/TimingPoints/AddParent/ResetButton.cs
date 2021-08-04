@@ -7,11 +7,11 @@ using UnityEngine;
 
 namespace Assets.OsuEditor.Settings.TimingPoints.AddParent
 {
-    class ResetButton : IClickable
+    class ResetButton : MonoBehaviour
     {
         [SerializeField] Controller Controller;
 
-        public override void Click()
+        void OnMouseDown()
         {
             Controller.Reset();
         }

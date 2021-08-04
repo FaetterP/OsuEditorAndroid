@@ -8,10 +8,10 @@ using UnityEngine.UI;
 
 namespace Assets.OsuEditor.Settings.Colours
 {
-    class SwitchColoursButton : IClickable
+    class SwitchColoursButton : MonoBehaviour
     {
         [SerializeField] ColourHandler handler;
-        public override void Click()
+        void OnMouseDown()
         {
             int newNumber = handler.GetNumber();
             newNumber++;

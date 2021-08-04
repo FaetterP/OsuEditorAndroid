@@ -10,10 +10,10 @@ using UnityEngine.SceneManagement;
 
 namespace Assets.CreateLoad
 {
-    class CheckMusicAndGoBackButton : IClickable
+    class CheckMusicAndGoBackButton : MonoBehaviour
     {
         [SerializeField] private Text Err;
-        public override void Click()
+        void OnMouseDown()
         {
             if (isContainsFiles())
             {

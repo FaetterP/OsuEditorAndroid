@@ -8,9 +8,9 @@ using UnityEngine;
 
 namespace Assets.OsuEditor.Settings
 {
-    class SaveButton : IClickable
+    class SaveButton : MonoBehaviour
     {
-        public override void Click()
+        void OnMouseDown()
         {
             Global.Map.SaveToFile();
         }

@@ -7,10 +7,10 @@ using UnityEngine.SceneManagement;
 
 namespace Assets.Utilities
 {
-    class ChangerScenes : IClickable
+    class ChangerScenes : MonoBehaviour
     {
         [SerializeField] private int number = 0;
-        public override void Click()
+        void OnMouseDown()
         {
             SceneManager.LoadScene(number);
         }

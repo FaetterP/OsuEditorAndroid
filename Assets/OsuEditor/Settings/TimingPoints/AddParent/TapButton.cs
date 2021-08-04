@@ -8,12 +8,12 @@ using UnityEngine.UI;
 
 namespace Assets.OsuEditor.Settings.TimingPoints.AddParent
 {
-    class TapButton : IClickable
+    class TapButton : MonoBehaviour
     {
         [SerializeField] private Controller Controller;
         [SerializeField] private AudioSource Music;
         private double last_time;
-        public override void Click()
+        void OnMouseDown()
         {
             if (!Music.isPlaying) { Music.Play(); }
             if (Controller.status == 0) { last_time = Time.time; Controller.SetStartTIme(Global.MusicTime); Controller.status = 1; return; }

@@ -8,10 +8,10 @@ using UnityEngine;
 
 namespace Assets.CreateLoad
 {
-    class SelectMapsetButton : IClickable
+    class SelectMapsetButton : MonoBehaviour
     {
         private string MapName;
-        public override void Click()
+        void OnMouseDown()
         {
             Global.FullPathToMapFolder = Application.persistentDataPath+"/"+MapName+"/";
             FindObjectOfType<LoaderMaps>().UpdateMaps();

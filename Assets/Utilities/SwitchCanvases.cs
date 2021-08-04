@@ -7,11 +7,11 @@ using UnityEngine.UI;
 
 namespace Assets.Utilities
 {
-    class SwitchCanvases : IClickable
+    class SwitchCanvases : MonoBehaviour
     {
         [SerializeField] private Canvas[] toEnable;
         [SerializeField] private Canvas[] toDisable;
-        public override void Click()
+        void OnMouseDown()
         {
             foreach (var t in toEnable)
             {

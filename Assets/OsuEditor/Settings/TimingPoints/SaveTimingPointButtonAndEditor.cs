@@ -9,7 +9,7 @@ using Assets.Utilities;
 
 namespace Assets.OsuEditor.Settings.TimingPoints
 {
-    class SaveTimingPointButtonAndEditor : IClickable
+    class SaveTimingPointButtonAndEditor : MonoBehaviour
     {
         private TimingPoint TimingPoint;
 
@@ -38,7 +38,7 @@ namespace Assets.OsuEditor.Settings.TimingPoints
             return TimingPoint;
         }
 
-        public override void Click()
+        void OnMouseDown()
         {
             if (TimingPoint == null) { return; }
             TimingPoint.Offset = int.Parse(Offset.text);

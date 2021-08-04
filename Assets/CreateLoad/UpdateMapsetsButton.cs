@@ -7,10 +7,10 @@ using UnityEngine;
 
 namespace Assets.CreateLoad
 {
-    class UpdateMapsetsButton : IClickable
+    class UpdateMapsetsButton : MonoBehaviour
     {
         [SerializeField] private LoaderAllMapsets loader;
-        public override void Click()
+        void OnMouseDown()
         {
             loader.UpdateMapsets();
         }

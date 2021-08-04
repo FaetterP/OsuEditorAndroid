@@ -8,11 +8,11 @@ using Assets.Utilities;
 
 namespace Assets.OsuEditor
 {
-    class LeftButton : IClickable
+    class LeftButton : MonoBehaviour
     {
         [SerializeField] private LeftStatus LeftStatus;
         [SerializeField] private List<LeftButton> toDisable;
-        public override void Click()
+        void OnMouseDown()
         {
             foreach(var t in toDisable)
             {

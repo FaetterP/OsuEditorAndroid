@@ -8,11 +8,11 @@ using UnityEngine;
 
 namespace Assets.OsuEditor.Settings.TimingPoints
 {
-    class AddNotParentTimingPointButton : IClickable
+    class AddNotParentTimingPointButton : MonoBehaviour
     {
         [SerializeField] private LoaderTimingPoints loader;
         [SerializeField] private CreatorMusicLineMarks creator;
-        public override void Click()
+        void OnMouseDown()
         {
             TimingPoint added = new TimingPoint();
             TimingPoint nearest = OsuMath.GetNearestTimingPointLeft(Global.MusicTime, true);

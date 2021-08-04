@@ -8,10 +8,10 @@ using UnityEngine.UI;
 
 namespace Assets.OsuEditor.Settings.Colours
 {
-    class RemoveColourButton : IClickable
+    class RemoveColourButton : MonoBehaviour
     {
         [SerializeField] ColourHandler handler;
-        public override void Click()
+        void OnMouseDown()
         {
             if (Global.Map.Colors.Count > 2)
             {

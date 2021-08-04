@@ -7,9 +7,9 @@ using UnityEngine;
 
 namespace Assets.OsuEditor.Settings.TimingPoints
 {
-    class SelectThisTimingPoint : IClickable
+    class SelectThisTimingPoint : MonoBehaviour
     {
-        public override void Click()
+        void OnMouseDown()
         {
             FindObjectOfType<SaveTimingPointButtonAndEditor>().SetTimingPoint(transform.parent.GetComponent<TimingPointElement>().timingPoint);
         }

@@ -9,9 +9,9 @@ using UnityEngine.UI;
 
 namespace Assets.OsuEditor.Settings.TimingPoints
 {
-    class SetPreviewButton : IClickable
+    class SetPreviewButton : MonoBehaviour
     {
-        public override void Click()
+        void OnMouseDown()
         {
             Global.Map.General.PreviewTime = Global.MusicTime;
             StartCoroutine(SetTime());
