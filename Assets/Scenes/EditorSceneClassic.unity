@@ -2139,7 +2139,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 161448693}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 10ecb0d12f414c34fa0590d4b0f9b7e4, type: 3}
   m_Name: 
@@ -15227,7 +15227,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1308642445}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b5b93600d2fc8c4abed610592fd828f, type: 3}
   m_Name: 
@@ -15862,6 +15862,7 @@ GameObject:
   - component: {fileID: 1352165046}
   - component: {fileID: 1352165048}
   - component: {fileID: 1352165047}
+  - component: {fileID: 1352165049}
   m_Layer: 5
   m_Name: DifficultModule
   m_TagString: Untagged
@@ -15893,7 +15894,7 @@ RectTransform:
   - {fileID: 1987833932}
   - {fileID: 161448694}
   m_Father: {fileID: 1364601155}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -15935,6 +15936,23 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1352165045}
+--- !u!114 &1352165049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1352165045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3e742768bcb45e428749280720a04b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ar: {fileID: 1308642447}
+  cs: {fileID: 1469744672}
+  hp: {fileID: 1827656543}
+  od: {fileID: 1578647314}
+  sm: {fileID: 1987833933}
+  st: {fileID: 161448696}
 --- !u!1 &1352480996
 GameObject:
   m_ObjectHideFlags: 0
@@ -16167,10 +16185,10 @@ RectTransform:
   m_Children:
   - {fileID: 2083083365}
   - {fileID: 1826390213}
+  - {fileID: 1352165046}
   - {fileID: 1454337869}
   - {fileID: 1443097279}
   - {fileID: 1663771062}
-  - {fileID: 1352165046}
   - {fileID: 1753304133}
   - {fileID: 426622341}
   - {fileID: 350321145}
@@ -16944,7 +16962,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1364601155}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -17246,7 +17264,7 @@ RectTransform:
   m_Children:
   - {fileID: 1067085842}
   m_Father: {fileID: 1364601155}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -17729,7 +17747,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1469744670}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a2106f37cfd6274286df4b1ab62d736, type: 3}
   m_Name: 
@@ -19054,7 +19072,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1578647312}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa5b3a4fd65011f41a5b3a44861e78f6, type: 3}
   m_Name: 
@@ -20570,7 +20588,7 @@ RectTransform:
   - {fileID: 897287419}
   - {fileID: 1840285728}
   m_Father: {fileID: 1364601155}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -22654,7 +22672,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1827656541}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5750da08e7738304abc0bf5808db1b8f, type: 3}
   m_Name: 
@@ -24821,7 +24839,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1987833931}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62e6456b03f1e424da7fa6dddf78adad, type: 3}
   m_Name: 

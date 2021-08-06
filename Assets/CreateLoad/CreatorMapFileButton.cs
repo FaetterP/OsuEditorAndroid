@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using UnityEngine.SceneManagement;
@@ -14,26 +10,6 @@ namespace Assets.CreateLoad
         [SerializeField] private Text difficulty, creator, source, tags;
         void OnMouseDown()
         {
-            if (difficulty.text == "")
-            {
-                difficulty.color = Color.red;
-                return;
-            }
-            else { difficulty.color = Color.black; }
-            if (creator.text == "")
-            {
-                creator.color = Color.red;
-                return;
-            }
-            else { creator.color = Color.black; }
-            if (source.text == "")
-            {
-                source.color = Color.red;
-                return;
-            }
-            else { source.color = Color.black; }
-
-            Debug.Log(Global.FullPathToMapFolder);
             string[] strarr = Global.FullPathToMapFolder.Split('/');
             string str = strarr[strarr.Length - 2];
             string artist = str.Split('-')[0];

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using System.IO;
 
 namespace Assets.CreateLoad
@@ -14,12 +9,12 @@ namespace Assets.CreateLoad
 
         void Start()
         {
-            DestroyChild();
+            ClearContent();
         }
 
         public void UpdateMaps()
         {
-            DestroyChild();
+            ClearContent();
             foreach (var t in new DirectoryInfo(Global.FullPathToMapFolder).GetFiles())
             {
                 if (t.Name.EndsWith(".osu"))
@@ -30,7 +25,7 @@ namespace Assets.CreateLoad
             }
         }
 
-        private void DestroyChild()
+        private void ClearContent()
         {
             foreach (var child in GetComponentsInChildren<ContentElementMap>())
             {

@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace Assets.CreateLoad
 {
     class EmptyMap
     {
-    public static string GetText(string AudioFilename, string Title, string TitleUnicode, string Artist, string ArtistUnicode, string Creator, string Version, string Source, string Tags, string background)
+    public static string GetText(string audioFilename, string title, string titleUnicode, string artist, string artistUnicode, string creator, string version, string source, string tags, string background)
         {
             string ret = 
                 "osu file format v14\n\n" +
                 "[General]\n" +
-                "AudioFilename: " + AudioFilename + "\n" +
+                "AudioFilename: " + audioFilename + "\n" +
                 "AudioLeadIn: 0\n" +
                 "PreviewTime: 0\n" +
                 "Countdown: 0\n" +
@@ -30,14 +26,14 @@ namespace Assets.CreateLoad
                 "TimelineZoom: 1.5\n" +
                 "\n" +
                 "[Metadata]\n" +
-                "Title:" + Title + "\n" +
-                "TitleUnicode:" + TitleUnicode + "\n" +
-                "Artist:" + Artist + "\n" +
-                "ArtistUnicode:" + ArtistUnicode + "\n" +
-                "Creator:" + Creator + "\n" +
-                "Version:" + Version + "\n" +
-                "Source:" + Source + "\n" +
-                "Tags:" + Tags + "\n" +
+                "Title:" + title + "\n" +
+                "TitleUnicode:" + titleUnicode + "\n" +
+                "Artist:" + artist + "\n" +
+                "ArtistUnicode:" + artistUnicode + "\n" +
+                "Creator:" + creator + "\n" +
+                "Version:" + version + "\n" +
+                "Source:" + source + "\n" +
+                "Tags:" + tags + "\n" +
                 "BeatmapID:-1\n" +
                 "BeatmapSetID:-1\n" +
                 "\n" +

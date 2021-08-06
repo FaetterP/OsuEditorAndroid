@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.IO;
-using Assets.Utilities;
 using UnityEngine;
 using Assets.Elements;
 using Assets.MapInfo;
@@ -14,6 +11,7 @@ namespace Assets.CreateLoad
     {
         private static string[] lines;
         private static List<string> forMapParse;
+
         public static void LoadMapFromFile(string path)
         {
             forMapParse = new List<string>();
@@ -144,7 +142,7 @@ namespace Assets.CreateLoad
                     isNeed = true;
                 }
             }
-            if (ret != "") { ret=ret.Remove(ret.Length - 1, 1); }
+            if (ret != "") { ret = ret.Remove(ret.Length - 1, 1); }
             return ret;
         }
 
@@ -198,9 +196,6 @@ namespace Assets.CreateLoad
                 else if (t.Split(',').Length == 6) { AddCircle(t); }
                 else if (t.Split(',').Length == 7) { AddSpinner(t); }
             }
-
-            // foreach (var t in Global.Map.OsuHitObjects) { Debug.Log(t.GetType()); }
-            // Debug.Log(Global.Map.OsuHitObjects.Count);
         }
 
 

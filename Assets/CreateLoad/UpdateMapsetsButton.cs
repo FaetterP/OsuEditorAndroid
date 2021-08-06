@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Assets.Utilities;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.CreateLoad
 {
     class UpdateMapsetsButton : MonoBehaviour
     {
-        [SerializeField] private LoaderAllMapsets loader;
+        [SerializeField] private LoaderMapsets loader;
         void OnMouseDown()
         {
             loader.UpdateMapsets();

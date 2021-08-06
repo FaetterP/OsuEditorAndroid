@@ -18,13 +18,11 @@ namespace Assets
         public static MapClass Map = new MapClass();
         public static Lang Lang = Lang.RU;
 
-        //public static string FullPathToMapFolder = Application.persistentDataPath + "/test_mapset/";
         public static string FullPathToMapFolder = @"C:\Users\FaetterP\AppData\LocalLow\faetterp\osueditor\beatmap-637254798315041883-NieR Automata OST Amusement Park Dynamic Vocals/";
-        //public static string FullPathToMap = Application.persistentDataPath + "/test_mapset/test.osu";
         public static string FullPathToMap = @"C:\Users\FaetterP\AppData\LocalLow\faetterp\osueditor\beatmap-637254798315041883-NieR Automata OST Amusement Park Dynamic Vocals/NieRAutomata - Amusement park (FaetterP) [Easy].osu";
 
         public static LeftStatus? LeftStatus = null;
         public static OsuHitObject SelectedHitObject;
-        public static SliderStatus? SliderStatus = null;
+        public static SliderStatus? SliderStatus = null; 
     }
 }
