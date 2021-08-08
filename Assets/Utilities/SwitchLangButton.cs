@@ -14,10 +14,10 @@ namespace Assets.Utilities
         void OnMouseDown()
         {
             Global.Lang = lang;
-            foreach(var t in GameObject.FindObjectsOfType<Text>())
+            foreach(var t in FindObjectsOfType<Text>())
             {
-                t.gameObject.active = false;
-                t.gameObject.active = true;
+                t.gameObject.SetActive(false);
+                t.gameObject.SetActive(true);
             }
         }
     }

@@ -1750,13 +1750,12 @@ RectTransform:
 --- !u!114 &1119588204
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114172269734726988, guid: 290547ef6b1f1be438f8fd622493ffc4,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1119588202}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2a53f20a40fbd7448bdce5f8770be46, type: 3}
+  m_Script: {fileID: 11500000, guid: 66b6fe6af3d28104fa69e665028d2f7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mapElement: {fileID: 114202890117530420, guid: aa348c17cf910cf42b20fc7c7319dec3,

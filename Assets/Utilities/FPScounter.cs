@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Utilities
 {
-    class FPScounter : MonoBehaviour
+    [RequireComponent(typeof(Text))]
+    class FPSCounter : MonoBehaviour
     {
-        Text thisText;
+        private Text thisText;
 
         void Awake()
         {
@@ -18,7 +15,7 @@ namespace Assets.Utilities
 
         void Update()
         {
-            thisText.text = ((int)(1.0f / Time.deltaTime)).ToString(); ;
+            thisText.text = "FPS:"+(int)(1.0f / Time.deltaTime); ;
         }
     }
 }
