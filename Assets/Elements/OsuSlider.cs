@@ -27,7 +27,7 @@ namespace Assets.Elements
         }
         void Start()
         {
-            GetComponent<PrinterNumber>().num = number;
+            GetComponent<PrinterNumber>().number = number;
             GetComponent<PrinterNumber>().Print();
             transform.localPosition = OsuMath.OsuCoordsToUnity(new Vector2(x, y));
             PrintSliderPoints();

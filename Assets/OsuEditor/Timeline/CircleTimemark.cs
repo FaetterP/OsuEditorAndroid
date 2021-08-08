@@ -28,7 +28,7 @@ namespace Assets.OsuEditor.Timeline
             if (hitObject is OsuCircle)
             {
                 gameObject.AddComponent<PrinterNumber>();
-                GetComponent<PrinterNumber>().num = (hitObject as OsuCircle).number;
+                GetComponent<PrinterNumber>().number = (hitObject as OsuCircle).number;
                 GetComponent<PrinterNumber>().Print();
             }
         }

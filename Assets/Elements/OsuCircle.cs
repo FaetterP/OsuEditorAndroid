@@ -23,7 +23,7 @@ namespace Assets.Elements
         void Start()
         {
             gameObject.transform.localPosition = OsuMath.OsuCoordsToUnity(new Vector2(x, y));
-            GetComponent<PrinterNumber>().num = number;
+            GetComponent<PrinterNumber>().number = number;
             GetComponent<PrinterNumber>().Print();
             GetComponent<Image>().color = Global.Map.Colors[ComboColorNum];
         }
