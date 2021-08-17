@@ -1388,7 +1388,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 231, y: 37}
-  m_SizeDelta: {x: 429, y: 36}
+  m_SizeDelta: {x: 430, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!61 &861999384
 BoxCollider2D:
@@ -1413,7 +1413,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 431.3, y: 32.72}
+  m_Size: {x: 430, y: 35}
   m_EdgeRadius: 0
 --- !u!23 &861999385
 MeshRenderer:
@@ -1472,8 +1472,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e2da12be55a2a54cbc13fae7ce2a459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  URL_1: https://osu.ppy.sh/wiki/
-  URL_2: /Ranking_Criteria
+  url_RU: https://osu.ppy.sh/wiki/RU/Ranking_Criteria
+  url_EN: https://osu.ppy.sh/wiki/EN/Ranking_Criteria
 --- !u!114 &861999388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1786,7 +1786,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: -435, y: 37}
-  m_SizeDelta: {x: 206, y: 36}
+  m_SizeDelta: {x: 220, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &1428450374
 MeshRenderer:
@@ -1832,7 +1832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   en: Editor Guide/FAQ
-  ru: "\u041F\u0440\u043E \u043C\u0430\u043F\u043F\u0438\u043D\u0433"
+  ru: "\u0420\u0443\u043A\u043E\u0432\u043E\u0434\u0441\u0442\u0432\u043E/\u0427\u0430\u0412\u043E"
 --- !u!114 &1428450376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1844,8 +1844,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e2da12be55a2a54cbc13fae7ce2a459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  URL_1: https://osu.ppy.sh/wiki/
-  URL_2: /Beatmapping
+  url_RU: https://osu.ppy.sh/wiki/RU/Beatmapping
+  url_EN: https://osu.ppy.sh/wiki/EN/Beatmapping
 --- !u!114 &1428450377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1908,7 +1908,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 204.53, y: 32.72}
+  m_Size: {x: 220, y: 35}
   m_EdgeRadius: 0
 --- !u!1 &1481529049
 GameObject:
