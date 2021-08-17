@@ -1,24 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Assets.MapInfo
 {
     class TimingPoint : IComparable<TimingPoint>
     {
-        public int Offset = 0;
-        public double BeatLength = 1000;
-        public int Meter=4;
-        public int TimeSignature = 0; //
-        public int SampleSet = 0; //
-        public int SampleIndex = 0; //
-        public int Volume = 100;
-        public bool Kiai = false;
+        public int Offset;
+        public double BeatLength;
+        public int Meter;
+        public int TimeSignature;
+        public int SampleSet;
+        public int SampleIndex;
+        public int Volume;
+        public bool Kiai;
 
         public double Mult = 1;
         public bool isParent = false;
-        //public double BPM = 100;
 
         public int CompareTo(TimingPoint other)
         {

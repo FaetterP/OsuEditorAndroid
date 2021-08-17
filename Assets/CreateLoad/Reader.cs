@@ -28,13 +28,13 @@ namespace Assets.CreateLoad
             map.General.Mode = int.Parse(GetValue("Mode:"));
             map.General.LetterboxInBreaks = int.Parse(GetValue("LetterboxInBreaks:"));
             map.General.WidescreenStoryboard = int.Parse(GetValue("WidescreenStoryboard:"))==1;
-            map.Editor.Bookmarks = new List<int>();
+            map.Editor.ClearBookmarks();
             if (GetValue("Bookmarks:") != null)
             {
                 foreach (var t in GetValue("Bookmarks:").Split(','))
                 {
                     if (t == "") { break; }
-                    map.Editor.Bookmarks.Add(int.Parse(t));
+                    map.Editor.AddBookmark(int.Parse(t));
                 }
             }
             map.Editor.DistanceSpacing = double.Parse(GetValue("DistanceSpacing:"));
@@ -58,7 +58,7 @@ namespace Assets.CreateLoad
             map.Difficulty.OverallDifficulty = double.Parse(GetValue("OverallDifficulty:"));
             map.Difficulty.ApproachRate = double.Parse(GetValue("ApproachRate:"));
             map.Difficulty.SliderMultiplier = double.Parse(GetValue("SliderMultiplier:"));
-            map.Difficulty.SliderTickRate = double.Parse(GetValue("SliderTickRate:"));
+            map.Difficulty.SliderTickRate = int.Parse(GetValue("SliderTickRate:"));
 
             string[] bg_string_arr = GetValue("0,0,").Split(',');
             map.Events.BackgroungImage = bg_string_arr[0].Remove(bg_string_arr[0].Length - 1, 1).Remove(0, 1);

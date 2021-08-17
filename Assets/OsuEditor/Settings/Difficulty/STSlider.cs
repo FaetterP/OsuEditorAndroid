@@ -26,7 +26,7 @@ namespace Assets.OsuEditor.Settings.Difficulty
 
         void SaveValue()
         {
-            Global.Map.Difficulty.SliderTickRate = thisSlider.value;
+            Global.Map.Difficulty.SliderTickRate = (int)thisSlider.value;
             STText.text = STText.GetComponent<LangWriter>().GetText() + " - " + thisSlider.value;
         }
     }

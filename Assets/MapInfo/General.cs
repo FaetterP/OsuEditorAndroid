@@ -1,20 +1,44 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Assets.MapInfo
 {
     class General
     {
-        public string AudioFilename = "audio.mp3";
-        public int AudioLeadIn = 0;
-        public int PreviewTime = 0;
-        public int Countdown = 0; //
-        public string SampleSet = "no"; //
-        public double StackLeniency = 0.5;
-        public int Mode = 0;
-        public int LetterboxInBreaks = 0; //
-        public bool WidescreenStoryboard = false;
+        public string AudioFilename;
+        public int AudioLeadIn;
+        public int PreviewTime;
+        public int Countdown; //TODO
+        public string SampleSet; //TODO
+        private double _stackLeniency; // 0-10
+        private int _mode; // 0-3
+        public int LetterboxInBreaks; //TODO
+        public bool WidescreenStoryboard;
+
+        public double StackLeniency
+        {
+            get
+            {
+                return _stackLeniency;
+            }
+
+            set
+            {
+                if (value < 0 || value > 10) { throw new ArgumentException(); }
+                _stackLeniency = value;
+            }
+        }
+        public int Mode
+        {
+            get
+            {
+                return _mode;
+            }
+
+            set
+            {
+                if (value < 0 || value > 3) { throw new ArgumentException(); }
+                _mode = value;
+            }
+        }
     }
 }
