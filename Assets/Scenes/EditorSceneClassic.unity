@@ -7350,10 +7350,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 588357060}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7803db2199dad7748aeca74096bea52d, type: 3}
+  m_Script: {fileID: 11500000, guid: 92db9dfceeb25dd4184e18609d85ec2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  music: {fileID: 963955356}
+  _music: {fileID: 963955356}
 --- !u!1 &594005556
 GameObject:
   m_ObjectHideFlags: 0
@@ -17924,7 +17924,7 @@ GameObject:
   - component: {fileID: 1507579973}
   - component: {fileID: 1507579972}
   m_Layer: 5
-  m_Name: SoundSpeed
+  m_Name: MusicSpeedSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17959,10 +17959,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1507579970}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca99cc659f6c75048a29230cac2293fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 7810689796b58fc4cafe824ee8037b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  music: {fileID: 963955356}
+  _music: {fileID: 963955356}
 --- !u!114 &1507579973
 MonoBehaviour:
   m_ObjectHideFlags: 0
