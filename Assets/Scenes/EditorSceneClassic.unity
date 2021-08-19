@@ -1036,7 +1036,6 @@ GameObject:
   - component: {fileID: 102507092}
   - component: {fileID: 102507093}
   - component: {fileID: 102507094}
-  - component: {fileID: 102507095}
   m_Layer: 5
   m_Name: TimeLine
   m_TagString: Untagged
@@ -1126,18 +1125,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   music: {fileID: 963955356}
   timer: {fileID: 1171896871}
---- !u!114 &102507095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 102507091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afeb4c46142f58f4f8b2cb11e289ed72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  kiai: {fileID: 1636877740}
 --- !u!1 &102722976
 GameObject:
   m_ObjectHideFlags: 0
@@ -20248,8 +20235,9 @@ GameObject:
   - component: {fileID: 1636877739}
   - component: {fileID: 1636877741}
   - component: {fileID: 1636877740}
+  - component: {fileID: 1636877742}
   m_Layer: 5
-  m_Name: Kiai
+  m_Name: KiaiIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20285,7 +20273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -20306,6 +20294,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1636877738}
+--- !u!114 &1636877742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1636877738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76f46d861cd4b3a438f9095d792efc8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1640096369
 GameObject:
   m_ObjectHideFlags: 0
@@ -26186,7 +26185,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'FPS:99
+  m_Text: 'FPS:
 
 '
 --- !u!222 &2093118312
