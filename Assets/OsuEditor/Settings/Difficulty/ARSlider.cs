@@ -29,11 +29,6 @@ namespace Assets.OsuEditor.Settings.Difficulty
             thisSlider.value = (float)Math.Round(thisSlider.value, 1);
             Global.Map.Difficulty.ApproachRate = thisSlider.value;
             ARText.text = ARText.GetComponent<LangWriter>().GetText() + " - " + thisSlider.value;
-
-            double ar = Global.Map.Difficulty.ApproachRate;
-            if (ar == 5) { Global.AR_ms = 1200; }
-            if (ar < 5) { Global.AR_ms = (int)(1200 + 600 * (5 - ar) / 5); }
-            if (ar > 5) { Global.AR_ms = (int)(1200 - 750 * (ar - 5) / 5); }
         }
     }
 }

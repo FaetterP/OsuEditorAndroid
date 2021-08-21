@@ -11,6 +11,8 @@ namespace Assets.MapInfo
         private double _sliderMultiplier; // 0.4-3.6
         private int _sliderTickRate; // 1-4
 
+        private int _ar_ms;
+
         public double HPDrainRate
         {
             get
@@ -61,6 +63,9 @@ namespace Assets.MapInfo
             {
                 if (value < 0 || value > 10) { throw new ArgumentException(); }
                 _approachRate = value;
+                if (value == 5) { _ar_ms = 1200; }
+                if (value < 5) { _ar_ms = (int)(1200 + 600 * (5 - value) / 5); }
+                if (value > 5) { _ar_ms = (int)(1200 - 750 * (value - 5) / 5); }
             }
         }
         public double SliderMultiplier
@@ -87,6 +92,14 @@ namespace Assets.MapInfo
             {
                 if (value < 1 || value > 4) { throw new ArgumentException(); }
                 _sliderTickRate = value;
+            }
+        }
+
+        public int AR_ms
+        {
+            get
+            {
+                return _ar_ms;
             }
         }
     }

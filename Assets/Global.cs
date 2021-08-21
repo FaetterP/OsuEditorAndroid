@@ -14,8 +14,15 @@ namespace Assets
     {
         public static int MusicLength = 1;
         public static int MusicTime = 0;
-        public static int AR_ms = 1000;
+        
         public static MapClass Map = new MapClass();
+        public static int AR_ms
+        {
+            get
+            {
+                return Map.Difficulty.AR_ms;
+            }
+        }
         public static Lang Lang = Lang.RU;
 
         public static string FullPathToMapFolder = @"C:\Users\FaetterP\AppData\LocalLow\faetterp\osueditor\beatmap-637254798315041883-NieR Automata OST Amusement Park Dynamic Vocals/";
