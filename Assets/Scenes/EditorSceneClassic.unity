@@ -271,11 +271,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2722d2ba6f96b54ea81ba9610377633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  background: {fileID: 881869826}
-  music: {fileID: 963955356}
-  line: {fileID: 102507094}
-  creator: {fileID: 972605517}
-  timelineSlider: {fileID: 1571745333}
+  _background: {fileID: 881869826}
+  _music: {fileID: 963955356}
+  _line: {fileID: 102507094}
+  _creator: {fileID: 972605517}
+  _timelineSlider: {fileID: 1571745333}
 --- !u!4 &11774194
 Transform:
   m_ObjectHideFlags: 0
