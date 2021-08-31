@@ -20,34 +20,29 @@ namespace Assets.OsuEditor
                 {
                     if (Global.MusicTime>t.time-Global.AR_ms && Global.MusicTime<t.time)
                     {
-                        
                         OsuHitObject created = Instantiate(t, gameObject.transform);
                         created.time = t.time;
-                        created.x = t.x;
-                        created.y = t.y;
+                        created.SetCoords(t.X, t.Y);
                         (created as OsuCircle).number = (t as OsuCircle).number;
                         (created as OsuCircle).combo_sum = (t as OsuCircle).combo_sum;
                         (created as OsuCircle).ComboColorNum = (t as OsuCircle).ComboColorNum;
                         created.transform.SetAsFirstSibling();
-                      //  (created as OsuCircle).Color = (t as OsuCircle).Color;
                         HitObjectsOnScreen.Add(t.time);
                     }
                 }
                 if (t is OsuSlider && !HitObjectsOnScreen.Contains(t.time))
                 {
-                    if (Global.MusicTime < (t as OsuSlider).time_end && Global.MusicTime > t.time - Global.AR_ms)
+                    if (Global.MusicTime < (t as OsuSlider)._timeEnd && Global.MusicTime > t.time - Global.AR_ms)
                     {
                         OsuHitObject created = Instantiate(t, gameObject.transform);
                         created.time = t.time;
-                        created.x = t.x;
-                        created.y = t.y;
-                        (created as OsuSlider).time_end = (t as OsuSlider).time_end;
+                        created.SetCoords(t.X, t.Y);
+                        (created as OsuSlider)._timeEnd = (t as OsuSlider)._timeEnd;
                         (created as OsuSlider).number = (t as OsuSlider).number;
                         (created as OsuSlider).combo_sum = (t as OsuSlider).combo_sum;
                         (created as OsuSlider).ComboColorNum = (t as OsuSlider).ComboColorNum;
-                     //   (created as OsuSlider).Color = (t as OsuSlider).Color;
                         (created as OsuSlider).CountOfSlides = (t as OsuSlider).CountOfSlides;
-                        (created as OsuSlider).length = (t as OsuSlider).length;
+                        (created as OsuSlider).Length = (t as OsuSlider).Length;
                         (created as OsuSlider).SliderPoints = (t as OsuSlider).SliderPoints;
                         created.transform.SetAsFirstSibling();
                         HitObjectsOnScreen.Add(t.time);
@@ -55,13 +50,12 @@ namespace Assets.OsuEditor
                 }
                 if (t is OsuSpinner && !HitObjectsOnScreen.Contains(t.time))
                 {
-                    if (Global.MusicTime < (t as OsuSpinner).time_end && Global.MusicTime > t.time - Global.AR_ms)
+                    if (Global.MusicTime < (t as OsuSpinner).TimeEnd && Global.MusicTime > t.time - Global.AR_ms)
                     {
                         OsuHitObject created = Instantiate(t, gameObject.transform);
-                        created.x = 256;
-                        created.y = 192;
+                        created.SetCoords(256, 192);
                         created.time = t.time;
-                        (created as OsuSpinner).time_end = (t as OsuSpinner).time_end;
+                        (created as OsuSpinner).TimeEnd = (t as OsuSpinner).TimeEnd;
                         created.transform.SetAsFirstSibling();
                         HitObjectsOnScreen.Add(t.time);
                     }

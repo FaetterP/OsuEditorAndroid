@@ -1,37 +1,48 @@
 ﻿using Assets.OsuEditor;
 using Assets.Utilities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Elements
 {
+    [RequireComponent(typeof(Image))]
+    [RequireComponent(typeof(PrinterNumber))]
     class OsuCircle : OsuHitObject
     {
-        public int ComboColorNum;
-        public int number=-3;
-        public int combo_sum = 0;
-        // public Color Color = Color.white;
-        public bool whisle, finish, clap;
+        private int _comboColorNum;
+        public int ComboColorNum
+        {
+            get
+            {
+                return _comboColorNum;
+            }
+            set
+            {
+                if (value < 0 || value >= Global.Map.Colors.Count) { throw new ArgumentException(); }
+                _comboColorNum = value;
+            }
+        }
+        public int number;
+        public int combo_sum;
+        public bool Whisle, Finish, Clap;
         public int Sampleset, Additions;
 
-        protected bool isMoving = false;
+        protected bool _isMoving = false;
+        private bool _isStart = true;
 
         void Start()
         {
-            gameObject.transform.localPosition = OsuMath.OsuCoordsToUnity(new Vector2(x, y));
+            gameObject.transform.localPosition = OsuMath.OsuCoordsToUnity(new Vector2(X, Y));
             GetComponent<PrinterNumber>().number = number;
             GetComponent<PrinterNumber>().Print();
             GetComponent<Image>().color = Global.Map.Colors[ComboColorNum];
         }
 
-        private bool isStart = true;
         void OnEnable()
         {
-            if (isStart) { isStart = false; return; }
+            if (_isStart) { _isStart = false; return; }
             CreatorHitObjects.RemoveObjectFromScreen(time);
             Destroy(gameObject);
         }
@@ -51,7 +62,7 @@ namespace Assets.Elements
                 switch (touch.phase)
                 {
                     case TouchPhase.Moved:
-                        if (isMoving) 
+                        if (_isMoving) 
                         { 
                             var poss=transform.parent.worldToLocalMatrix.MultiplyPoint(Camera.main.ScreenToWorldPoint(touch.position));
                             poss.z = 0;
@@ -60,41 +71,43 @@ namespace Assets.Elements
                         break;
 
                     case TouchPhase.Ended:
-                        if (isMoving)
+                        if (_isMoving)
                         {
                             OsuHitObject obj = OsuMath.GetHitObjectFromTime(time);
                             var pos = OsuMath.UnityCoordsToOsu(transform.localPosition);
-                            if (pos.x < 0) { pos.x = 0; }
-                            if (pos.y < 0) { pos.y = 0; }
-                            if (pos.x > 512) { pos.x = 512; }
-                            if (pos.y > 384) { pos.y = 384; }
-                            obj.x = (int)pos.x;
-                            obj.y = (int)pos.y;
+                            obj.SetCoords(pos);
                             CreatorHitObjects.RemoveObjectFromScreen(time);
                             Destroy(gameObject);
-                            isMoving = false;
+                            _isMoving = false;
                         }
                         break;
                 }
             }
         }
+
         void OnMouseDown()
         {
-            isMoving = true;   
+            _isMoving = true;   
         }
+
+        public OsuCircle Clone()
+        {
+            return (OsuCircle)MemberwiseClone();
+        }
+
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append(x + ",");
-            sb.Append(y + ",");
+            sb.Append(X + ",");
+            sb.Append(Y + ",");
             sb.Append(time + ",");
             sb.Append(combo_sum + ",");
 
             int num = 0;
-            if (whisle) { num += 2; }
-            if (finish) { num += 4; }
-            if (clap) { num += 8; }
+            if (Whisle) { num += 2; }
+            if (Finish) { num += 4; }
+            if (Clap) { num += 8; }
             sb.Append(num + ",");
 
             sb.Append(Sampleset + ":");

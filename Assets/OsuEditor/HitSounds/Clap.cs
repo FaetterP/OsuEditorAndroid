@@ -19,7 +19,7 @@ namespace Assets.OsuEditor.HitSounds
 
         void OnEnable()
         {
-            if((Global.SelectedHitObject as OsuCircle).clap)
+            if((Global.SelectedHitObject as OsuCircle).Clap)
             {
                 thisImage.color = new Color(1, 1, 1, 1);
             }
@@ -31,14 +31,14 @@ namespace Assets.OsuEditor.HitSounds
         void OnMouseDown()
         {
             OsuCircle c = (Global.SelectedHitObject as OsuCircle);
-            if (c.clap)
+            if (c.Clap)
             {
-                c.clap = false;
+                c.Clap = false;
                 thisImage.color = new Color(1, 1, 1, 0.5f);
             }
             else
             {
-                c.clap = true;
+                c.Clap = true;
                 thisImage.color = new Color(1, 1, 1, 1);
             }
         }

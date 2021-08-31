@@ -87,7 +87,7 @@ namespace Assets.OsuEditor.Timeline
 
                         toAdd = (CircleTimemark)toCreateSliderEnd.Clone();
                         toAdd.color = Global.Map.Colors[(t as OsuCircle).ComboColorNum];
-                        toAdd.time = (t as OsuSlider).time_end;
+                        toAdd.time = (t as OsuSlider)._timeEnd;
                         toAdd.hitObject = t;
                         CircleMarksToCreate.Add(toAdd);
 
@@ -96,7 +96,7 @@ namespace Assets.OsuEditor.Timeline
                         {
                             toAdd = (CircleTimemark)toCreateSliderMiddle.Clone();
                             toAdd.color = Global.Map.Colors[(t as OsuCircle).ComboColorNum];
-                            toAdd.time = t.time+(int)OsuMath.SliderLengthToAddedTime((t as OsuSlider).length, timingPoint.Mult, timingPoint.BeatLength)*i;
+                            toAdd.time = t.time+(int)OsuMath.SliderLengthToAddedTime((t as OsuSlider).Length, timingPoint.Mult, timingPoint.BeatLength)*i;
                             toAdd.hitObject = t;
                             CircleMarksToCreate.Add(toAdd);
                         }
@@ -120,7 +120,7 @@ namespace Assets.OsuEditor.Timeline
 
                     toAdd = (CircleTimemark)toCreateSpinnerEnd.Clone();
                     toAdd.color = Color.white;
-                    toAdd.time = (t as OsuSpinner).time_end;
+                    toAdd.time = (t as OsuSpinner).TimeEnd;
                     toAdd.hitObject = t;
                     CircleMarksToCreate.Add(toAdd);
                 }

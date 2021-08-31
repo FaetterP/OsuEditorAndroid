@@ -103,7 +103,7 @@ namespace Assets.OsuEditor.Timeline
             double dist = 1000000;
             int time = 10000000;
             int added_spinner_time = 0;
-            if (hitObject is OsuSpinner) { added_spinner_time = (hitObject as OsuSpinner).time_end - hitObject.time; }
+            if (hitObject is OsuSpinner) { added_spinner_time = (hitObject as OsuSpinner).TimeEnd - hitObject.time; }
             foreach (var t in marks)
             {
                 double newdist = Math.Abs(t.transform.localPosition.x - transform.localPosition.x);
@@ -123,7 +123,7 @@ namespace Assets.OsuEditor.Timeline
             }
             if (hitObject is OsuSpinner)
             {
-                (hitObject as OsuSpinner).time_end= (hitObject as OsuSpinner).time + added_spinner_time;
+                (hitObject as OsuSpinner).TimeEnd= (hitObject as OsuSpinner).time + added_spinner_time;
             }
 
             foreach (var t in FindObjectsOfType<OsuHitObject>())

@@ -1,22 +1,48 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 
 namespace Assets.Elements
 {
-    abstract class OsuHitObject : MonoBehaviour, ICloneable, IComparable<OsuHitObject>
+    abstract class OsuHitObject : MonoBehaviour, IComparable<OsuHitObject>
     {
-        public int x = 0;
-        public int y = 0;
-        public int time = 0;
-
-        public object Clone()
+        private int _x;
+        private int _y;
+        public int time;
+        public int X
         {
-            return MemberwiseClone();
-
+            get
+            {
+                return _x;
+            }
         }
+        public int Y
+        {
+            get
+            {
+                return _y;
+            }
+        }
+
+        public void SetCoords(Vector2 pos)
+        {
+            if (pos.x < 0) { pos.x = 0; }
+            if (pos.y < 0) { pos.y = 0; }
+            if (pos.x > 512) { pos.x = 512; }
+            if (pos.y > 384) { pos.y = 384; }
+            _x = (int)pos.x;
+            _y = (int)pos.y;
+        }
+
+        public void SetCoords(int x, int y)
+        {
+            if (x < 0) { x = 0; }
+            if (y < 0) { y = 0; }
+            if (x > 512) { x = 512; }
+            if (y > 384) { y = 384; }
+            _x = x;
+            _y = y;
+        }
+
         public int CompareTo(OsuHitObject p)
         {
             return time.CompareTo(p.time);

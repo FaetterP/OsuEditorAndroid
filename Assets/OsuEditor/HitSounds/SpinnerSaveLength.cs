@@ -31,7 +31,7 @@ namespace Assets.OsuEditor.HitSounds
                 //else { break; }
             }
 
-            (OsuMath.GetHitObjectFromTime(spinner.time) as OsuSpinner).time_end = mark.time;
+            (OsuMath.GetHitObjectFromTime(spinner.time) as OsuSpinner).TimeEnd = mark.time;
             foreach(var t in FindObjectsOfType<OsuSpinner>())
             {
                 CreatorHitObjects.RemoveObjectFromScreen(t.time);

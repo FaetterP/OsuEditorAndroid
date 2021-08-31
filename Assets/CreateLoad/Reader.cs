@@ -202,16 +202,15 @@ namespace Assets.CreateLoad
         private static void AddCircle(string line)
         {
             string[] tt = line.Split(',');
-            OsuCircle added = (OsuCircle)circle.Clone();
-            added.x = int.Parse(tt[0]);
-            added.y = int.Parse(tt[1]);
+            OsuCircle added = circle.Clone();
+            added.SetCoords(int.Parse(tt[0]), int.Parse(tt[1]));
             added.time = int.Parse(tt[2]);
             added.combo_sum = int.Parse(tt[3]);
 
             int num = int.Parse(tt[4]);
-            if (num >= 8) { added.clap = true; num -= 8; }
-            if (num >= 4) { added.finish = true; num -= 4; }
-            if (num >= 2) { added.whisle = true; }
+            if (num >= 8) { added.Clap = true; num -= 8; }
+            if (num >= 4) { added.Finish = true; num -= 4; }
+            if (num >= 2) { added.Whisle = true; }
 
             string[] arr = tt[5].Split(':');
             added.Sampleset = int.Parse(arr[0]);
@@ -223,9 +222,8 @@ namespace Assets.CreateLoad
         {
 
             string[] tt = line.Split(',');
-            OsuSlider added = (OsuSlider)slider.Clone();
-            added.x = int.Parse(tt[0]);
-            added.y = int.Parse(tt[1]);
+            OsuSlider added = slider.Clone();
+            added.SetCoords(int.Parse(tt[0]), int.Parse(tt[1]));
             added.time = int.Parse(tt[2]);
             added.combo_sum = int.Parse(tt[3]);
             added.SliderPoints = new List<SliderPoint>();
@@ -241,7 +239,7 @@ namespace Assets.CreateLoad
 
             }
             added.CountOfSlides = int.Parse(tt[6]);
-            added.length = double.Parse(tt[7]);
+            added.Length = double.Parse(tt[7]);
             added.UpdateTimeEnd();
             Global.Map.OsuHitObjects.Add(added);
         }
@@ -249,11 +247,10 @@ namespace Assets.CreateLoad
         private static void AddSpinner(string line)
         {
             string[] tt = line.Split(',');
-            OsuSpinner added = (OsuSpinner)spinner.Clone();
-            added.x = int.Parse(tt[0]);
-            added.y = int.Parse(tt[1]);
+            OsuSpinner added = spinner.Clone();
+            added.SetCoords(int.Parse(tt[0]), int.Parse(tt[1]));
             added.time = int.Parse(tt[2]);
-            added.time_end = int.Parse(tt[5]);
+            added.TimeEnd = int.Parse(tt[5]);
             Global.Map.OsuHitObjects.Add(added);
         }
     }
