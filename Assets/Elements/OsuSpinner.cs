@@ -36,8 +36,7 @@ namespace Assets.Elements
         {
             if (Global.MusicTime < time - Global.AR_ms)
             {
-                OsuEditor.CreatorHitObjects.RemoveObjectFromScreen(time);
-                Destroy(gameObject);
+                RemoveFromScreen();
             }
             else if (Global.MusicTime < time)
             {
@@ -51,8 +50,7 @@ namespace Assets.Elements
             }
             else
             {
-                OsuEditor.CreatorHitObjects.RemoveObjectFromScreen(time);
-                Destroy(gameObject);
+                RemoveFromScreen();
             }
         }
 

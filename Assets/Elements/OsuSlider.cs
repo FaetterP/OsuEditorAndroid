@@ -88,8 +88,7 @@ namespace Assets.Elements
             int razn = time - Global.MusicTime;
             if (time - Global.MusicTime > Global.AR_ms || _timeEnd - Global.MusicTime < 0)
             {
-                CreatorHitObjects.RemoveObjectFromScreen(time);
-                Destroy(gameObject);
+                RemoveFromScreen();
             }
 
             if (Input.touchCount > 0)
@@ -118,11 +117,10 @@ namespace Assets.Elements
                                 (obj as OsuSlider).SliderPoints[i].x += -obj.X + pos.x;
                                 (obj as OsuSlider).SliderPoints[i].y += -obj.Y + pos.y;
                             }
-                            
 
-                            CreatorHitObjects.RemoveObjectFromScreen(time);
-                            Destroy(gameObject);
-                            _isMoving = false;
+
+                            RemoveFromScreen();
+                            //_isMoving = false;
                         }
                         break;
                 }

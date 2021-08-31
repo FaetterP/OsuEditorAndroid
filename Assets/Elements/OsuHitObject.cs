@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.OsuEditor;
+using System;
 using UnityEngine;
 
 namespace Assets.Elements
@@ -46,6 +47,12 @@ namespace Assets.Elements
         public int CompareTo(OsuHitObject p)
         {
             return time.CompareTo(p.time);
+        }
+
+        public void RemoveFromScreen()
+        {
+            CreatorHitObjects.RemoveObjectFromList(time);
+            Destroy(gameObject);
         }
     }
 }

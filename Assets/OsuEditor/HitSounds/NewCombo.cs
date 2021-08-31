@@ -51,8 +51,7 @@ namespace Assets.OsuEditor.HitSounds
             OnEnable();
             foreach(var t in FindObjectsOfType<OsuCircle>())
             {
-                CreatorHitObjects.RemoveObjectFromScreen(t.time);
-                Destroy(t.gameObject);
+                t.RemoveFromScreen();
             }
             Global.Map.UpdateComboColours();
             CreatorTimemarks.UpdateCircleMarks();

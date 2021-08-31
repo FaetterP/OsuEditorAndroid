@@ -34,8 +34,7 @@ namespace Assets.OsuEditor.HitSounds
             (OsuMath.GetHitObjectFromTime(spinner.time) as OsuSpinner).TimeEnd = mark.time;
             foreach(var t in FindObjectsOfType<OsuSpinner>())
             {
-                CreatorHitObjects.RemoveObjectFromScreen(t.time);
-                Destroy(t.gameObject);
+                t.RemoveFromScreen();
             }
             CreatorTimemarks.UpdateCircleMarks();
         }

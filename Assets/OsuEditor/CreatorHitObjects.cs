@@ -64,7 +64,7 @@ namespace Assets.OsuEditor
         }
 
 
-        public static void RemoveObjectFromScreen(int time)
+        public static void RemoveObjectFromList(int time)
         {
             HitObjectsOnScreen.Remove(time);
         }
