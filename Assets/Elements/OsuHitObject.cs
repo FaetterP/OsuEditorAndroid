@@ -8,7 +8,7 @@ namespace Assets.Elements
     {
         private int _x;
         private int _y;
-        public int time;
+        public int Time;
         public int X
         {
             get
@@ -46,13 +46,17 @@ namespace Assets.Elements
 
         public int CompareTo(OsuHitObject p)
         {
-            return time.CompareTo(p.time);
+            return Time.CompareTo(p.Time);
         }
 
         public void RemoveFromScreen()
         {
-            CreatorHitObjects.RemoveObjectFromList(time);
+            CreatorHitObjects.RemoveObjectFromList(Time);
             Destroy(gameObject);
         }
+
+        public abstract bool IsRightTime();
+
+        public abstract void Init(OsuHitObject obj);
     }
 }

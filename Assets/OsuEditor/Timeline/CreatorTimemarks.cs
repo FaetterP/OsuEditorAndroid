@@ -81,7 +81,7 @@ namespace Assets.OsuEditor.Timeline
                     {
                         CircleTimemark toAdd = (CircleTimemark)toCreateSliderStart.Clone();
                         toAdd.color = Global.Map.Colors[(t as OsuCircle).ComboColorNum];
-                        toAdd.time = t.time;
+                        toAdd.time = t.Time;
                         toAdd.hitObject = t;
                         CircleMarksToCreate.Add(toAdd);
 
@@ -91,12 +91,12 @@ namespace Assets.OsuEditor.Timeline
                         toAdd.hitObject = t;
                         CircleMarksToCreate.Add(toAdd);
 
-                        TimingPoint timingPoint = OsuMath.GetNearestTimingPointLeft(t.time, false);
+                        TimingPoint timingPoint = OsuMath.GetNearestTimingPointLeft(t.Time, false);
                         for (int i=1;i<(t as OsuSlider).CountOfSlides; i++)
                         {
                             toAdd = (CircleTimemark)toCreateSliderMiddle.Clone();
                             toAdd.color = Global.Map.Colors[(t as OsuCircle).ComboColorNum];
-                            toAdd.time = t.time+(int)OsuMath.SliderLengthToAddedTime((t as OsuSlider).Length, timingPoint.Mult, timingPoint.BeatLength)*i;
+                            toAdd.time = t.Time+(int)OsuMath.SliderLengthToAddedTime((t as OsuSlider).Length, timingPoint.Mult, timingPoint.BeatLength)*i;
                             toAdd.hitObject = t;
                             CircleMarksToCreate.Add(toAdd);
                         }
@@ -105,7 +105,7 @@ namespace Assets.OsuEditor.Timeline
                     {
                         CircleTimemark toAdd = (CircleTimemark)toCreateCircle.Clone();
                         toAdd.color = Global.Map.Colors[(t as OsuCircle).ComboColorNum];
-                        toAdd.time = t.time;
+                        toAdd.time = t.Time;
                         toAdd.hitObject = t;
                         CircleMarksToCreate.Add(toAdd);
                     }
@@ -114,7 +114,7 @@ namespace Assets.OsuEditor.Timeline
                 {
                     CircleTimemark toAdd = (CircleTimemark)toCreateSpinnerStart.Clone();
                     toAdd.color = Color.white;
-                    toAdd.time = t.time;
+                    toAdd.time = t.Time;
                     toAdd.hitObject = t;
                     CircleMarksToCreate.Add(toAdd);
 

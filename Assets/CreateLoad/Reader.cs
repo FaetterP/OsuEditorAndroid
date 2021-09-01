@@ -204,7 +204,7 @@ namespace Assets.CreateLoad
             string[] tt = line.Split(',');
             OsuCircle added = circle.Clone();
             added.SetCoords(int.Parse(tt[0]), int.Parse(tt[1]));
-            added.time = int.Parse(tt[2]);
+            added.Time = int.Parse(tt[2]);
             added.combo_sum = int.Parse(tt[3]);
 
             int num = int.Parse(tt[4]);
@@ -224,7 +224,7 @@ namespace Assets.CreateLoad
             string[] tt = line.Split(',');
             OsuSlider added = slider.Clone();
             added.SetCoords(int.Parse(tt[0]), int.Parse(tt[1]));
-            added.time = int.Parse(tt[2]);
+            added.Time = int.Parse(tt[2]);
             added.combo_sum = int.Parse(tt[3]);
             added.SliderPoints = new List<SliderPoint>();
             string[] points = tt[5].Split('|');
@@ -249,7 +249,7 @@ namespace Assets.CreateLoad
             string[] tt = line.Split(',');
             OsuSpinner added = spinner.Clone();
             added.SetCoords(int.Parse(tt[0]), int.Parse(tt[1]));
-            added.time = int.Parse(tt[2]);
+            added.Time = int.Parse(tt[2]);
             added.TimeEnd = int.Parse(tt[5]);
             Global.Map.OsuHitObjects.Add(added);
         }

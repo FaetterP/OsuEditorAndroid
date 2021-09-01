@@ -16,11 +16,10 @@ namespace Assets.Elements
             }
             set
             {
-                if (value <= time) { throw new ArgumentException(); }
+                if (value <= Time) { throw new ArgumentException(); }
                 _timeEnd = value;
             }
         }
-
 
         void Awake()
         {
@@ -34,19 +33,19 @@ namespace Assets.Elements
 
         void Update()
         {
-            if (Global.MusicTime < time - Global.AR_ms)
+            if (Global.MusicTime < Time - Global.AR_ms)
             {
                 RemoveFromScreen();
             }
-            else if (Global.MusicTime < time)
+            else if (Global.MusicTime < Time)
             {
-                transform.rotation = Quaternion.Euler(0, 0, time);
+                transform.rotation = Quaternion.Euler(0, 0, Time);
                 _thisImage.color = new Color(1, 1, 1, 0.1f);
             }
-            else if (Global.MusicTime > time && Global.MusicTime < TimeEnd)
+            else if (Global.MusicTime > Time && Global.MusicTime < TimeEnd)
             {
                 transform.rotation = Quaternion.Euler(0, 0, Global.MusicTime);
-                _thisImage.color = new Color(1, 1, 1, 0.1f + 0.9f * ((Global.MusicTime - time * 1.0f) / (TimeEnd - time)));
+                _thisImage.color = new Color(1, 1, 1, 0.1f + 0.9f * ((Global.MusicTime - Time * 1.0f) / (TimeEnd - Time)));
             }
             else
             {
@@ -62,7 +61,20 @@ namespace Assets.Elements
         public override string ToString()
         {
             // 256,192,734,12,8,4992,0:1:0:0:
-            return "256,192," + time + ",12,8," + TimeEnd + ",0:1:0:0";
+            return "256,192," + Time + ",12,8," + TimeEnd + ",0:1:0:0";
+        }
+
+        public override bool IsRightTime()
+        {
+            return Global.MusicTime < TimeEnd && Global.MusicTime > Time - Global.AR_ms;
+        }
+
+        public override void Init(OsuHitObject obj)
+        {
+            OsuSpinner other = obj as OsuSpinner;
+            SetCoords(256, 192);
+            Time = other.Time;
+            TimeEnd = other.TimeEnd;
         }
     }
 }

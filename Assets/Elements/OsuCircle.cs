@@ -48,7 +48,7 @@ namespace Assets.Elements
 
         void Update()
         {
-            int razn = time - Global.MusicTime;
+            int razn = Time - Global.MusicTime;
             if (razn > Global.AR_ms || razn < 0)
             {
                 RemoveFromScreen();
@@ -71,7 +71,7 @@ namespace Assets.Elements
                     case TouchPhase.Ended:
                         if (_isMoving)
                         {
-                            OsuHitObject obj = OsuMath.GetHitObjectFromTime(time);
+                            OsuHitObject obj = OsuMath.GetHitObjectFromTime(Time);
                             var pos = OsuMath.UnityCoordsToOsu(transform.localPosition);
                             obj.SetCoords(pos);
                             RemoveFromScreen();
@@ -98,7 +98,7 @@ namespace Assets.Elements
 
             sb.Append(X + ",");
             sb.Append(Y + ",");
-            sb.Append(time + ",");
+            sb.Append(Time + ",");
             sb.Append(combo_sum + ",");
 
             int num = 0;
@@ -112,6 +112,21 @@ namespace Assets.Elements
             sb.Append("0:0:");
 
             return sb.ToString();
+        }
+
+        public override bool IsRightTime()
+        {
+            return Global.MusicTime > Time - Global.AR_ms && Global.MusicTime < Time;
+        }
+
+        public override void Init(OsuHitObject obj)
+        {
+            OsuCircle other = obj as OsuCircle;
+            Time = other.Time;
+            SetCoords(other.X, other.Y);
+            number = other.number;
+            combo_sum = other.combo_sum;
+            ComboColorNum = other.ComboColorNum;
         }
     }
 }

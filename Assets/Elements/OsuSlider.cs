@@ -58,7 +58,7 @@ namespace Assets.Elements
             }
             set
             {
-                if (value <= time) { throw new ArgumentException(); }
+                if (value <= Time) { throw new ArgumentException(); }
                 _timeEnd = value;
             }
         }
@@ -85,8 +85,8 @@ namespace Assets.Elements
 
         void Update()
         {
-            int razn = time - Global.MusicTime;
-            if (time - Global.MusicTime > Global.AR_ms || _timeEnd - Global.MusicTime < 0)
+            int razn = Time - Global.MusicTime;
+            if (Time - Global.MusicTime > Global.AR_ms || _timeEnd - Global.MusicTime < 0)
             {
                 RemoveFromScreen();
             }
@@ -108,7 +108,7 @@ namespace Assets.Elements
                     case TouchPhase.Ended:
                         if (_isMoving)
                         {
-                            OsuHitObject obj = OsuMath.GetHitObjectFromTime(time);
+                            OsuHitObject obj = OsuMath.GetHitObjectFromTime(Time);
                             var pos = OsuMath.UnityCoordsToOsu(transform.localPosition);
 
                             obj.SetCoords(pos);
@@ -129,8 +129,8 @@ namespace Assets.Elements
 
         public void UpdateTimeEnd()
         {
-            TimingPoint timingPoint = OsuMath.GetNearestTimingPointLeft(time, false);
-            _timeEnd = time + (int)OsuMath.SliderLengthToAddedTime(_length, timingPoint.Mult, timingPoint.BeatLength) * CountOfSlides;
+            TimingPoint timingPoint = OsuMath.GetNearestTimingPointLeft(Time, false);
+            _timeEnd = Time + (int)OsuMath.SliderLengthToAddedTime(_length, timingPoint.Mult, timingPoint.BeatLength) * CountOfSlides;
         }
 
         public void UpdateBezePoints()
@@ -229,7 +229,7 @@ namespace Assets.Elements
             //64,247,300,2,0,P|247:66|410:221,1,525
             sb.Append(X + ",");
             sb.Append(Y + ",");
-            sb.Append(time + ",");
+            sb.Append(Time + ",");
             sb.Append(combo_sum + ",");
 
             int num = 0;
@@ -251,6 +251,25 @@ namespace Assets.Elements
             sb.Append(_length);
 
             return sb.ToString();
+        }
+
+        public override bool IsRightTime()
+        {
+            return Global.MusicTime < TimeEnd && Global.MusicTime > Time - Global.AR_ms;
+        }
+
+        public override void Init(OsuHitObject obj)
+        {
+            OsuSlider other = obj as OsuSlider;
+            Time = other.Time;
+            SetCoords(other.X, other.Y);
+            TimeEnd = other.TimeEnd;
+            number = other.number;
+            combo_sum = other.combo_sum;
+            ComboColorNum = other.ComboColorNum;
+            CountOfSlides = other.CountOfSlides;
+            Length = other.Length;
+            SliderPoints = other.SliderPoints;
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Assets.OsuEditor.HitSounds
         void OnEnable()
         {
             OsuSpinner t = Global.SelectedHitObject as OsuSpinner;
-            thisInput.text = (t.TimeEnd - t.time).ToString();
+            thisInput.text = (t.TimeEnd - t.Time).ToString();
         }
     }
 }

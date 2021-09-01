@@ -89,7 +89,7 @@ namespace Assets
         {
             foreach (var t in Global.Map.OsuHitObjects)
             {
-                if (t.time == time) { return t; }
+                if (t.Time == time) { return t; }
             }
             return null;
         }

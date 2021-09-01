@@ -23,15 +23,15 @@ namespace Assets.OsuEditor.HitSounds
             Timemark mark = null;
             foreach(var t in CreatorTimemarks.MarksToCreate)
             {
-                if (sr > Math.Abs(t.time - spinner.time - length))
+                if (sr > Math.Abs(t.time - spinner.Time - length))
                 {
                     mark = t;
-                    sr = Math.Abs(t.time - spinner.time - length);
+                    sr = Math.Abs(t.time - spinner.Time - length);
                 }
                 //else { break; }
             }
 
-            (OsuMath.GetHitObjectFromTime(spinner.time) as OsuSpinner).TimeEnd = mark.time;
+            (OsuMath.GetHitObjectFromTime(spinner.Time) as OsuSpinner).TimeEnd = mark.time;
             foreach(var t in FindObjectsOfType<OsuSpinner>())
             {
                 t.RemoveFromScreen();

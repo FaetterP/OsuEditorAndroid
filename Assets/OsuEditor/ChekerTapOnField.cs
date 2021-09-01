@@ -36,7 +36,7 @@ namespace Assets.OsuEditor
                 case LeftStatus.Circle:
                     OsuCircle added_ci = circle.Clone();
                     added_ci.SetCoords(pos);
-                    added_ci.time = Global.MusicTime;
+                    added_ci.Time = Global.MusicTime;
                     added_ci.combo_sum = 1;
                     Global.Map.OsuHitObjects.Add(added_ci);
                     break;
@@ -44,7 +44,7 @@ namespace Assets.OsuEditor
                 case LeftStatus.Slider:
                     OsuSlider added_sl = slider.Clone();
                     added_sl.SetCoords(pos);
-                    added_sl.time = Global.MusicTime;
+                    added_sl.Time = Global.MusicTime;
                     added_sl.combo_sum = 2;
                     added_sl.SliderPoints = new List<SliderPoint>();
                     added_sl.SliderPoints.Add(new SliderPoint(256, 176));
@@ -57,7 +57,7 @@ namespace Assets.OsuEditor
                 case LeftStatus.Spinner:
                     OsuSpinner added_sp = spinner.Clone();
                     added_sp.SetCoords(256, 192);
-                    added_sp.time = Global.MusicTime;
+                    added_sp.Time = Global.MusicTime;
                     added_sp.TimeEnd = Global.MusicTime+1000;
                     Global.Map.OsuHitObjects.Add(added_sp);
                     break;

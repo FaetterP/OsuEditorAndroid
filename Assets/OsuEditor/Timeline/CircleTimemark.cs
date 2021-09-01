@@ -36,7 +36,7 @@ namespace Assets.OsuEditor.Timeline
         {
             if (Global.LeftStatus == LeftStatus.Select)
             {
-                Global.SelectedHitObject = OsuMath.GetHitObjectFromTime(hitObject.time);
+                Global.SelectedHitObject = OsuMath.GetHitObjectFromTime(hitObject.Time);
 
                 holder.SliderCanvas.gameObject.SetActive(false);
                 holder.CircleCanvas.gameObject.SetActive(false);
@@ -103,7 +103,7 @@ namespace Assets.OsuEditor.Timeline
             double dist = 1000000;
             int time = 10000000;
             int added_spinner_time = 0;
-            if (hitObject is OsuSpinner) { added_spinner_time = (hitObject as OsuSpinner).TimeEnd - hitObject.time; }
+            if (hitObject is OsuSpinner) { added_spinner_time = (hitObject as OsuSpinner).TimeEnd - hitObject.Time; }
             foreach (var t in marks)
             {
                 double newdist = Math.Abs(t.transform.localPosition.x - transform.localPosition.x);
@@ -114,7 +114,7 @@ namespace Assets.OsuEditor.Timeline
                 }
             }
             //GameObject.Find("DEBUG").GetComponent<Text>().text = time.ToString();
-            OsuMath.GetHitObjectFromTime(this.time).time = time;
+            OsuMath.GetHitObjectFromTime(this.time).Time = time;
             Global.Map.OsuHitObjects.Sort();
 
             if (hitObject is OsuSlider)
@@ -123,7 +123,7 @@ namespace Assets.OsuEditor.Timeline
             }
             if (hitObject is OsuSpinner)
             {
-                (hitObject as OsuSpinner).TimeEnd= (hitObject as OsuSpinner).time + added_spinner_time;
+                (hitObject as OsuSpinner).TimeEnd= (hitObject as OsuSpinner).Time + added_spinner_time;
             }
 
             foreach (var t in FindObjectsOfType<OsuHitObject>())

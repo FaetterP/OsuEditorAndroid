@@ -23,7 +23,7 @@ namespace Assets.OsuEditor
         void Update()
         {
 
-            if (Global.SelectedHitObject != null && Global.SelectedHitObject.time == thisSlider.time)
+            if (Global.SelectedHitObject != null && Global.SelectedHitObject.Time == thisSlider.Time)
             {
                 GetComponent<BoxCollider2D>().enabled = true;
                 GetComponent<Image>().color = new Color(1, 1, 1, 1);
@@ -37,7 +37,7 @@ namespace Assets.OsuEditor
             }
             try
             {
-                if (Global.SelectedHitObject.time != thisSlider.time) { return; }
+                if (Global.SelectedHitObject.Time != thisSlider.Time) { return; }
             }
             catch { return; }
             if (Input.touchCount == 1)
@@ -62,9 +62,9 @@ namespace Assets.OsuEditor
                             thisPoint.x = pos.x;
                             thisPoint.y = pos.y;
                             isMoving = false;
-                            (OsuMath.GetHitObjectFromTime(thisSlider.time) as OsuSlider).UpdateBezePoints();
-                            (OsuMath.GetHitObjectFromTime(thisSlider.time) as OsuSlider).UpdateLength();
-                            (OsuMath.GetHitObjectFromTime(thisSlider.time) as OsuSlider).UpdateTimeEnd();
+                            (OsuMath.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateBezePoints();
+                            (OsuMath.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateLength();
+                            (OsuMath.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateTimeEnd();
                             thisSlider.RemoveFromScreen();
                             CreatorTimemarks.UpdateCircleMarks();
                         }
@@ -103,9 +103,9 @@ namespace Assets.OsuEditor
                         break;
                 }
 
-                (OsuMath.GetHitObjectFromTime(thisSlider.time) as OsuSlider).UpdateBezePoints();
-                (OsuMath.GetHitObjectFromTime(thisSlider.time) as OsuSlider).UpdateLength();
-                (OsuMath.GetHitObjectFromTime(thisSlider.time) as OsuSlider).UpdateTimeEnd();
+                (OsuMath.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateBezePoints();
+                (OsuMath.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateLength();
+                (OsuMath.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateTimeEnd();
                 thisSlider.RemoveFromScreen();
                 CreatorTimemarks.UpdateCircleMarks();
             }
