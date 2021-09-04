@@ -6,7 +6,7 @@ namespace Assets.Utilities
     class PrinterNumber : MonoBehaviour
     {
         private GameObject[] numbers = new GameObject[10];
-        public int number;
+        //public int number;
 
         void Awake()
         {
@@ -16,7 +16,7 @@ namespace Assets.Utilities
             }
         }
 
-        public void Print()
+        public void Print(int number)
         {
             int offset = 0;
             for (int i = 0; i <= (int)Math.Log10(number); i++)

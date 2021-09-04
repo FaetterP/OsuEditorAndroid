@@ -28,8 +28,8 @@ namespace Assets.OsuEditor.Timeline
             if (hitObject is OsuCircle)
             {
                 gameObject.AddComponent<PrinterNumber>();
-                GetComponent<PrinterNumber>().number = (hitObject as OsuCircle).number;
-                GetComponent<PrinterNumber>().Print();
+                int index = OsuMath.GetIndexFromTime(hitObject.Time);
+                GetComponent<PrinterNumber>().Print(Global.Map.ComboNumbers[index]);
             }
         }
         void OnMouseDown()

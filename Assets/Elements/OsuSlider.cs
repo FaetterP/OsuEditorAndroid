@@ -19,6 +19,8 @@ namespace Assets.Elements
         public List<SliderPoint> SliderPoints = new List<SliderPoint>();
         private List<Vector2> _bezePoints = new List<Vector2>();
         private LineRenderer _thisLineRenderer;
+        private int _index;
+
         public ReadOnlyCollection<Vector2> BezePoints
         {
             get
@@ -70,8 +72,9 @@ namespace Assets.Elements
 
         void Start()
         {
-            GetComponent<PrinterNumber>().number = number;
-            GetComponent<PrinterNumber>().Print();
+            _index = OsuMath.GetIndexFromTime(Time);
+            _comboColor = Global.Map.Colors[Global.Map.ComboColors[_index]];
+            GetComponent<PrinterNumber>().Print(Global.Map.ComboNumbers[_index]);
             transform.localPosition = OsuMath.OsuCoordsToUnity(new Vector2(X, Y));
             PrintSliderPoints();
             UpdateBezePoints();
@@ -174,7 +177,7 @@ namespace Assets.Elements
                 GameObject created = Instantiate(circle, transform);
                 var vec = OsuMath.OsuCoordsToUnity(t);
                 created.transform.localPosition = new Vector2(vec.x, vec.y) - new Vector2(transform.localPosition.x, transform.localPosition.y);
-                created.GetComponent<Image>().color = Global.Map.Colors[ComboColorNum];
+                created.GetComponent<Image>().color = _comboColor;
                 created.transform.SetAsFirstSibling();
             }
         }
@@ -264,9 +267,9 @@ namespace Assets.Elements
             Time = other.Time;
             SetCoords(other.X, other.Y);
             TimeEnd = other.TimeEnd;
-            number = other.number;
+            //number = other.number;
             combo_sum = other.combo_sum;
-            ComboColorNum = other.ComboColorNum;
+            //ComboColorNum = other.ComboColorNum;
             CountOfSlides = other.CountOfSlides;
             Length = other.Length;
             SliderPoints = other.SliderPoints;

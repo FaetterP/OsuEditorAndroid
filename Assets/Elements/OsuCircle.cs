@@ -11,33 +11,30 @@ namespace Assets.Elements
     [RequireComponent(typeof(PrinterNumber))]
     class OsuCircle : OsuHitObject
     {
-        private int _comboColorNum;
-        public int ComboColorNum
-        {
-            get
-            {
-                return _comboColorNum;
-            }
-            set
-            {
-                if (value < 0 || value >= Global.Map.Colors.Count) { throw new ArgumentException(); }
-                _comboColorNum = value;
-            }
-        }
-        public int number;
         public int combo_sum;
         public bool Whisle, Finish, Clap;
         public int Sampleset, Additions;
 
         protected bool _isMoving = false;
         private bool _isStart = true;
+        protected Color _comboColor;
+        private int index;
+        public Color ComboColor
+        {
+            get
+            {
+                return _comboColor;
+            }
+        }
 
         void Start()
         {
+            index = OsuMath.GetIndexFromTime(Time);
+            _comboColor = Global.Map.Colors[Global.Map.ComboColors[index]];
+
             gameObject.transform.localPosition = OsuMath.OsuCoordsToUnity(new Vector2(X, Y));
-            GetComponent<PrinterNumber>().number = number;
-            GetComponent<PrinterNumber>().Print();
-            GetComponent<Image>().color = Global.Map.Colors[ComboColorNum];
+            GetComponent<PrinterNumber>().Print(Global.Map.ComboNumbers[index]);
+            GetComponent<Image>().color = _comboColor;
         }
 
         void OnEnable()
@@ -124,9 +121,9 @@ namespace Assets.Elements
             OsuCircle other = obj as OsuCircle;
             Time = other.Time;
             SetCoords(other.X, other.Y);
-            number = other.number;
+            //number = other.number;
             combo_sum = other.combo_sum;
-            ComboColorNum = other.ComboColorNum;
+            //ComboColorNum = other.ComboColorNum;
         }
     }
 }

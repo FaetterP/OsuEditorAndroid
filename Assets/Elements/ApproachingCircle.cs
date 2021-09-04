@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Elements
@@ -43,7 +39,7 @@ namespace Assets.Elements
 
         public void UpdateColor()
         {
-            GetComponent<Image>().color = Global.Map.Colors[thisCircle.ComboColorNum];
+            GetComponent<Image>().color = thisCircle.ComboColor;
         }
     }
 }

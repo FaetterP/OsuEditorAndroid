@@ -1,9 +1,7 @@
 ﻿using Assets.Elements;
-using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Collections.ObjectModel;
 using UnityEngine;
 
 namespace Assets.MapInfo
@@ -19,6 +17,24 @@ namespace Assets.MapInfo
         public List<Color> Colors = new List<Color>();
         public List<OsuHitObject> OsuHitObjects = new List<OsuHitObject>();
 
+        private List<int> _comboColors = new List<int>();
+        private List<int> _comboNumbers = new List<int>();
+
+        public ReadOnlyCollection<int> ComboColors
+        {
+            get
+            {
+                return _comboColors.AsReadOnly();
+            }
+        }
+        public ReadOnlyCollection<int> ComboNumbers
+        {
+            get
+            {
+                return _comboNumbers.AsReadOnly();
+            }
+        }
+
         public void UpdateComboColours()
         {
             int color_num = 0, number = 1;
@@ -28,40 +44,84 @@ namespace Assets.MapInfo
                 {
                     int sum_color = (t as OsuCircle).combo_sum;
                     (t as OsuCircle).combo_sum = sum_color;
-                    if (sum_color == 1) { (t as OsuCircle).ComboColorNum = color_num; number++; (t as OsuCircle).number = number; }
-                    else if (sum_color == 5) { color_num++; color_num = color_num % Global.Map.Colors.Count; (t as OsuCircle).ComboColorNum = color_num; number = 1; (t as OsuCircle).number = number; }
-                    else { color_num += (sum_color / 16) + 1; color_num = color_num % Global.Map.Colors.Count; (t as OsuCircle).ComboColorNum = color_num; number = 1; (t as OsuCircle).number = number; }
+                    if (sum_color == 1) 
+                    {
+                        number++; 
+                        _comboNumbers.Add(number);
+                        _comboColors.Add(color_num);
+                    }
+                    else if (sum_color == 5) 
+                    {
+                        color_num++; 
+                        color_num %= Global.Map.Colors.Count;
+                        number = 1;
+                        _comboNumbers.Add(number);
+                        _comboColors.Add(color_num);
+                    }
+                    else
+                    {
+                        color_num += (sum_color / 16) + 1;
+                        color_num %= Global.Map.Colors.Count;
+                        number = 1;
+                        _comboNumbers.Add(number);
+                        _comboColors.Add(color_num);
+                    }
                 }
                 else if (t is OsuSlider)
                 {
                     int sum_color = (t as OsuSlider).combo_sum;
                     (t as OsuSlider).combo_sum = sum_color;
-                    if (sum_color == 2) { (t as OsuSlider).ComboColorNum = color_num; number++; (t as OsuSlider).number = number; }
-                    else if (sum_color == 6) { color_num++; color_num = color_num % Global.Map.Colors.Count; (t as OsuSlider).ComboColorNum = color_num; number = 1; (t as OsuSlider).number = number; }
-                    else { color_num += (sum_color / 16) + 1; color_num = color_num % Global.Map.Colors.Count; (t as OsuSlider).ComboColorNum = color_num; number = 1; (t as OsuSlider).number = number; }
+                    if (sum_color == 2) 
+                    {
+                        number++;
+                        _comboNumbers.Add(number);
+                        _comboColors.Add(color_num);
+                    }
+                    else if 
+                        (sum_color == 6) 
+                    {
+                        color_num++;
+                        color_num = color_num % Global.Map.Colors.Count;
+                        number = 1;
+                        _comboNumbers.Add(number);
+                        _comboColors.Add(color_num);
+                    }
+                    else 
+                    {
+                        color_num += (sum_color / 16) + 1;
+                        color_num = color_num % Global.Map.Colors.Count;
+                        number = 1;
+                        _comboNumbers.Add(number);
+                        _comboColors.Add(color_num);
+                    }
+                }
+                else if(t is OsuSpinner)
+                {
+                    _comboNumbers.Add(9999);
+                    _comboColors.Add(9999);
                 }
             }
         }
 
         public void UpdateNumbers()
         {
-            int num = 1, combo=-1;
-            foreach(OsuHitObject t in Global.Map.OsuHitObjects)
+            _comboNumbers.Clear();
+            int num = 1, combo = -1;
+            foreach (var t in _comboColors)
             {
-                if(t is OsuCircle)
+
+                if (t == combo)
                 {
-                    if((t as OsuCircle).ComboColorNum == combo)
-                    {
-                        (t as OsuCircle).number = num;
-                        num++;
-                    }
-                    else
-                    {
-                        combo = (t as OsuCircle).ComboColorNum;
-                        (t as OsuCircle).number = 1;
-                        num = 2;
-                    }
+                    _comboNumbers.Add(num);
+                    num++;
                 }
+                else
+                {
+                    combo = t;
+                    _comboNumbers.Add(1);
+                    num = 2;
+                }
+
             }
         }
 
