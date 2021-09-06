@@ -19,8 +19,7 @@ namespace Assets.OsuEditor.Settings.Colours
                 handler.ChangeNumber(Global.Map.Colors.Count - 1);
             }
             UpdateStatus();
-            Global.Map.UpdateComboColours();
-            Global.Map.UpdateNumbers();
+            Global.Map.UpdateComboInfos();
         }
 
         public void UpdateStatus()

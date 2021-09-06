@@ -53,7 +53,7 @@ namespace Assets.OsuEditor.HitSounds
             {
                 t.RemoveFromScreen();
             }
-            Global.Map.UpdateComboColours();
+            Global.Map.UpdateComboInfos();
             CreatorTimemarks.UpdateCircleMarks();
         }
     }

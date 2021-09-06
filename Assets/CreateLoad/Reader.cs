@@ -10,11 +10,9 @@ namespace Assets.CreateLoad
     class Reader
     {
         private static string[] lines;
-        private static List<string> forMapParse;
 
         public static void LoadMapFromFile(string path)
         {
-            forMapParse = new List<string>();
             lines = File.ReadAllLines(path);
             MapClass map = Global.Map;
 
@@ -106,8 +104,7 @@ namespace Assets.CreateLoad
                 else if (t.Split(',').Length == 7) { AddSpinner(t); }
             }
 
-            map.UpdateComboColours();
-            map.UpdateNumbers();
+            map.UpdateComboInfos();
         }
 
         private static string GetValue(string field)
@@ -180,24 +177,6 @@ namespace Assets.CreateLoad
         private static OsuCircle circle;
         private static OsuSlider slider;
         private static OsuSpinner spinner;
-        private static void FillHitObjects()
-        {
-            Global.Map.OsuHitObjects = new List<OsuHitObject>();
-            var circlego = Resources.Load("OsuCircle") as GameObject;
-            var slidergo = Resources.Load("OsuSlider") as GameObject;
-            var spinnergo = Resources.Load("OsuSpinner") as GameObject;
-            circle = circlego.GetComponent<OsuCircle>();
-            slider = slidergo.GetComponent<OsuSlider>();
-            spinner = spinnergo.GetComponent<OsuSpinner>();
-
-            foreach (string t in forMapParse)
-            {
-                if (t.Contains('|')) { AddSlider(t); }
-                else if (t.Split(',').Length == 6) { AddCircle(t); }
-                else if (t.Split(',').Length == 7) { AddSpinner(t); }
-            }
-        }
-
 
         private static void AddCircle(string line)
         {
@@ -220,7 +199,6 @@ namespace Assets.CreateLoad
 
         private static void AddSlider(string line)
         {
-
             string[] tt = line.Split(',');
             OsuSlider added = slider.Clone();
             added.SetCoords(int.Parse(tt[0]), int.Parse(tt[1]));
@@ -236,7 +214,6 @@ namespace Assets.CreateLoad
                 SliderPoint toAdd = new SliderPoint(int.Parse(xy[0]), int.Parse(xy[1]));
                 if (toAdd.x == last.x && toAdd.y == last.y) { added.SliderPoints[added.SliderPoints.Count - 1].SwitchStatic(); }
                 else { added.SliderPoints.Add(toAdd); last.x = toAdd.x; last.y = toAdd.y; }
-
             }
             added.CountOfSlides = int.Parse(tt[6]);
             added.Length = double.Parse(tt[7]);

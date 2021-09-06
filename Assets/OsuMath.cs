@@ -146,24 +146,5 @@ namespace Assets
             }
             return ret;
         }
-
-        public static int GetIndexFromTime(int time)
-        {
-            int ret = 0;
-
-            foreach(var t in Global.Map.OsuHitObjects)
-            {
-                if (t.Time == time)
-                {
-                    return ret;
-                }
-                else
-                {
-                    ret++;
-                }
-            }
-
-            return ret;
-        }
     }
 }

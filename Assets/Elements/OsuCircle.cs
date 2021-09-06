@@ -1,4 +1,5 @@
-﻿using Assets.OsuEditor;
+﻿using Assets.MapInfo;
+using Assets.OsuEditor;
 using Assets.Utilities;
 using System;
 using System.Text;
@@ -17,24 +18,29 @@ namespace Assets.Elements
 
         protected bool _isMoving = false;
         private bool _isStart = true;
-        protected Color _comboColor;
-        private int index;
+        protected ComboInfo _comboInfo;
         public Color ComboColor
         {
             get
             {
-                return _comboColor;
+                return _comboInfo.Color;
+            }
+        }
+        public int Number
+        {
+            get
+            {
+                return _comboInfo.Number;
             }
         }
 
         void Start()
         {
-            index = OsuMath.GetIndexFromTime(Time);
-            _comboColor = Global.Map.Colors[Global.Map.ComboColors[index]];
+            _comboInfo = Global.Map.GetComboInfo(Time);
 
             gameObject.transform.localPosition = OsuMath.OsuCoordsToUnity(new Vector2(X, Y));
-            GetComponent<PrinterNumber>().Print(Global.Map.ComboNumbers[index]);
-            GetComponent<Image>().color = _comboColor;
+            GetComponent<PrinterNumber>().Print(_comboInfo.Number);
+            GetComponent<Image>().color = _comboInfo.Color;
         }
 
         void OnEnable()

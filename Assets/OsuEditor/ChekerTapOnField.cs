@@ -63,8 +63,7 @@ namespace Assets.OsuEditor
                     break;
             }
             Global.Map.OsuHitObjects.Sort();
-            Global.Map.UpdateComboColours();
-            Global.Map.UpdateNumbers();
+            Global.Map.UpdateComboInfos();
             CreatorTimemarks.UpdateCircleMarks();
             
         }

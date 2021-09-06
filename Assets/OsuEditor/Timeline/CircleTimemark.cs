@@ -1,9 +1,7 @@
 ﻿using Assets.Elements;
+using Assets.MapInfo;
 using Assets.Utilities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,8 +12,8 @@ namespace Assets.OsuEditor.Timeline
         public OsuHitObject hitObject;
         private bool isMoving = false;
         public int time;
-        public Color color;
-        CanvasHolder holder;
+        private CanvasHolder holder;
+        private ComboInfo combo;
         
         void Awake()
         {
@@ -24,12 +22,12 @@ namespace Assets.OsuEditor.Timeline
 
         void Start()
         {
-            GetComponent<Image>().color = color;
+            combo = Global.Map.GetComboInfo(hitObject.Time);
+            GetComponent<Image>().color = combo.Color;
             if (hitObject is OsuCircle)
             {
-                gameObject.AddComponent<PrinterNumber>();
-                int index = OsuMath.GetIndexFromTime(hitObject.Time);
-                GetComponent<PrinterNumber>().Print(Global.Map.ComboNumbers[index]);
+                PrinterNumber printer = gameObject.AddComponent<PrinterNumber>();
+                printer.Print(combo.Number);
             }
         }
         void OnMouseDown()
@@ -113,7 +111,7 @@ namespace Assets.OsuEditor.Timeline
                     time = t.time;
                 }
             }
-            //GameObject.Find("DEBUG").GetComponent<Text>().text = time.ToString();
+
             OsuMath.GetHitObjectFromTime(this.time).Time = time;
             Global.Map.OsuHitObjects.Sort();
 
@@ -130,10 +128,11 @@ namespace Assets.OsuEditor.Timeline
             {
                 t.RemoveFromScreen();
             }
-            Global.Map.UpdateComboColours();
-            Global.Map.UpdateNumbers();
+
+            Global.Map.UpdateComboInfos();
             CreatorTimemarks.UpdateCircleMarks();
         }
+
         public object Clone()
         {
             return MemberwiseClone();

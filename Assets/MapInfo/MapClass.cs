@@ -17,26 +17,11 @@ namespace Assets.MapInfo
         public List<Color> Colors = new List<Color>();
         public List<OsuHitObject> OsuHitObjects = new List<OsuHitObject>();
 
-        private List<int> _comboColors = new List<int>();
-        private List<int> _comboNumbers = new List<int>();
+        private Dictionary<int, ComboInfo> _comboInfos = new Dictionary<int, ComboInfo>();
 
-        public ReadOnlyCollection<int> ComboColors
+        public void UpdateComboInfos()
         {
-            get
-            {
-                return _comboColors.AsReadOnly();
-            }
-        }
-        public ReadOnlyCollection<int> ComboNumbers
-        {
-            get
-            {
-                return _comboNumbers.AsReadOnly();
-            }
-        }
-
-        public void UpdateComboColours()
-        {
+            _comboInfos.Clear();
             int color_num = 0, number = 1;
             foreach (OsuHitObject t in OsuHitObjects)
             {
@@ -46,25 +31,25 @@ namespace Assets.MapInfo
                     (t as OsuCircle).combo_sum = sum_color;
                     if (sum_color == 1) 
                     {
-                        number++; 
-                        _comboNumbers.Add(number);
-                        _comboColors.Add(color_num);
+                        number++;
+                        ComboInfo toAdd = new ComboInfo(number, Colors[color_num]);
+                        _comboInfos.Add(t.Time, toAdd);
                     }
                     else if (sum_color == 5) 
                     {
                         color_num++; 
                         color_num %= Global.Map.Colors.Count;
                         number = 1;
-                        _comboNumbers.Add(number);
-                        _comboColors.Add(color_num);
+                        ComboInfo toAdd = new ComboInfo(number, Colors[color_num]);
+                        _comboInfos.Add(t.Time, toAdd);
                     }
                     else
                     {
                         color_num += (sum_color / 16) + 1;
                         color_num %= Global.Map.Colors.Count;
                         number = 1;
-                        _comboNumbers.Add(number);
-                        _comboColors.Add(color_num);
+                        ComboInfo toAdd = new ComboInfo(number, Colors[color_num]);
+                        _comboInfos.Add(t.Time, toAdd);
                     }
                 }
                 else if (t is OsuSlider)
@@ -74,8 +59,8 @@ namespace Assets.MapInfo
                     if (sum_color == 2) 
                     {
                         number++;
-                        _comboNumbers.Add(number);
-                        _comboColors.Add(color_num);
+                        ComboInfo toAdd = new ComboInfo(number, Colors[color_num]);
+                        _comboInfos.Add(t.Time, toAdd);
                     }
                     else if 
                         (sum_color == 6) 
@@ -83,46 +68,29 @@ namespace Assets.MapInfo
                         color_num++;
                         color_num = color_num % Global.Map.Colors.Count;
                         number = 1;
-                        _comboNumbers.Add(number);
-                        _comboColors.Add(color_num);
+                        ComboInfo toAdd = new ComboInfo(number, Colors[color_num]);
+                        _comboInfos.Add(t.Time, toAdd);
                     }
                     else 
                     {
                         color_num += (sum_color / 16) + 1;
                         color_num = color_num % Global.Map.Colors.Count;
                         number = 1;
-                        _comboNumbers.Add(number);
-                        _comboColors.Add(color_num);
+                        ComboInfo toAdd = new ComboInfo(number, Colors[color_num]);
+                        _comboInfos.Add(t.Time, toAdd);
                     }
                 }
                 else if(t is OsuSpinner)
                 {
-                    _comboNumbers.Add(9999);
-                    _comboColors.Add(9999);
+                    ComboInfo toAdd = new ComboInfo(9999, Color.black);
+                    _comboInfos.Add(t.Time, toAdd);
                 }
             }
         }
 
-        public void UpdateNumbers()
+        public ComboInfo GetComboInfo(int time)
         {
-            _comboNumbers.Clear();
-            int num = 1, combo = -1;
-            foreach (var t in _comboColors)
-            {
-
-                if (t == combo)
-                {
-                    _comboNumbers.Add(num);
-                    num++;
-                }
-                else
-                {
-                    combo = t;
-                    _comboNumbers.Add(1);
-                    num = 2;
-                }
-
-            }
+            return _comboInfos[time];
         }
 
         private string GetMapTXT()
