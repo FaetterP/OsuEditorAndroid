@@ -1,30 +1,24 @@
 ﻿using Assets.Elements;
 using Assets.OsuEditor.Timeline;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Assets.OsuEditor
 {
     class ChekerTapOnField : MonoBehaviour
     {
-        private static OsuCircle circle;
-        private static OsuSlider slider;
-        private static OsuSpinner spinner;
-
+        [SerializeField] private CreatorTimemarks creator;
+                         private OsuCircle circle;
+                         private OsuSlider slider;
+                         private OsuSpinner spinner;
 
         void Awake()
         {
-            var circlego = Resources.Load("OsuCircle") as GameObject;
-            var slidergo = Resources.Load("OsuSlider") as GameObject;
-            var spinnergo = Resources.Load("OsuSpinner") as GameObject;
-            circle = circlego.GetComponent<OsuCircle>();
-            slider = slidergo.GetComponent<OsuSlider>();
-            spinner = spinnergo.GetComponent<OsuSpinner>();
+            circle = Resources.Load<GameObject>("OsuCircle").GetComponent<OsuCircle>();
+            slider = Resources.Load<GameObject>("OsuSlider").GetComponent<OsuSlider>();
+            spinner = Resources.Load<GameObject>("OsuSpinner").GetComponent<OsuSpinner>();
         }
+
         void OnMouseDown()
         {
             Touch touch = Input.GetTouch(0);
@@ -64,8 +58,7 @@ namespace Assets.OsuEditor
             }
             Global.Map.OsuHitObjects.Sort();
             Global.Map.UpdateComboInfos();
-            CreatorTimemarks.UpdateCircleMarks();
-            
+            creator.UpdateCircleMarks();
         }
     }
 }

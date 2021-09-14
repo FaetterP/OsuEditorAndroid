@@ -14,9 +14,11 @@ namespace Assets.OsuEditor.Timeline
         public int time;
         private CanvasHolder holder;
         private ComboInfo combo;
+        private CreatorTimemarks creator;
         
         void Awake()
         {
+            creator = FindObjectOfType<CreatorTimemarks>();
             holder = FindObjectOfType<CanvasHolder>();
         }
 
@@ -90,7 +92,7 @@ namespace Assets.OsuEditor.Timeline
             }
             else
             {
-                CreatorTimemarks.RemoveCircleMarkFromScreen(time);
+                creator.RemoveCircleMarkFromScreen(time);
                 Destroy(gameObject);
             }
         }
@@ -130,7 +132,7 @@ namespace Assets.OsuEditor.Timeline
             }
 
             Global.Map.UpdateComboInfos();
-            CreatorTimemarks.UpdateCircleMarks();
+            creator.UpdateCircleMarks();
         }
 
         public object Clone()

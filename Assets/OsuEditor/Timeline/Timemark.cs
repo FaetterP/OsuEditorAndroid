@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,12 +6,14 @@ namespace Assets.OsuEditor.Timeline
 {
     class Timemark : MonoBehaviour, ICloneable, IComparable<Timemark>
     {
+        private CreatorTimemarks creator;
         public int time;
         public Color color;
         public int height;
 
         void Start()
         {
+            creator = FindObjectOfType<CreatorTimemarks>();
             GetComponent<Image>().color = color;
             var t = transform.localScale;
             t.y = height;
@@ -30,12 +29,15 @@ namespace Assets.OsuEditor.Timeline
             }
             else
             {
-                CreatorTimemarks.RemoveMarkFromScreen(time);
-                Destroy(gameObject);
+                DestroyFromScreen();
             }
         }
 
-
+        public void DestroyFromScreen()
+        {
+            creator.RemoveMarkFromScreen(time);
+            Destroy(gameObject);
+        }
 
         public object Clone()
         {

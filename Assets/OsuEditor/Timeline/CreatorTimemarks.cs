@@ -7,11 +7,11 @@ namespace Assets.OsuEditor.Timeline
 {
     class CreatorTimemarks : MonoBehaviour
     {
-
-        public static List<Timemark> MarksToCreate = new List<Timemark>();
-        private static List<CircleTimemark> CircleMarksToCreate = new List<CircleTimemark>();
-        private static List<int> MarksOnScreen = new List<int>();
-        private static List<int> CircleMarksOnScreen = new List<int>();
+        [SerializeField] private Timemark _timemark;
+                         private List<Timemark> _marksToCreate = new List<Timemark>();
+                         private List<CircleTimemark> _circleMarksToCreate = new List<CircleTimemark>();
+                         private List<int> _marksOnScreen = new List<int>();
+                         private List<int> _circleMarksOnScreen = new List<int>();
 
         void Awake()
         {
@@ -20,9 +20,9 @@ namespace Assets.OsuEditor.Timeline
 
         void Update()
         {
-            foreach (var t in MarksToCreate)
+            foreach (var t in _marksToCreate)
             {
-                if (!MarksOnScreen.Contains(t.time))
+                if (!_marksOnScreen.Contains(t.time))
                 {
                     if (Global.MusicTime > t.time - Global.AR_ms && Global.MusicTime < t.time + Global.AR_ms)
                     {
@@ -30,33 +30,33 @@ namespace Assets.OsuEditor.Timeline
                         created.height = t.height;
                         created.time = t.time;
                         created.color = t.color;
-                        MarksOnScreen.Add(t.time);
+                        _marksOnScreen.Add(t.time);
                     }
                 }
             }
-            foreach (var t in CircleMarksToCreate)
+            foreach (var t in _circleMarksToCreate)
             {
-                if (!CircleMarksOnScreen.Contains(t.time))
+                if (!_circleMarksOnScreen.Contains(t.time))
                 {
                     if (Global.MusicTime > t.time - Global.AR_ms && Global.MusicTime < t.time + Global.AR_ms)
                     {
                         CircleTimemark created = Instantiate(t, transform);
                         created.hitObject = t.hitObject;
                         created.time = t.time;
-                        CircleMarksOnScreen.Add(t.time);
+                        _circleMarksOnScreen.Add(t.time);
                     }
                 }
             }
         }
 
-        public static void UpdateCircleMarks()
+        public void UpdateCircleMarks()
         {
             foreach (var t in FindObjectsOfType<CircleTimemark>())
             {
                 RemoveCircleMarkFromScreen(t.time);
                 Destroy(t.gameObject);
             }
-            CircleMarksToCreate.Clear();
+            _circleMarksToCreate.Clear();
 
             CircleTimemark toCreateCircle = Resources.Load<GameObject>("CircleTimemark").GetComponent<CircleTimemark>();
             CircleTimemark toCreateSpinnerStart = Resources.Load<GameObject>("SpinnerTimemarkStart").GetComponent<CircleTimemark>();
@@ -75,13 +75,13 @@ namespace Assets.OsuEditor.Timeline
                         //toAdd.color = (t as OsuSlider).ComboColor;
                         toAdd.time = t.Time;
                         toAdd.hitObject = t;
-                        CircleMarksToCreate.Add(toAdd);
+                        _circleMarksToCreate.Add(toAdd);
 
                         toAdd = (CircleTimemark)toCreateSliderEnd.Clone();
                         //toAdd.color = (t as OsuSlider).ComboColor;
                         toAdd.time = (t as OsuSlider)._timeEnd;
                         toAdd.hitObject = t;
-                        CircleMarksToCreate.Add(toAdd);
+                        _circleMarksToCreate.Add(toAdd);
 
                         TimingPoint timingPoint = OsuMath.GetNearestTimingPointLeft(t.Time, false);
                         for (int i = 1; i < (t as OsuSlider).CountOfSlides; i++)
@@ -90,7 +90,7 @@ namespace Assets.OsuEditor.Timeline
                             //toAdd.color = (t as OsuSlider).ComboColor;
                             toAdd.time = t.Time + (int)OsuMath.SliderLengthToAddedTime((t as OsuSlider).Length, timingPoint.Mult, timingPoint.BeatLength) * i;
                             toAdd.hitObject = t;
-                            CircleMarksToCreate.Add(toAdd);
+                            _circleMarksToCreate.Add(toAdd);
                         }
                     }
                     else
@@ -99,7 +99,7 @@ namespace Assets.OsuEditor.Timeline
                         //toAdd.color = (t as OsuCircle).ComboColor;
                         toAdd.time = t.Time;
                         toAdd.hitObject = t;
-                        CircleMarksToCreate.Add(toAdd);
+                        _circleMarksToCreate.Add(toAdd);
                     }
                 }
                 if (t is OsuSpinner)
@@ -108,24 +108,121 @@ namespace Assets.OsuEditor.Timeline
                    // toAdd.color = Color.white;
                     toAdd.time = t.Time;
                     toAdd.hitObject = t;
-                    CircleMarksToCreate.Add(toAdd);
+                    _circleMarksToCreate.Add(toAdd);
 
                     toAdd = (CircleTimemark)toCreateSpinnerEnd.Clone();
                     //toAdd.color = Color.white;
                     toAdd.time = (t as OsuSpinner).TimeEnd;
                     toAdd.hitObject = t;
-                    CircleMarksToCreate.Add(toAdd);
+                    _circleMarksToCreate.Add(toAdd);
                 }
             }
         }
 
-        public static void RemoveMarkFromScreen(int time)
+        public void RemoveMarkFromScreen(int time)
         {
-            MarksOnScreen.Remove(time);
+            _marksOnScreen.Remove(time);
         }
-        public static void RemoveCircleMarkFromScreen(int time)
+
+        public void RemoveCircleMarkFromScreen(int time)
         {
-            CircleMarksOnScreen.Remove(time);
+            _circleMarksOnScreen.Remove(time);
+        }
+
+        public void UpdateTimemarks(int step)
+        {
+            Timemark[] marks = FindObjectsOfType<Timemark>();
+            foreach (var t in marks)
+            {
+                t.DestroyFromScreen();
+            }
+
+            _marksToCreate.Clear();
+            AddMainStepMarks();
+            switch (step)
+            {
+                case 2:
+                    Devide(2, Color.red);
+                    break;
+                case 3:
+                    Devide(3, Color.magenta);
+                    break;
+                case 4:
+                    Devide(2, Color.red);
+                    Devide(2, Color.blue);
+                    break;
+                case 5:
+                    Devide(5, Color.yellow);
+                    break;
+                case 6:
+                    Devide(2, Color.red);
+                    Devide(3, Color.magenta);
+                    break;
+                case 7:
+                    Devide(7, Color.yellow);
+                    break;
+                case 8:
+                    Devide(2, Color.red);
+                    Devide(2, Color.blue);
+                    Devide(2, Color.magenta);
+                    break;
+            }
+
+        }
+        private void AddMainStepMarks()
+        {
+            List<TimingPoint> parents = new List<TimingPoint>();
+            foreach (var t in Global.Map.TimingPoints)
+            {
+                Timemark added = (Timemark)_timemark.Clone();
+                added.time = t.Offset;
+                added.height = 50;
+                added.color = Color.cyan;
+                _marksToCreate.Add(added);
+                if (t.isParent) { parents.Add(t); }
+            }
+            double time;
+            for (int i = 0; i < parents.Count - 1; i++)
+            {
+                time = parents[i].Offset;
+                while (time < parents[i + 1].Offset)
+                {
+                    Timemark added = (Timemark)_timemark.Clone();
+                    added.time = (int)time;
+                    added.height = 50;
+                    added.color = Color.white;
+                    _marksToCreate.Add(added);
+                    time += parents[i].BeatLength;
+                }
+            }
+            time = parents[parents.Count - 1].Offset;
+            while (time < Global.MusicLength)
+            {
+                Timemark added = (Timemark)_timemark.Clone();
+                added.time = (int)time;
+                added.height = 50;
+                added.color = Color.white;
+                _marksToCreate.Add(added);
+                time += parents[parents.Count - 1].BeatLength;
+            }
+        }
+        private void Devide(ushort num, Color color)
+        {
+            List<Timemark> toadd = new List<Timemark>();
+            for (int i = 0; i < _marksToCreate.Count - 1; i++)
+            {
+                for (int i0 = 1; i0 < num; i0++)
+                {
+                    double time = _marksToCreate[i + 1].time - _marksToCreate[i].time;
+                    Timemark added = (Timemark)_timemark.Clone();
+                    added.time = (int)(_marksToCreate[i].time + time * i0 / num);
+                    added.height = 30;
+                    added.color = color;
+                    toadd.Add(added);
+                }
+            }
+            _marksToCreate.AddRange(toadd);
+            _marksToCreate.Sort();
         }
     }
 }

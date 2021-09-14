@@ -1,9 +1,6 @@
 ﻿using Assets.Elements;
 using Assets.OsuEditor.Timeline;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,17 +9,20 @@ namespace Assets.OsuEditor
 {
     class SliderPointGameObject : MonoBehaviour, ICloneable
     {
-        [SerializeField] Sprite StaticSprite, NotStaticSprite;
-        public SliderPoint thisPoint;
-        public OsuSlider thisSlider;
-        private bool isMoving = false;
+        [SerializeField] private Sprite _staticPointSprite, _notStaticPointSprite;
+                         public SliderPoint thisPoint;
+                         public OsuSlider thisSlider;
+                         private bool _isMoving = false;
+                         private CreatorTimemarks _creator;
+
         void Start()
         {
-            GetComponent<Image>().sprite = thisPoint.isStatic ? StaticSprite : NotStaticSprite;
+            _creator = FindObjectOfType<CreatorTimemarks>();
+            GetComponent<Image>().sprite = thisPoint.isStatic ? _staticPointSprite : _notStaticPointSprite;
         }
+
         void Update()
         {
-
             if (Global.SelectedHitObject != null && Global.SelectedHitObject.Time == thisSlider.Time)
             {
                 GetComponent<BoxCollider2D>().enabled = true;
@@ -46,7 +46,7 @@ namespace Assets.OsuEditor
                 switch (touch.phase)
                 {
                     case TouchPhase.Moved:
-                        if (isMoving)
+                        if (_isMoving)
                         {
                             var poss = transform.parent.worldToLocalMatrix.MultiplyPoint(Camera.main.ScreenToWorldPoint(touch.position));
                             poss.z = 0;
@@ -55,18 +55,18 @@ namespace Assets.OsuEditor
                         break;
 
                     case TouchPhase.Ended:
-                        if (isMoving)
+                        if (_isMoving)
                         {
                             Vector2 pos = transform.localPosition;
                             pos = OsuMath.UnityCoordsToOsu(pos+ new Vector2(thisSlider.transform.localPosition.x, thisSlider.transform.localPosition.y));
                             thisPoint.x = pos.x;
                             thisPoint.y = pos.y;
-                            isMoving = false;
+                            _isMoving = false;
                             (OsuMath.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateBezePoints();
                             (OsuMath.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateLength();
                             (OsuMath.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateTimeEnd();
                             thisSlider.RemoveFromScreen();
-                            CreatorTimemarks.UpdateCircleMarks();
+                            _creator.UpdateCircleMarks();
                         }
                         break;
                 }
@@ -86,7 +86,7 @@ namespace Assets.OsuEditor
         {
             if (Input.touchCount == 1)
             {
-                isMoving = true;
+                _isMoving = true;
             }
             if (Input.touchCount == 2)
             {
@@ -107,7 +107,7 @@ namespace Assets.OsuEditor
                 (OsuMath.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateLength();
                 (OsuMath.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateTimeEnd();
                 thisSlider.RemoveFromScreen();
-                CreatorTimemarks.UpdateCircleMarks();
+                _creator.UpdateCircleMarks();
             }
         }
 

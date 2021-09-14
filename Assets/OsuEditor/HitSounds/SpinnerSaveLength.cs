@@ -1,9 +1,6 @@
 ﻿using Assets.Elements;
 using Assets.OsuEditor.Timeline;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +12,7 @@ namespace Assets.OsuEditor.HitSounds
 
         void OnMouseDown()
         {
-            OsuSpinner spinner = Global.SelectedHitObject as OsuSpinner;
+            /*OsuSpinner spinner = Global.SelectedHitObject as OsuSpinner;
             int length = int.Parse(inputFieldLength.text);
             length = Math.Abs(length);
 
@@ -28,7 +25,6 @@ namespace Assets.OsuEditor.HitSounds
                     mark = t;
                     sr = Math.Abs(t.time - spinner.Time - length);
                 }
-                //else { break; }
             }
 
             (OsuMath.GetHitObjectFromTime(spinner.Time) as OsuSpinner).TimeEnd = mark.time;
@@ -36,7 +32,7 @@ namespace Assets.OsuEditor.HitSounds
             {
                 t.RemoveFromScreen();
             }
-            CreatorTimemarks.UpdateCircleMarks();
+            CreatorTimemarks.UpdateCircleMarks();*/
         }
     }
 }

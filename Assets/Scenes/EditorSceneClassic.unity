@@ -352,6 +352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   num: {fileID: 1932706206}
+  creator: {fileID: 0}
 --- !u!114 &21088949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7804,6 +7805,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d2172d784bc3b1439c0f2447d740053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _timemark: {fileID: 114301961996264226, guid: 31e38f6ab48376a43b193b1476ae7f58,
+    type: 2}
 --- !u!1 &647023479
 GameObject:
   m_ObjectHideFlags: 0
@@ -13297,6 +13300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f248d43b26f02b448b33b429167a2798, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  creator: {fileID: 0}
 --- !u!61 &1131817488
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13612,7 +13616,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f80b0abe5147fe044886468e88013ba0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputFieldLength: {fileID: 819082627}
 --- !u!1 &1142235494
 GameObject:
   m_ObjectHideFlags: 0
@@ -16554,6 +16557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e52a7e62e57cac744a8eb68ec57679f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  creator: {fileID: 0}
 --- !u!61 &1389808060
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -18853,6 +18857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3779656d7bb2bfc49ad9bc463c0b34b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  creatorTimemarks: {fileID: 643830055}
   timemark: {fileID: 114301961996264226, guid: 31e38f6ab48376a43b193b1476ae7f58, type: 2}
   step: {fileID: 319920632}
 --- !u!1 &1574789864
@@ -24603,6 +24608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4e00be58e4307741905d47226471919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  creator: {fileID: 0}
   num: {fileID: 1932706206}
 --- !u!114 &1975228066
 MonoBehaviour:

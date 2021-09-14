@@ -1,9 +1,5 @@
 ﻿using Assets.Elements;
 using Assets.OsuEditor.Timeline;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +7,8 @@ namespace Assets.OsuEditor.HitSounds
 {
     class NewCombo : MonoBehaviour
     {
-        private Image thisImage;
+        [SerializeField] private CreatorTimemarks creator;
+                         private Image thisImage;
 
         void Awake()
         {
@@ -54,7 +51,7 @@ namespace Assets.OsuEditor.HitSounds
                 t.RemoveFromScreen();
             }
             Global.Map.UpdateComboInfos();
-            CreatorTimemarks.UpdateCircleMarks();
+            creator.UpdateCircleMarks();
         }
     }
 }
