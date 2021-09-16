@@ -35,7 +35,7 @@ namespace Assets.Elements
         {
             if (Global.MusicTime < Time - Global.AR_ms)
             {
-                RemoveFromScreen();
+                Destroy(gameObject);
             }
             else if (Global.MusicTime < Time)
             {
@@ -49,7 +49,7 @@ namespace Assets.Elements
             }
             else
             {
-                RemoveFromScreen();
+                Destroy(gameObject);
             }
         }
 

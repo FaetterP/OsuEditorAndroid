@@ -65,7 +65,7 @@ namespace Assets.OsuEditor
                             (OsuMath.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateBezePoints();
                             (OsuMath.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateLength();
                             (OsuMath.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateTimeEnd();
-                            thisSlider.RemoveFromScreen();
+                            Destroy(thisSlider.gameObject);
                             _creator.UpdateCircleMarks();
                         }
                         break;
@@ -106,7 +106,7 @@ namespace Assets.OsuEditor
                 (OsuMath.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateBezePoints();
                 (OsuMath.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateLength();
                 (OsuMath.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateTimeEnd();
-                thisSlider.RemoveFromScreen();
+                Destroy(thisSlider.gameObject);
                 _creator.UpdateCircleMarks();
             }
         }

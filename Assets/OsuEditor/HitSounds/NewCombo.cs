@@ -48,7 +48,7 @@ namespace Assets.OsuEditor.HitSounds
             OnEnable();
             foreach(var t in FindObjectsOfType<OsuCircle>())
             {
-                t.RemoveFromScreen();
+                Destroy(t.gameObject);
             }
             Global.Map.UpdateComboInfos();
             creator.UpdateCircleMarks();

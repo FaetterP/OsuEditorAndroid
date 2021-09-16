@@ -45,8 +45,12 @@ namespace Assets.Elements
 
         void OnEnable()
         {
-            if (_isStart) { _isStart = false; return; }
-            RemoveFromScreen();
+            if (_isStart) 
+            { 
+                _isStart = false; 
+                return; 
+            }
+            Destroy(gameObject);
         }
 
         void Update()
@@ -54,7 +58,7 @@ namespace Assets.Elements
             int razn = Time - Global.MusicTime;
             if (razn > Global.AR_ms || razn < 0)
             {
-                RemoveFromScreen();
+                Destroy(gameObject);
             }
 
             if (Input.touchCount > 0)
@@ -77,8 +81,7 @@ namespace Assets.Elements
                             OsuHitObject obj = OsuMath.GetHitObjectFromTime(Time);
                             var pos = OsuMath.UnityCoordsToOsu(transform.localPosition);
                             obj.SetCoords(pos);
-                            RemoveFromScreen();
-                            _isMoving = false;
+                            Destroy(gameObject);
                         }
                         break;
                 }

@@ -49,10 +49,9 @@ namespace Assets.Elements
             return Time.CompareTo(p.Time);
         }
 
-        public void RemoveFromScreen()
+        void OnDestroy()
         {
             CreatorHitObjects.RemoveObjectFromList(Time);
-            Destroy(gameObject);
         }
 
         public abstract bool IsRightTime();

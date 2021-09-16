@@ -128,7 +128,7 @@ namespace Assets.OsuEditor.Timeline
 
             foreach (var t in FindObjectsOfType<OsuHitObject>())
             {
-                t.RemoveFromScreen();
+                Destroy(t.gameObject);
             }
 
             Global.Map.UpdateComboInfos();

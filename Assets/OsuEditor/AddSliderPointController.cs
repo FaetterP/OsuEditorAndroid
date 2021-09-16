@@ -27,7 +27,7 @@ namespace Assets.OsuEditor
                     OsuSlider[] arr = FindObjectsOfType<OsuSlider>();
                     foreach(var t in arr)
                     {
-                        t.RemoveFromScreen();
+                        Destroy(t.gameObject);
                     }
                 }
             }

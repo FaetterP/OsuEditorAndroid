@@ -22,7 +22,7 @@ namespace Assets.OsuEditor
 
                 foreach (var t in FindObjectsOfType<OsuSlider>())
                 {
-                    t.RemoveFromScreen();
+                    Destroy(t.gameObject);
                 }
             }
         }
