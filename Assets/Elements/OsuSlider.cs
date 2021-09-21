@@ -1,5 +1,6 @@
 ﻿using Assets.MapInfo;
 using Assets.OsuEditor;
+using Assets.OsuEditor.Timeline;
 using Assets.Utilities;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace Assets.Elements
     class OsuSlider : OsuCircle
     {
         private double _length;
-        public int _timeEnd;
+        private int _timeEnd;
         private int _countOfSlides;
         public List<SliderPoint> SliderPoints = new List<SliderPoint>();
         private List<Vector2> _bezePoints = new List<Vector2>();
@@ -63,6 +64,10 @@ namespace Assets.Elements
                 _timeEnd = value;
             }
         }
+
+        private static CircleTimemark toCreateSliderStart;
+        private static CircleTimemark toCreateSliderMiddle;
+        private static CircleTimemark toCreateSliderEnd;
 
         void Awake()
         {
@@ -145,7 +150,7 @@ namespace Assets.Elements
                     toBeze.Add(t);
                     List<Vector2> vec = OsuMath.GetInterPointBeze(toBeze, 100);
 
-                    for (int i = vec.Count-1; i >=0; i--)
+                    for (int i = vec.Count - 1; i >= 0; i--)
                     {
                         _bezePoints.Add(vec[i]);
                     }
@@ -182,7 +187,7 @@ namespace Assets.Elements
         public void UpdateLength()
         {
             _length = 0;
-            for(int i = 0; i < BezePoints.Count-1; i++)
+            for (int i = 0; i < BezePoints.Count - 1; i++)
             {
                 double add_length = Math.Sqrt(Math.Pow(BezePoints[i].x - BezePoints[i + 1].x, 2) + Math.Pow(BezePoints[i].y - BezePoints[i + 1].y, 2));
                 _length += add_length;
@@ -194,11 +199,11 @@ namespace Assets.Elements
             UpdateLine();
             GameObject go = Resources.Load("SliderPoint") as GameObject;
             SliderPointGameObject spgo = go.GetComponent<SliderPointGameObject>();
-            foreach(var t in SliderPoints)
+            foreach (var t in SliderPoints)
             {
                 SliderPointGameObject created = Instantiate(spgo, transform);
                 created.transform.SetAsLastSibling();
-                created.transform.localPosition = OsuMath.OsuCoordsToUnity(new Vector2((float)t.x, (float)t.y))-new Vector2(transform.localPosition.x, transform.localPosition.y);
+                created.transform.localPosition = OsuMath.OsuCoordsToUnity(new Vector2((float)t.x, (float)t.y)) - new Vector2(transform.localPosition.x, transform.localPosition.y);
                 created.thisSlider = this;
                 created.thisPoint = t;
             }
@@ -208,11 +213,11 @@ namespace Assets.Elements
         {
             _thisLineRenderer.positionCount = SliderPoints.Count + 1;
             _thisLineRenderer.SetPosition(0, transform.localPosition);
-            for(int i = 0; i < SliderPoints.Count; i++)
+            for (int i = 0; i < SliderPoints.Count; i++)
             {
-                _thisLineRenderer.SetPosition(i+1, OsuMath.OsuCoordsToUnity(new Vector2((float)SliderPoints[i].x, (float)SliderPoints[i].y)));
+                _thisLineRenderer.SetPosition(i + 1, OsuMath.OsuCoordsToUnity(new Vector2((float)SliderPoints[i].x, (float)SliderPoints[i].y)));
             }
-            for(int i = 0; i < _thisLineRenderer.positionCount; i++)
+            for (int i = 0; i < _thisLineRenderer.positionCount; i++)
             {
                 _thisLineRenderer.SetPosition(i, transform.TransformPoint(_thisLineRenderer.GetPosition(i) - new Vector3(transform.localPosition.x, transform.localPosition.y, 100)));
             }
@@ -247,7 +252,7 @@ namespace Assets.Elements
                 }
             }
             sb.Remove(sb.Length - 1, 1);
-            sb.Append(","+CountOfSlides + ",");
+            sb.Append("," + CountOfSlides + ",");
             sb.Append(_length);
 
             return sb.ToString();
@@ -264,12 +269,43 @@ namespace Assets.Elements
             Time = other.Time;
             SetCoords(other.X, other.Y);
             TimeEnd = other.TimeEnd;
-            //number = other.number;
             combo_sum = other.combo_sum;
-            //ComboColorNum = other.ComboColorNum;
             CountOfSlides = other.CountOfSlides;
             Length = other.Length;
             SliderPoints = other.SliderPoints;
+        }
+
+        public override CircleTimemark[] GetTimemark()
+        {
+            if (toCreateSliderStart == null)
+            {
+                toCreateSliderStart = Resources.Load<CircleTimemark>("SliderTimemarkStart");
+                toCreateSliderMiddle = Resources.Load<CircleTimemark>("SliderTimemarkMiddle");
+                toCreateSliderEnd = Resources.Load<CircleTimemark>("SliderTimemarkEnd");
+            }
+
+            CircleTimemark[] ret = new CircleTimemark[_countOfSlides + 1];
+
+            CircleTimemark toAdd = toCreateSliderStart.Clone();
+            toAdd.time = Time;
+            toAdd.hitObject = this;
+            ret[0] = toAdd;
+
+            toAdd = toCreateSliderEnd.Clone();
+            toAdd.time = _timeEnd;
+            toAdd.hitObject = this;
+            ret[_countOfSlides] = toAdd;
+
+            TimingPoint timingPoint = OsuMath.GetNearestTimingPointLeft(Time, false);
+            for (int i = 1; i < CountOfSlides; i++)
+            {
+                toAdd = toCreateSliderMiddle.Clone();
+                toAdd.time = Time + (int)OsuMath.SliderLengthToAddedTime(Length, timingPoint.Mult, timingPoint.BeatLength) * i;
+                toAdd.hitObject = this;
+                ret[i] = toAdd;
+            }
+
+            return ret;
         }
     }
 }

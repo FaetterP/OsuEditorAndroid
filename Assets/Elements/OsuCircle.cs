@@ -1,5 +1,6 @@
 ﻿using Assets.MapInfo;
 using Assets.OsuEditor;
+using Assets.OsuEditor.Timeline;
 using Assets.Utilities;
 using System;
 using System.Text;
@@ -34,6 +35,8 @@ namespace Assets.Elements
             }
         }
 
+        private static CircleTimemark s_circleTimemark;
+
         void Start()
         {
             _comboInfo = Global.Map.GetComboInfo(Time);
@@ -45,10 +48,10 @@ namespace Assets.Elements
 
         void OnEnable()
         {
-            if (_isStart) 
-            { 
-                _isStart = false; 
-                return; 
+            if (_isStart)
+            {
+                _isStart = false;
+                return;
             }
             Destroy(gameObject);
         }
@@ -67,9 +70,9 @@ namespace Assets.Elements
                 switch (touch.phase)
                 {
                     case TouchPhase.Moved:
-                        if (_isMoving) 
-                        { 
-                            var poss=transform.parent.worldToLocalMatrix.MultiplyPoint(Camera.main.ScreenToWorldPoint(touch.position));
+                        if (_isMoving)
+                        {
+                            var poss = transform.parent.worldToLocalMatrix.MultiplyPoint(Camera.main.ScreenToWorldPoint(touch.position));
                             poss.z = 0;
                             transform.localPosition = poss;
                         }
@@ -90,7 +93,7 @@ namespace Assets.Elements
 
         void OnMouseDown()
         {
-            _isMoving = true;   
+            _isMoving = true;
         }
 
         public OsuCircle Clone()
@@ -130,9 +133,24 @@ namespace Assets.Elements
             OsuCircle other = obj as OsuCircle;
             Time = other.Time;
             SetCoords(other.X, other.Y);
-            //number = other.number;
             combo_sum = other.combo_sum;
-            //ComboColorNum = other.ComboColorNum;
+        }
+
+        public override CircleTimemark[] GetTimemark()
+        {
+            if (s_circleTimemark == null)
+            {
+                s_circleTimemark = Resources.Load<CircleTimemark>("CircleTimemark");
+            }
+
+            CircleTimemark[] ret = new CircleTimemark[1];
+
+            CircleTimemark toAdd = s_circleTimemark.Clone();
+            toAdd.time = Time;
+            toAdd.hitObject = this;
+            ret[0] = toAdd;
+
+            return ret;
         }
     }
 }

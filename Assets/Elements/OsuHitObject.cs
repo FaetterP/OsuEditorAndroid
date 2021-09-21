@@ -1,4 +1,5 @@
 ﻿using Assets.OsuEditor;
+using Assets.OsuEditor.Timeline;
 using System;
 using UnityEngine;
 
@@ -57,5 +58,7 @@ namespace Assets.Elements
         public abstract bool IsRightTime();
 
         public abstract void Init(OsuHitObject obj);
+
+        public abstract CircleTimemark[] GetTimemark();
     }
 }

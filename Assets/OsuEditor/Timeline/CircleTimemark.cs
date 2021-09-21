@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Assets.OsuEditor.Timeline
 {
-    class CircleTimemark : MonoBehaviour, ICloneable, IComparable<CircleTimemark>
+    class CircleTimemark : MonoBehaviour, IComparable<CircleTimemark>
     {
         public OsuHitObject hitObject;
         private bool isMoving = false;
@@ -135,9 +135,9 @@ namespace Assets.OsuEditor.Timeline
             creator.UpdateCircleMarks();
         }
 
-        public object Clone()
+        public CircleTimemark Clone()
         {
-            return MemberwiseClone();
+            return (CircleTimemark)MemberwiseClone();
         }
 
         public int CompareTo(CircleTimemark other)

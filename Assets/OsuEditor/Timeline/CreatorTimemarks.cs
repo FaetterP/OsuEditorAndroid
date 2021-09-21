@@ -58,63 +58,11 @@ namespace Assets.OsuEditor.Timeline
             }
             _circleMarksToCreate.Clear();
 
-            CircleTimemark toCreateCircle = Resources.Load<GameObject>("CircleTimemark").GetComponent<CircleTimemark>();
-            CircleTimemark toCreateSpinnerStart = Resources.Load<GameObject>("SpinnerTimemarkStart").GetComponent<CircleTimemark>();
-            CircleTimemark toCreateSpinnerEnd = Resources.Load<GameObject>("SpinnerTimemarkEnd").GetComponent<CircleTimemark>();
-            CircleTimemark toCreateSliderStart = Resources.Load<GameObject>("SliderTimemarkStart").GetComponent<CircleTimemark>();
-            CircleTimemark toCreateSliderMiddle = Resources.Load<GameObject>("SliderTimemarkMiddle").GetComponent<CircleTimemark>();
-            CircleTimemark toCreateSliderEnd = Resources.Load<GameObject>("SliderTimemarkEnd").GetComponent<CircleTimemark>();
-
-            foreach (OsuHitObject t in Global.Map.OsuHitObjects)
+            foreach (OsuHitObject hitObject in Global.Map.OsuHitObjects)
             {
-                if (t is OsuCircle)
+                foreach (var timemark in hitObject.GetTimemark())
                 {
-                    if (t is OsuSlider)
-                    {
-                        CircleTimemark toAdd = (CircleTimemark)toCreateSliderStart.Clone();
-                        //toAdd.color = (t as OsuSlider).ComboColor;
-                        toAdd.time = t.Time;
-                        toAdd.hitObject = t;
-                        _circleMarksToCreate.Add(toAdd);
-
-                        toAdd = (CircleTimemark)toCreateSliderEnd.Clone();
-                        //toAdd.color = (t as OsuSlider).ComboColor;
-                        toAdd.time = (t as OsuSlider)._timeEnd;
-                        toAdd.hitObject = t;
-                        _circleMarksToCreate.Add(toAdd);
-
-                        TimingPoint timingPoint = OsuMath.GetNearestTimingPointLeft(t.Time, false);
-                        for (int i = 1; i < (t as OsuSlider).CountOfSlides; i++)
-                        {
-                            toAdd = (CircleTimemark)toCreateSliderMiddle.Clone();
-                            //toAdd.color = (t as OsuSlider).ComboColor;
-                            toAdd.time = t.Time + (int)OsuMath.SliderLengthToAddedTime((t as OsuSlider).Length, timingPoint.Mult, timingPoint.BeatLength) * i;
-                            toAdd.hitObject = t;
-                            _circleMarksToCreate.Add(toAdd);
-                        }
-                    }
-                    else
-                    {
-                        CircleTimemark toAdd = (CircleTimemark)toCreateCircle.Clone();
-                        //toAdd.color = (t as OsuCircle).ComboColor;
-                        toAdd.time = t.Time;
-                        toAdd.hitObject = t;
-                        _circleMarksToCreate.Add(toAdd);
-                    }
-                }
-                if (t is OsuSpinner)
-                {
-                    CircleTimemark toAdd = (CircleTimemark)toCreateSpinnerStart.Clone();
-                   // toAdd.color = Color.white;
-                    toAdd.time = t.Time;
-                    toAdd.hitObject = t;
-                    _circleMarksToCreate.Add(toAdd);
-
-                    toAdd = (CircleTimemark)toCreateSpinnerEnd.Clone();
-                    //toAdd.color = Color.white;
-                    toAdd.time = (t as OsuSpinner).TimeEnd;
-                    toAdd.hitObject = t;
-                    _circleMarksToCreate.Add(toAdd);
+                    _circleMarksToCreate.Add(timemark);
                 }
             }
         }
