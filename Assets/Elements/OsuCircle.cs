@@ -1,8 +1,6 @@
 ﻿using Assets.MapInfo;
-using Assets.OsuEditor;
 using Assets.OsuEditor.Timeline;
 using Assets.Utilities;
-using System;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,8 +16,8 @@ namespace Assets.Elements
         public int Sampleset, Additions;
 
         protected bool _isMoving = false;
-        private bool _isStart = true;
         protected ComboInfo _comboInfo;
+
         public Color ComboColor
         {
             get
@@ -44,16 +42,6 @@ namespace Assets.Elements
             gameObject.transform.localPosition = OsuMath.OsuCoordsToUnity(new Vector2(X, Y));
             GetComponent<PrinterNumber>().Print(_comboInfo.Number);
             GetComponent<Image>().color = _comboInfo.Color;
-        }
-
-        void OnEnable()
-        {
-            if (_isStart)
-            {
-                _isStart = false;
-                return;
-            }
-            Destroy(gameObject);
         }
 
         void Update()

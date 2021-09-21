@@ -65,9 +65,9 @@ namespace Assets.Elements
             }
         }
 
-        private static CircleTimemark toCreateSliderStart;
-        private static CircleTimemark toCreateSliderMiddle;
-        private static CircleTimemark toCreateSliderEnd;
+        private static CircleTimemark s_sliderBeginTimemark;
+        private static CircleTimemark s_sliderMiddleTimemark;
+        private static CircleTimemark s_sliderEndTimemark;
 
         void Awake()
         {
@@ -78,7 +78,7 @@ namespace Assets.Elements
         {
             _comboInfo = Global.Map.GetComboInfo(Time);
 
-            GetComponent<PrinterNumber>().Print(_comboInfo.Number);
+            GetComponent<PrinterNumber>().Print(Number);
             transform.localPosition = OsuMath.OsuCoordsToUnity(new Vector2(X, Y));
             PrintSliderPoints();
             UpdateBezePoints();
@@ -277,21 +277,21 @@ namespace Assets.Elements
 
         public override CircleTimemark[] GetTimemark()
         {
-            if (toCreateSliderStart == null)
+            if (s_sliderBeginTimemark == null)
             {
-                toCreateSliderStart = Resources.Load<CircleTimemark>("SliderTimemarkStart");
-                toCreateSliderMiddle = Resources.Load<CircleTimemark>("SliderTimemarkMiddle");
-                toCreateSliderEnd = Resources.Load<CircleTimemark>("SliderTimemarkEnd");
+                s_sliderBeginTimemark = Resources.Load<CircleTimemark>("SliderTimemarkStart");
+                s_sliderMiddleTimemark = Resources.Load<CircleTimemark>("SliderTimemarkMiddle");
+                s_sliderEndTimemark = Resources.Load<CircleTimemark>("SliderTimemarkEnd");
             }
 
             CircleTimemark[] ret = new CircleTimemark[_countOfSlides + 1];
 
-            CircleTimemark toAdd = toCreateSliderStart.Clone();
+            CircleTimemark toAdd = s_sliderBeginTimemark.Clone();
             toAdd.time = Time;
             toAdd.hitObject = this;
             ret[0] = toAdd;
 
-            toAdd = toCreateSliderEnd.Clone();
+            toAdd = s_sliderEndTimemark.Clone();
             toAdd.time = _timeEnd;
             toAdd.hitObject = this;
             ret[_countOfSlides] = toAdd;
@@ -299,7 +299,7 @@ namespace Assets.Elements
             TimingPoint timingPoint = OsuMath.GetNearestTimingPointLeft(Time, false);
             for (int i = 1; i < CountOfSlides; i++)
             {
-                toAdd = toCreateSliderMiddle.Clone();
+                toAdd = s_sliderMiddleTimemark.Clone();
                 toAdd.time = Time + (int)OsuMath.SliderLengthToAddedTime(Length, timingPoint.Mult, timingPoint.BeatLength) * i;
                 toAdd.hitObject = this;
                 ret[i] = toAdd;

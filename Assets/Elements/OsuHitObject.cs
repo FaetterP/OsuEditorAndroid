@@ -50,6 +50,11 @@ namespace Assets.Elements
             return Time.CompareTo(p.Time);
         }
 
+        void OnDisable()
+        {
+            Destroy(gameObject);
+        }
+
         void OnDestroy()
         {
             CreatorHitObjects.RemoveObjectFromList(Time);
