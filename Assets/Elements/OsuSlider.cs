@@ -132,12 +132,6 @@ namespace Assets.Elements
             }
         }
 
-        public void UpdateTimeEnd()
-        {
-            TimingPoint timingPoint = OsuMath.GetNearestTimingPointLeft(Time, false);
-            _timeEnd = Time + (int)OsuMath.SliderLengthToAddedTime(_length, timingPoint.Mult, timingPoint.BeatLength) * CountOfSlides;
-        }
-
         public void UpdateBezePoints()
         {
             _bezePoints.Clear();
@@ -194,6 +188,12 @@ namespace Assets.Elements
             }
         }
 
+        public void UpdateTimeEnd()
+        {
+            TimingPoint timingPoint = OsuMath.GetNearestTimingPointLeft(Time, false);
+            _timeEnd = Time + (int)OsuMath.SliderLengthToAddedTime(_length, timingPoint.Mult, timingPoint.BeatLength) * CountOfSlides;
+        }
+
         private void PrintSliderPoints()
         {
             UpdateLine();
@@ -212,50 +212,14 @@ namespace Assets.Elements
         public void UpdateLine()
         {
             _thisLineRenderer.positionCount = SliderPoints.Count + 1;
-            _thisLineRenderer.SetPosition(0, transform.localPosition);
+            _thisLineRenderer.SetPosition(0, Vector2.zero);
             for (int i = 0; i < SliderPoints.Count; i++)
             {
-                _thisLineRenderer.SetPosition(i + 1, OsuMath.OsuCoordsToUnity(new Vector2((float)SliderPoints[i].x, (float)SliderPoints[i].y)));
+                Vector3 position = OsuMath.OsuCoordsToUnity(new Vector2((float)SliderPoints[i].x, (float)SliderPoints[i].y));
+                position -= transform.localPosition;
+                position -= new Vector3(0, 0, 1);
+                _thisLineRenderer.SetPosition(i + 1, position);
             }
-            for (int i = 0; i < _thisLineRenderer.positionCount; i++)
-            {
-                _thisLineRenderer.SetPosition(i, transform.TransformPoint(_thisLineRenderer.GetPosition(i) - new Vector3(transform.localPosition.x, transform.localPosition.y, 100)));
-            }
-        }
-
-        public new OsuSlider Clone()
-        {
-            return (OsuSlider)MemberwiseClone();
-        }
-
-        public override string ToString()
-        {
-            StringBuilder sb = new StringBuilder();
-            //64,247,300,2,0,P|247:66|410:221,1,525
-            sb.Append(X + ",");
-            sb.Append(Y + ",");
-            sb.Append(Time + ",");
-            sb.Append(combo_sum + ",");
-
-            int num = 0;
-            if (Whisle) { num += 2; }
-            if (Finish) { num += 4; }
-            if (Clap) { num += 8; }
-            sb.Append(num + ",");
-            sb.Append("P|");
-            foreach (var t in SliderPoints)
-            {
-                sb.Append(t.x + ":" + t.y + "|");
-                if (t.isStatic)
-                {
-                    sb.Append(t.x + ":" + t.y + "|");
-                }
-            }
-            sb.Remove(sb.Length - 1, 1);
-            sb.Append("," + CountOfSlides + ",");
-            sb.Append(_length);
-
-            return sb.ToString();
         }
 
         public override bool IsRightTime()
@@ -306,6 +270,41 @@ namespace Assets.Elements
             }
 
             return ret;
+        }
+
+        public new OsuSlider Clone()
+        {
+            return (OsuSlider)MemberwiseClone();
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            //64,247,300,2,0,P|247:66|410:221,1,525
+            sb.Append(X + ",");
+            sb.Append(Y + ",");
+            sb.Append(Time + ",");
+            sb.Append(combo_sum + ",");
+
+            int num = 0;
+            if (Whisle) { num += 2; }
+            if (Finish) { num += 4; }
+            if (Clap) { num += 8; }
+            sb.Append(num + ",");
+            sb.Append("P|");
+            foreach (var t in SliderPoints)
+            {
+                sb.Append(t.x + ":" + t.y + "|");
+                if (t.isStatic)
+                {
+                    sb.Append(t.x + ":" + t.y + "|");
+                }
+            }
+            sb.Remove(sb.Length - 1, 1);
+            sb.Append("," + CountOfSlides + ",");
+            sb.Append(_length);
+
+            return sb.ToString();
         }
     }
 }
