@@ -1,44 +1,49 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.IO;
-using UnityEngine;
-using Assets.Elements;
+﻿using Assets.Elements;
 using Assets.MapInfo;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using UnityEngine;
 
 namespace Assets.CreateLoad
 {
-    class Reader
+    class Reader : MonoBehaviour
     {
-        private static string[] lines;
+        private string[] _lines;
+        private double _lastParentLenght = -1;
+        private OsuCircle _circleSample;
+        private OsuSlider _sliderSample;
+        private OsuSpinner _spinnerSample;
 
-        public static void LoadMapFromFile(string path)
+        public void LoadMapFromFile(string path)
         {
-            lines = File.ReadAllLines(path);
+            _lines = File.ReadAllLines(path);
             MapClass map = Global.Map;
 
-
             map.General.AudioFilename = GetValue("AudioFilename:");
-            map.General.AudioLeadIn = int.Parse(GetValue("AudioLeadIn:"));
-            map.General.PreviewTime = int.Parse(GetValue("PreviewTime:"));
-            map.General.Countdown = int.Parse(GetValue("Countdown:"));
+            map.General.AudioLeadIn = GetIntValue("AudioLeadIn:");
+            map.General.PreviewTime = GetIntValue("PreviewTime:");
+            map.General.Countdown = GetIntValue("Countdown:");
             map.General.SampleSet = GetValue("SampleSet:");
-            map.General.StackLeniency = double.Parse(GetValue("StackLeniency:"));
-            map.General.Mode = int.Parse(GetValue("Mode:"));
-            map.General.LetterboxInBreaks = int.Parse(GetValue("LetterboxInBreaks:"));
-            map.General.WidescreenStoryboard = int.Parse(GetValue("WidescreenStoryboard:"))==1;
+            map.General.StackLeniency = GetDoubleValue("StackLeniency:");
+            map.General.Mode = GetIntValue("Mode:");
+            map.General.LetterboxInBreaks = GetIntValue("LetterboxInBreaks:");
+            map.General.WidescreenStoryboard = GetBoolValue("WidescreenStoryboard:");
+
             map.Editor.ClearBookmarks();
             if (GetValue("Bookmarks:") != null)
             {
-                foreach (var t in GetValue("Bookmarks:").Split(','))
+                foreach (string t in GetValue("Bookmarks:").Split(','))
                 {
                     if (t == "") { break; }
                     map.Editor.AddBookmark(int.Parse(t));
                 }
             }
-            map.Editor.DistanceSpacing = double.Parse(GetValue("DistanceSpacing:"));
-            map.Editor.BeatDivisor = int.Parse(GetValue("BeatDivisor:"));
-            map.Editor.GridSize = int.Parse(GetValue("GridSize:"));
-            map.Editor.TimelineZoom = double.Parse(GetValue("TimelineZoom:"));
+            map.Editor.DistanceSpacing = GetDoubleValue("DistanceSpacing:");
+            map.Editor.BeatDivisor = GetIntValue("BeatDivisor:");
+            map.Editor.GridSize = GetIntValue("GridSize:");
+            map.Editor.TimelineZoom = GetDoubleValue("TimelineZoom:");
 
             map.Metadata.Title = GetValue("Title:");
             map.Metadata.TitleUnicode = GetValue("TitleUnicode:");
@@ -48,24 +53,25 @@ namespace Assets.CreateLoad
             map.Metadata.Version = GetValue("Version:");
             map.Metadata.Source = GetValue("Source:");
             map.Metadata.Tags = GetValue("Tags:");
-            map.Metadata.BeatmapID = int.Parse(GetValue("BeatmapID:"));
-            map.Metadata.BeatmapSetID = int.Parse(GetValue("BeatmapSetID:"));
+            map.Metadata.BeatmapID = GetIntValue("BeatmapID:");
+            map.Metadata.BeatmapSetID = GetIntValue("BeatmapSetID:");
 
-            map.Difficulty.HPDrainRate = double.Parse(GetValue("HPDrainRate:"));
-            map.Difficulty.CircleSize = double.Parse(GetValue("CircleSize:"));
-            map.Difficulty.OverallDifficulty = double.Parse(GetValue("OverallDifficulty:"));
-            map.Difficulty.ApproachRate = double.Parse(GetValue("ApproachRate:"));
-            map.Difficulty.SliderMultiplier = double.Parse(GetValue("SliderMultiplier:"));
-            map.Difficulty.SliderTickRate = int.Parse(GetValue("SliderTickRate:"));
+            map.Difficulty.HPDrainRate = GetDoubleValue("HPDrainRate:");
+            map.Difficulty.CircleSize = GetDoubleValue("CircleSize:");
+            map.Difficulty.OverallDifficulty = GetDoubleValue("OverallDifficulty:");
+            map.Difficulty.ApproachRate = GetDoubleValue("ApproachRate:");
+            map.Difficulty.SliderMultiplier = GetDoubleValue("SliderMultiplier:");
+            map.Difficulty.SliderTickRate = GetIntValue("SliderTickRate:");
 
             string[] bg_string_arr = GetValue("0,0,").Split(',');
             map.Events.BackgroungImage = bg_string_arr[0].Remove(bg_string_arr[0].Length - 1, 1).Remove(0, 1);
             map.Events.xOffset = int.Parse(bg_string_arr[1]);
             map.Events.yOffset = int.Parse(bg_string_arr[2]);
-            List<string> raw_sb = GetBlock("[Events]").Split('\n').ToList();
-            raw_sb.RemoveAt(0);
+
+            List<string> raw_storyboard = GetBlock("[Events]").Split('\n').ToList();
+            raw_storyboard.RemoveAt(0);
             string sb = "";
-            foreach(var t in raw_sb)
+            foreach (var t in raw_storyboard)
             {
                 sb += t + "\n";
             }
@@ -93,10 +99,11 @@ namespace Assets.CreateLoad
                 map.Colors.Add(new Color(230 / 255f, 230 / 255f, 250 / 255f));
             }
 
+            _circleSample = Resources.Load<OsuCircle>("OsuCircle");
+            _sliderSample = Resources.Load<OsuSlider>("OsuSlider");
+            _spinnerSample = Resources.Load<OsuSpinner>("OsuSpinner");
+
             map.OsuHitObjects = new List<OsuHitObject>();
-            circle = (Resources.Load("OsuCircle") as GameObject).GetComponent<OsuCircle>();
-            slider = (Resources.Load("OsuSlider") as GameObject).GetComponent<OsuSlider>();
-            spinner = (Resources.Load("OsuSpinner") as GameObject).GetComponent<OsuSpinner>();
             foreach (var t in GetBlock("[HitObjects]").Split('\n'))
             {
                 if (t.Contains('|')) { AddSlider(t); }
@@ -107,9 +114,9 @@ namespace Assets.CreateLoad
             map.UpdateComboInfos();
         }
 
-        private static string GetValue(string field)
+        private string GetValue(string field)
         {
-            foreach(var t in lines)
+            foreach (var t in _lines)
             {
                 if (t.StartsWith(field))
                 {
@@ -121,20 +128,37 @@ namespace Assets.CreateLoad
             return null;
         }
 
-        private static string GetBlock(string block)
+        private int GetIntValue(string field)
+        {
+            return int.Parse(GetValue(field));
+        }
+
+        private double GetDoubleValue(string field)
+        {
+            return double.Parse(GetValue(field));
+        }
+
+        private bool GetBoolValue(string field)
+        {
+            int value = int.Parse(GetValue(field));
+            if (value != 0 && value != 1) { throw new FormatException(); }
+            return value == 1;
+        }
+
+        private string GetBlock(string block)
         {
             string ret = "";
             bool isNeed = false;
-            foreach(var t in lines)
+            foreach (var t in _lines)
             {
                 if (t.StartsWith("[")) { isNeed = false; }
 
-                if (isNeed && t!="" && !t.StartsWith("//"))
+                if (isNeed && t != "" && !t.StartsWith("//"))
                 {
                     ret += t + "\n";
                 }
-               
-                if(t == block)
+
+                if (t == block)
                 {
                     isNeed = true;
                 }
@@ -143,8 +167,7 @@ namespace Assets.CreateLoad
             return ret;
         }
 
-        private static double last_parent_lenght = -1;
-        private static TimingPoint ConvertTimingPoint(string tp)
+        private TimingPoint ConvertTimingPoint(string tp)
         {
             string[] param = tp.Split(',');
 
@@ -157,12 +180,12 @@ namespace Assets.CreateLoad
                 ret.isParent = true;
                 ret.BeatLength = divisor;
                 ret.Mult = 1;
-                last_parent_lenght = divisor;
+                _lastParentLenght = divisor;
             }
             else
             {
                 ret.isParent = false;
-                ret.BeatLength = last_parent_lenght;
+                ret.BeatLength = _lastParentLenght;
                 ret.Mult = -100 / divisor;
             }
             ret.Meter = int.Parse(param[2]);
@@ -174,14 +197,10 @@ namespace Assets.CreateLoad
             return ret;
         }
 
-        private static OsuCircle circle;
-        private static OsuSlider slider;
-        private static OsuSpinner spinner;
-
-        private static void AddCircle(string line)
+        private void AddCircle(string line)
         {
             string[] tt = line.Split(',');
-            OsuCircle added = circle.Clone();
+            OsuCircle added = _circleSample.Clone();
             added.SetCoords(int.Parse(tt[0]), int.Parse(tt[1]));
             added.Time = int.Parse(tt[2]);
             added.combo_sum = int.Parse(tt[3]);
@@ -197,10 +216,10 @@ namespace Assets.CreateLoad
             Global.Map.OsuHitObjects.Add(added);
         }
 
-        private static void AddSlider(string line)
+        private void AddSlider(string line)
         {
             string[] tt = line.Split(',');
-            OsuSlider added = slider.Clone();
+            OsuSlider added = _sliderSample.Clone();
             added.SetCoords(int.Parse(tt[0]), int.Parse(tt[1]));
             added.Time = int.Parse(tt[2]);
             added.combo_sum = int.Parse(tt[3]);
@@ -221,10 +240,10 @@ namespace Assets.CreateLoad
             Global.Map.OsuHitObjects.Add(added);
         }
 
-        private static void AddSpinner(string line)
+        private void AddSpinner(string line)
         {
             string[] tt = line.Split(',');
-            OsuSpinner added = spinner.Clone();
+            OsuSpinner added = _spinnerSample.Clone();
             added.SetCoords(int.Parse(tt[0]), int.Parse(tt[1]));
             added.Time = int.Parse(tt[2]);
             added.TimeEnd = int.Parse(tt[5]);

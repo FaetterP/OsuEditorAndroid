@@ -5,16 +5,23 @@ namespace Assets.CreateLoad
 {
     class SelectMapButton : MonoBehaviour
     {
-        private string MapName;
+        private string _mapName;
+        private static Reader s_reader;
+
         void OnMouseDown()
         {
-            Global.FullPathToMap = Global.FullPathToMapFolder + MapName;
+            if (s_reader == null) { s_reader = FindObjectOfType<Reader>(); }
+
+            string path = Global.FullPathToMapFolder + _mapName;
+            Global.FullPathToMap = path;
+            s_reader.LoadMapFromFile(path);
+
             SceneManager.LoadScene(4);
         }
 
         public void SetText(string text)
         {
-            MapName = text;
+            _mapName = text;
         }
     }
 }

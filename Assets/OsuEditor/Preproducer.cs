@@ -1,10 +1,9 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using Assets.CreateLoad;
-using Assets.Music;
-using System.Collections;
+﻿using Assets.Music;
 using Assets.OsuEditor;
 using Assets.OsuEditor.Timeline;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Editor
 {
@@ -19,26 +18,24 @@ namespace Assets.Editor
 
         void Awake()
         {
-            Reader.LoadMapFromFile(Global.FullPathToMap);
-
             _wwwBackground = new WWW("file:///" + Global.FullPathToMapFolder + Global.Map.Events.BackgroungImage);
         }
+
         void Start()
         {
             SetBackground();
             SetMusic();
         }
 
-
         private void SetBackground()
         {
             Rect textureRect = new Rect(0, 0, _wwwBackground.texture.width, _wwwBackground.texture.height);
-            _background.sprite = Sprite.Create(_wwwBackground.texture, textureRect , Vector2.zero);
+            _background.sprite = Sprite.Create(_wwwBackground.texture, textureRect, Vector2.zero);
         }
 
         public void SetMusic()
         {
-           StartCoroutine(LoadSongCoroutine());
+            StartCoroutine(LoadSongCoroutine());
         }
 
         IEnumerator LoadSongCoroutine()
