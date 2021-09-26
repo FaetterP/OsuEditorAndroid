@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Assets.CreateLoad.LoadExceptions;
+using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Assets.CreateLoad
@@ -14,7 +16,16 @@ namespace Assets.CreateLoad
 
             string path = Global.FullPathToMapFolder + _mapName;
             Global.FullPathToMap = path;
-            s_reader.LoadMapFromFile(path);
+
+            try
+            {
+                s_reader.LoadMapFromFile(path);
+            }
+            catch (Exception e)
+            {
+                FindObjectOfType<LoadExceptionHandler>().Handle(e);
+                return;
+            }
 
             SceneManager.LoadScene(4);
         }
