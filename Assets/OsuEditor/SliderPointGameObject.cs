@@ -18,7 +18,7 @@ namespace Assets.OsuEditor
         void Start()
         {
             _creator = FindObjectOfType<CreatorTimemarks>();
-            GetComponent<Image>().sprite = thisPoint.isStatic ? _staticPointSprite : _notStaticPointSprite;
+            GetComponent<Image>().sprite = thisPoint.IsStatic ? _staticPointSprite : _notStaticPointSprite;
         }
 
         void Update()

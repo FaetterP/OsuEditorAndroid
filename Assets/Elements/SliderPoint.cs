@@ -1,25 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Assets.Elements
+﻿namespace Assets.Elements
 {
-    class SliderPoint 
+    class SliderPoint
     {
-        public double x = 0, y = 0;
-        public bool isStatic = false;
+        public double x, y;
+        public bool IsStatic;
 
         public SliderPoint(int x, int y)
         {
             this.x = x;
             this.y = y;
-            isStatic = false;
+            IsStatic = false;
         }
         public void SwitchStatic()
         {
-            if (isStatic) { isStatic = false; }
-            else { isStatic = true; }
+            if (IsStatic) { IsStatic = false; }
+            else { IsStatic = true; }
+        }
+
+        public static bool operator ==(SliderPoint a, SliderPoint b)
+        {
+            return a.x == b.x && a.y == b.y;
+        }
+
+        public static bool operator !=(SliderPoint a, SliderPoint b)
+        {
+            return !(a==b);
         }
     }
 }

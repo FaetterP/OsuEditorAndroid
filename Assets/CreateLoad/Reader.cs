@@ -63,19 +63,18 @@ namespace Assets.CreateLoad
             map.Difficulty.SliderMultiplier = GetDoubleValue("SliderMultiplier:");
             map.Difficulty.SliderTickRate = GetIntValue("SliderTickRate:");
 
-            string[] bg_string_arr = GetValue("0,0,").Split(',');
-            map.Events.BackgroungImage = bg_string_arr[0].Remove(bg_string_arr[0].Length - 1, 1).Remove(0, 1);
-            map.Events.xOffset = int.Parse(bg_string_arr[1]);
-            map.Events.yOffset = int.Parse(bg_string_arr[2]);
+            string[] backgroundParams = GetValue("0,0,").Split(',');
+            map.Events.BackgroungImage = backgroundParams[0].Remove(backgroundParams[0].Length - 1, 1).Remove(0, 1);
+            map.Events.xOffset = int.Parse(backgroundParams[1]);
+            map.Events.yOffset = int.Parse(backgroundParams[2]);
 
-            List<string> raw_storyboard = GetBlock("[Events]").Split('\n').ToList();
-            raw_storyboard.RemoveAt(0);
-            string sb = "";
-            foreach (var t in raw_storyboard)
-            {
-                sb += t + "\n";
-            }
-            map.Events.storyboard = sb;
+            List<string> storyboardBlock = GetBlock("[Events]").Split('\n').ToList();
+            storyboardBlock.RemoveAt(0);
+
+            string storyboard = "";
+            if (storyboardBlock.Count > 0)
+                storyboard = storyboardBlock.Aggregate((i, j) => i + '\n' + j);
+            map.Events.storyboard = storyboard;
 
             map.TimingPoints = new List<TimingPoint>();
             foreach (var t in GetBlock("[TimingPoints]").Split('\n'))
@@ -84,12 +83,13 @@ namespace Assets.CreateLoad
             }
 
             map.Colors = new List<Color>();
-            if (GetBlock("[Colours]") != "")
+            string coloursBlock = GetBlock("[Colours]");
+            if (coloursBlock != "")
             {
-                foreach (var t in GetBlock("[Colours]").Split('\n'))
+                foreach (var t in coloursBlock.Split('\n'))
                 {
-                    string[] color_arr = t.Split(' ').Last().Split(',');
-                    Color added = new Color(int.Parse(color_arr[0]) / 255f, int.Parse(color_arr[1]) / 255f, int.Parse(color_arr[2]) / 255f);
+                    float[] color_arr = t.Split(' ').Last().Split(',').Select(x => int.Parse(x) / 255f).ToArray();
+                    Color added = new Color(color_arr[0], color_arr[1], color_arr[2]);
                     map.Colors.Add(added);
                 }
             }
@@ -106,22 +106,30 @@ namespace Assets.CreateLoad
             map.OsuHitObjects = new List<OsuHitObject>();
             foreach (var t in GetBlock("[HitObjects]").Split('\n'))
             {
-                if (t.Contains('|')) { AddSlider(t); }
-                else if (t.Split(',').Length == 6) { AddCircle(t); }
-                else if (t.Split(',').Length == 7) { AddSpinner(t); }
+                if (t.Contains('|'))
+                    AddSlider(t);
+
+                else if (t.Split(',').Length == 6)
+                    AddCircle(t);
+
+                else if (t.Split(',').Length == 7)
+                    AddSpinner(t);
             }
 
             map.UpdateComboInfos();
         }
 
-        private string GetValue(string field)
+        private string GetValue(string fieldname)
         {
             foreach (var t in _lines)
             {
-                if (t.StartsWith(field))
+                if (t.StartsWith(fieldname))
                 {
-                    string ret = t.Remove(0, field.Length);
-                    if (ret.StartsWith(" ")) { ret = ret.Remove(0, 1); }
+                    string ret = t.Remove(0, fieldname.Length);
+
+                    if (ret.StartsWith(" "))
+                        ret = ret.Remove(0, 1);
+
                     return ret;
                 }
             }
@@ -141,7 +149,10 @@ namespace Assets.CreateLoad
         private bool GetBoolValue(string field)
         {
             int value = int.Parse(GetValue(field));
-            if (value != 0 && value != 1) { throw new FormatException(); }
+
+            if (value != 0 && value != 1)
+                throw new FormatException();
+
             return value == 1;
         }
 
@@ -149,21 +160,22 @@ namespace Assets.CreateLoad
         {
             string ret = "";
             bool isNeed = false;
+
             foreach (var t in _lines)
             {
-                if (t.StartsWith("[")) { isNeed = false; }
+                if (t.StartsWith("["))
+                    isNeed = false;
 
-                if (isNeed && t != "" && !t.StartsWith("//"))
-                {
+                if (isNeed && t != "" && t.StartsWith("//") == false)
                     ret += t + "\n";
-                }
 
                 if (t == block)
-                {
                     isNeed = true;
-                }
             }
-            if (ret != "") { ret = ret.Remove(ret.Length - 1, 1); }
+
+            if (ret != "")
+                ret = ret.Remove(ret.Length - 1, 1);
+
             return ret;
         }
 
@@ -199,54 +211,71 @@ namespace Assets.CreateLoad
 
         private void AddCircle(string line)
         {
-            string[] tt = line.Split(',');
+            string[] param = line.Split(',');
             OsuCircle added = _circleSample.Clone();
-            added.SetCoords(int.Parse(tt[0]), int.Parse(tt[1]));
-            added.Time = int.Parse(tt[2]);
-            added.combo_sum = int.Parse(tt[3]);
 
-            int num = int.Parse(tt[4]);
+            Vector2 coords = new Vector2(int.Parse(param[0]), int.Parse(param[1]));
+            added.SetCoords(coords);
+            added.Time = int.Parse(param[2]);
+            added.combo_sum = int.Parse(param[3]);
+
+            int num = int.Parse(param[4]);
             if (num >= 8) { added.Clap = true; num -= 8; }
             if (num >= 4) { added.Finish = true; num -= 4; }
             if (num >= 2) { added.Whisle = true; }
 
-            string[] arr = tt[5].Split(':');
+            string[] arr = param[5].Split(':');
             added.Sampleset = int.Parse(arr[0]);
             added.Additions = int.Parse(arr[1]);
+
             Global.Map.OsuHitObjects.Add(added);
         }
 
         private void AddSlider(string line)
         {
-            string[] tt = line.Split(',');
+            string[] param = line.Split(',');
             OsuSlider added = _sliderSample.Clone();
-            added.SetCoords(int.Parse(tt[0]), int.Parse(tt[1]));
-            added.Time = int.Parse(tt[2]);
-            added.combo_sum = int.Parse(tt[3]);
+
+            Vector2 coords = new Vector2(int.Parse(param[0]), int.Parse(param[1]));
+            added.SetCoords(coords);
+            added.Time = int.Parse(param[2]);
+            added.combo_sum = int.Parse(param[3]);
             added.SliderPoints = new List<SliderPoint>();
-            string[] points = tt[5].Split('|');
+            string[] points = param[5].Split('|');
 
             SliderPoint last = new SliderPoint(int.MaxValue, int.MaxValue);
             for (int i = 1; i < points.Length; i++)
             {
                 string[] xy = points[i].Split(':');
                 SliderPoint toAdd = new SliderPoint(int.Parse(xy[0]), int.Parse(xy[1]));
-                if (toAdd.x == last.x && toAdd.y == last.y) { added.SliderPoints[added.SliderPoints.Count - 1].SwitchStatic(); }
-                else { added.SliderPoints.Add(toAdd); last.x = toAdd.x; last.y = toAdd.y; }
+
+                if (toAdd == last)
+                {
+                    added.SliderPoints.Last().SwitchStatic();
+                }
+                else
+                {
+                    added.SliderPoints.Add(toAdd);
+                    last = toAdd;
+                }
             }
-            added.CountOfSlides = int.Parse(tt[6]);
-            added.Length = double.Parse(tt[7]);
+            added.CountOfSlides = int.Parse(param[6]);
+            added.Length = double.Parse(param[7]);
             added.UpdateTimeEnd();
+
             Global.Map.OsuHitObjects.Add(added);
         }
 
         private void AddSpinner(string line)
         {
-            string[] tt = line.Split(',');
+            string[] param = line.Split(',');
             OsuSpinner added = _spinnerSample.Clone();
-            added.SetCoords(int.Parse(tt[0]), int.Parse(tt[1]));
-            added.Time = int.Parse(tt[2]);
-            added.TimeEnd = int.Parse(tt[5]);
+
+            Vector2 coords = new Vector2(int.Parse(param[0]), int.Parse(param[1]));
+            added.SetCoords(coords);
+            added.Time = int.Parse(param[2]);
+            added.TimeEnd = int.Parse(param[5]);
+
             Global.Map.OsuHitObjects.Add(added);
         }
     }

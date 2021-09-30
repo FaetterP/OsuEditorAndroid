@@ -139,7 +139,7 @@ namespace Assets.Elements
             toBeze.Add(new SliderPoint(X, Y));
             foreach (var t in SliderPoints)
             {
-                if (t.isStatic)
+                if (t.IsStatic)
                 {
                     toBeze.Add(t);
                     List<Vector2> vec = OsuMath.GetInterPointBeze(toBeze, 100);
@@ -295,7 +295,7 @@ namespace Assets.Elements
             foreach (var t in SliderPoints)
             {
                 sb.Append(t.x + ":" + t.y + "|");
-                if (t.isStatic)
+                if (t.IsStatic)
                 {
                     sb.Append(t.x + ":" + t.y + "|");
                 }
