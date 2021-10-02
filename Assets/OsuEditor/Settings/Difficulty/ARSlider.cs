@@ -1,34 +1,15 @@
-﻿using Assets.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
-using UnityEngine.UI;
-
-namespace Assets.OsuEditor.Settings.Difficulty
+﻿namespace Assets.OsuEditor.Settings.Difficulty
 {
-    class ARSlider : MonoBehaviour
+    class ARSlider : DifficultySlider
     {
-        private Slider thisSlider;
-        [SerializeField] private Text ARText;
-
-        void Awake()
+        protected override void SetValue(double value)
         {
-            thisSlider = GetComponent<Slider>();
-            thisSlider.onValueChanged.AddListener(delegate { SaveValue(); });
+            Global.Map.Difficulty.ApproachRate = value;
         }
 
-        void Start()
+        protected override double GetValue()
         {
-            thisSlider.value = (float)Global.Map.Difficulty.ApproachRate;
-        }
-
-        void SaveValue()
-        {
-            thisSlider.value = (float)Math.Round(thisSlider.value, 1);
-            Global.Map.Difficulty.ApproachRate = thisSlider.value;
-            ARText.text = ARText.GetComponent<LangWriter>().GetText() + " - " + thisSlider.value;
+            return Global.Map.Difficulty.ApproachRate;
         }
     }
 }
