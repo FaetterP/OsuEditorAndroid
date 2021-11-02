@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Assets.OsuEditor.Timeline
 {
-    class Timemark : MonoBehaviour, ICloneable, IComparable<Timemark>
+    class Timemark : MonoBehaviour, IComparable<Timemark>
     {
         private CreatorTimemarks creator;
         public int time;
@@ -22,7 +22,7 @@ namespace Assets.OsuEditor.Timeline
 
         void Update()
         {
-            if (Global.MusicTime > time - Global.AR_ms && Global.MusicTime < time + Global.AR_ms)
+            if (IsRightTime())
             {
                 int x = OsuMath.GetMarkX(time, -500, 500, Global.MusicTime - Global.AR_ms, Global.MusicTime + Global.AR_ms);
                 transform.localPosition = new Vector2(x, 0);
@@ -39,14 +39,26 @@ namespace Assets.OsuEditor.Timeline
             Destroy(gameObject);
         }
 
-        public object Clone()
+        public Timemark Clone()
         {
-            return MemberwiseClone();
+            return (Timemark)MemberwiseClone();
         }
 
         public int CompareTo(Timemark other)
         {
             return time.CompareTo(other.time);
+        }
+
+        public void Init(Timemark other)
+        {
+            height = other.height;
+            time = other.time;
+            color = other.color;
+        }
+
+        public bool IsRightTime()
+        {
+            return Global.MusicTime > time - Global.AR_ms && Global.MusicTime < time + Global.AR_ms;
         }
     }
 }

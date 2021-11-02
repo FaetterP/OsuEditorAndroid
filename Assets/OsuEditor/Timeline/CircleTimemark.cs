@@ -7,15 +7,14 @@ using UnityEngine.UI;
 
 namespace Assets.OsuEditor.Timeline
 {
-    class CircleTimemark : MonoBehaviour, IComparable<CircleTimemark>
+    class CircleTimemark : Timemark
     {
         public OsuHitObject hitObject;
-        private bool isMoving = false;
-        public int time;
+        private bool isMoving;
         private CanvasHolder holder;
         private ComboInfo combo;
         private CreatorTimemarks creator;
-        
+
         void Awake()
         {
             creator = FindObjectOfType<CreatorTimemarks>();
@@ -32,6 +31,7 @@ namespace Assets.OsuEditor.Timeline
                 printer.Print(combo.Number);
             }
         }
+
         void OnMouseDown()
         {
             if (Global.LeftStatus == LeftStatus.Select)
@@ -65,6 +65,7 @@ namespace Assets.OsuEditor.Timeline
                 isMoving = true;
             }
         }
+
         void Update()
         {
             if (Input.touchCount > 0 && isMoving)
@@ -85,7 +86,7 @@ namespace Assets.OsuEditor.Timeline
                         break;
                 }
             }
-            else if (Global.MusicTime > time - Global.AR_ms && Global.MusicTime < time + Global.AR_ms && !isMoving)
+            else if (IsRightTime() && isMoving == false)
             {
                 int x = OsuMath.GetMarkX(time, -500, 500, Global.MusicTime - Global.AR_ms, Global.MusicTime + Global.AR_ms);
                 transform.localPosition = new Vector2(x, 0);
@@ -101,20 +102,21 @@ namespace Assets.OsuEditor.Timeline
         {
             Timemark[] marks = FindObjectsOfType<Timemark>();
             double dist = 1000000;
-            int time = 10000000;
+            int newTime = 10000000;
             int added_spinner_time = 0;
-            if (hitObject is OsuSpinner) { added_spinner_time = (hitObject as OsuSpinner).TimeEnd - hitObject.Time; }
+            if (hitObject is OsuSpinner)
+                added_spinner_time = (hitObject as OsuSpinner).TimeEnd - hitObject.Time;
             foreach (var t in marks)
             {
                 double newdist = Math.Abs(t.transform.localPosition.x - transform.localPosition.x);
                 if (newdist < dist)
                 {
                     dist = newdist;
-                    time = t.time;
+                    newTime = t.time;
                 }
             }
 
-            OsuMath.GetHitObjectFromTime(this.time).Time = time;
+            OsuMath.GetHitObjectFromTime(this.time).Time = newTime;
             Global.Map.OsuHitObjects.Sort();
 
             if (hitObject is OsuSlider)
@@ -123,7 +125,7 @@ namespace Assets.OsuEditor.Timeline
             }
             if (hitObject is OsuSpinner)
             {
-                (hitObject as OsuSpinner).TimeEnd= (hitObject as OsuSpinner).Time + added_spinner_time;
+                (hitObject as OsuSpinner).TimeEnd = (hitObject as OsuSpinner).Time + added_spinner_time;
             }
 
             foreach (var t in FindObjectsOfType<OsuHitObject>())
@@ -135,7 +137,7 @@ namespace Assets.OsuEditor.Timeline
             creator.UpdateCircleMarks();
         }
 
-        public CircleTimemark Clone()
+        public new CircleTimemark Clone()
         {
             return (CircleTimemark)MemberwiseClone();
         }
