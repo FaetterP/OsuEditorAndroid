@@ -1,5 +1,5 @@
 ﻿using Assets.OsuEditor;
-using Assets.OsuEditor.Timeline;
+using Assets.OsuEditor.Timeline.Timemarks;
 using System;
 using UnityEngine;
 
@@ -64,6 +64,6 @@ namespace Assets.Elements
 
         public abstract void Init(OsuHitObject obj);
 
-        public abstract CircleTimemark[] GetTimemark();
+        public abstract TimemarkCircle[] GetTimemark();
     }
 }

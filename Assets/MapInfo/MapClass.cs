@@ -173,5 +173,16 @@ namespace Assets.MapInfo
             sw.Write(GetMapTXT());
             sw.Close();
         }
+
+        public ReadOnlyCollection<TimingPoint> GetParentTimingPoints()
+        {
+            List<TimingPoint> ret = new List<TimingPoint>();
+            foreach(var point in TimingPoints)
+            {
+                if (point.isParent)
+                    ret.Add(point);
+            }
+            return ret.AsReadOnly();
+        }
     }
 }

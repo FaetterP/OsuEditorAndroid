@@ -1,5 +1,6 @@
 ﻿using Assets.MapInfo;
 using Assets.OsuEditor.Timeline;
+using Assets.OsuEditor.Timeline.Timemarks;
 using Assets.Utilities;
 using System.Text;
 using UnityEngine;
@@ -32,8 +33,6 @@ namespace Assets.Elements
                 return _comboInfo.Number;
             }
         }
-
-        private static CircleTimemark s_circleTimemark;
 
         void Start()
         {
@@ -124,18 +123,11 @@ namespace Assets.Elements
             combo_sum = other.combo_sum;
         }
 
-        public override CircleTimemark[] GetTimemark()
+        public override TimemarkCircle[] GetTimemark()
         {
-            if (s_circleTimemark == null)
-            {
-                s_circleTimemark = Resources.Load<CircleTimemark>("CircleTimemark");
-            }
+            TimemarkCircle[] ret = new TimemarkCircle[1];
 
-            CircleTimemark[] ret = new CircleTimemark[1];
-
-            CircleTimemark toAdd = s_circleTimemark.Clone();
-            toAdd.time = Time;
-            toAdd.hitObject = this;
+            TimemarkCircle toAdd = TimemarkCircle.GetCircleMark(this);
             ret[0] = toAdd;
 
             return ret;

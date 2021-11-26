@@ -300,9 +300,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b4f95296cc17894db471cc6915cb140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CircleCanvas: {fileID: 360727328}
-  SliderCanvas: {fileID: 2017492832}
-  SpinnerCanvas: {fileID: 982487428}
+  _circleCanvas: {fileID: 360727328}
+  _sliderCanvas: {fileID: 2017492832}
+  _spinnerCanvas: {fileID: 982487428}
 --- !u!1 &21088946
 GameObject:
   m_ObjectHideFlags: 0
@@ -7805,8 +7805,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d2172d784bc3b1439c0f2447d740053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timemark: {fileID: 114301961996264226, guid: 31e38f6ab48376a43b193b1476ae7f58,
-    type: 2}
 --- !u!1 &647023479
 GameObject:
   m_ObjectHideFlags: 0
@@ -18846,7 +18844,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creatorTimemarks: {fileID: 643830055}
-  timemark: {fileID: 114301961996264226, guid: 31e38f6ab48376a43b193b1476ae7f58, type: 2}
   step: {fileID: 319920632}
 --- !u!1 &1574789864
 GameObject:

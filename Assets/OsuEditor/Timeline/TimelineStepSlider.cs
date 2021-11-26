@@ -11,7 +11,6 @@ namespace Assets.OsuEditor.Timeline
     class TimelineStepSlider : MonoBehaviour
     {
         [SerializeField] private CreatorTimemarks creatorTimemarks;
-        [SerializeField] private Timemark timemark;
         [SerializeField] private Text step;
                          private Slider thisSlider;
 

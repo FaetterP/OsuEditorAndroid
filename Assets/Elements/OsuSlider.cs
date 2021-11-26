@@ -1,6 +1,7 @@
 ﻿using Assets.MapInfo;
 using Assets.OsuEditor;
 using Assets.OsuEditor.Timeline;
+using Assets.OsuEditor.Timeline.Timemarks;
 using Assets.Utilities;
 using System;
 using System.Collections.Generic;
@@ -64,10 +65,6 @@ namespace Assets.Elements
                 _timeEnd = value;
             }
         }
-
-        private static CircleTimemark s_sliderBeginTimemark;
-        private static CircleTimemark s_sliderMiddleTimemark;
-        private static CircleTimemark s_sliderEndTimemark;
 
         void Awake()
         {
@@ -239,34 +236,23 @@ namespace Assets.Elements
             SliderPoints = other.SliderPoints;
         }
 
-        public override CircleTimemark[] GetTimemark()
+        public override TimemarkCircle[] GetTimemark()
         {
-            if (s_sliderBeginTimemark == null)
-            {
-                s_sliderBeginTimemark = Resources.Load<CircleTimemark>("SliderTimemarkStart");
-                s_sliderMiddleTimemark = Resources.Load<CircleTimemark>("SliderTimemarkMiddle");
-                s_sliderEndTimemark = Resources.Load<CircleTimemark>("SliderTimemarkEnd");
-            }
+            TimemarkCircle[] ret = new TimemarkCircle[_countOfSlides + 1];
 
-            CircleTimemark[] ret = new CircleTimemark[_countOfSlides + 1];
-
-            CircleTimemark toAdd = s_sliderBeginTimemark.Clone();
-            toAdd.time = Time;
-            toAdd.hitObject = this;
+            TimemarkSliderStart toAdd = TimemarkSliderStart.GetSliderStartMark(this);
             ret[0] = toAdd;
 
-            toAdd = s_sliderEndTimemark.Clone();
-            toAdd.time = _timeEnd;
-            toAdd.hitObject = this;
-            ret[_countOfSlides] = toAdd;
+
+            TimemarkSlider toAdd1 = TimemarkSlider.GetSliderEndMark(this);
+            ret[_countOfSlides] = toAdd1;
 
             TimingPoint timingPoint = OsuMath.GetNearestTimingPointLeft(Time, false);
             for (int i = 1; i < CountOfSlides; i++)
             {
-                toAdd = s_sliderMiddleTimemark.Clone();
-                toAdd.time = Time + (int)OsuMath.SliderLengthToAddedTime(Length, timingPoint.Mult, timingPoint.BeatLength) * i;
-                toAdd.hitObject = this;
-                ret[i] = toAdd;
+                int time = Time + (int)OsuMath.SliderLengthToAddedTime(Length, timingPoint.Mult, timingPoint.BeatLength) * i;
+                TimemarkSlider toAdd2 = TimemarkSlider.GetSliderMiddleMark(this, time);
+                ret[i] = toAdd2;
             }
 
             return ret;

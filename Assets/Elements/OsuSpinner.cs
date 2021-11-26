@@ -1,4 +1,5 @@
 ﻿using Assets.OsuEditor.Timeline;
+using Assets.OsuEditor.Timeline.Timemarks;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,9 +22,6 @@ namespace Assets.Elements
                 _timeEnd = value;
             }
         }
-
-        private static CircleTimemark s_spinnerStartTimemark;
-        private static CircleTimemark s_spinnerEndTimemark;
 
         void Awake()
         {
@@ -81,25 +79,15 @@ namespace Assets.Elements
             TimeEnd = other.TimeEnd;
         }
 
-        public override CircleTimemark[] GetTimemark()
+        public override TimemarkCircle[] GetTimemark()
         {
-            if (s_spinnerEndTimemark == null)
-            {
-                s_spinnerStartTimemark = Resources.Load<CircleTimemark>("SpinnerTimemarkStart");
-                s_spinnerEndTimemark = Resources.Load<CircleTimemark>("SpinnerTimemarkEnd");
-            }
+            TimemarkCircle[] ret = new TimemarkCircle[2];
 
-            CircleTimemark[] ret = new CircleTimemark[2];
-
-            CircleTimemark toAdd = s_spinnerStartTimemark.Clone();
-            toAdd.time = Time;
-            toAdd.hitObject = this;
+            TimemarkSpinnerStart toAdd = TimemarkSpinnerStart.GetTimemark(this);
             ret[0] = toAdd;
 
-            toAdd = s_spinnerEndTimemark.Clone();
-            toAdd.time = TimeEnd;
-            toAdd.hitObject = this;
-            ret[1] = toAdd;
+            TimemarkSpinnerEnd toAdd2 = TimemarkSpinnerEnd.GetTimemark(this);
+            ret[1] = toAdd2;
 
             return ret;
         }

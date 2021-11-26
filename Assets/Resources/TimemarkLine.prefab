@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114502165807700744}
   - component: {fileID: 114301961996264226}
   m_Layer: 5
-  m_Name: TimingMark
+  m_Name: TimemarkLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,12 +37,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1114220960589124}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ae1b80c8726194a914a42103acf3ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 42d29cc4144cdb74c8c015be3a3492fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 0
-  color: {r: 0, g: 0, b: 0, a: 0}
-  height: 0
 --- !u!114 &114502165807700744
 MonoBehaviour:
   m_ObjectHideFlags: 1
