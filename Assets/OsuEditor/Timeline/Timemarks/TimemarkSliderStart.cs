@@ -1,8 +1,4 @@
 ﻿using Assets.Elements;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 
 namespace Assets.OsuEditor.Timeline.Timemarks
@@ -15,7 +11,14 @@ namespace Assets.OsuEditor.Timeline.Timemarks
         {
             _holder.SetActiveCircle(true);
             _holder.SetActiveSlider(true);
-            _holder.SetActiveSpinner(false);
+        }
+
+        protected override void ApplyTime(int newTime)
+        {
+            OsuSlider slider = OsuMath.GetHitObjectFromTime(_hitObject.Time) as OsuSlider;
+            int duration = slider.TimeEnd - slider.Time;
+            slider.Time = newTime;
+            slider.TimeEnd = newTime + duration;
         }
 
         public new TimemarkSliderStart Clone()

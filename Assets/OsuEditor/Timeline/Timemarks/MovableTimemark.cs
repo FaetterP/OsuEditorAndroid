@@ -1,6 +1,7 @@
 ﻿using Assets.Elements;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.OsuEditor.Timeline.Timemarks
 {
@@ -9,6 +10,11 @@ namespace Assets.OsuEditor.Timeline.Timemarks
         private bool _isMoving;
 
         void OnMouseDown()
+        {
+            CheckMove();
+        }
+
+        protected void CheckMove()
         {
             if (Global.LeftStatus == LeftStatus.Move)
             {
@@ -44,7 +50,7 @@ namespace Assets.OsuEditor.Timeline.Timemarks
 
         private void UpdateTime()
         {
-            Timemark[] marks = FindObjectsOfType<Timemark>();
+            TimemarkLine[] marks = FindObjectsOfType<TimemarkLine>();
             double dist = 1000000;
             int newTime = 0;
 

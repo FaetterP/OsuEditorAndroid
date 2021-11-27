@@ -11,7 +11,7 @@ namespace Assets.OsuEditor.Timeline.Timemarks
 
         protected override void ApplyTime(int newTime)
         {
-            OsuSpinner spinner = _hitObject as OsuSpinner;
+            OsuSpinner spinner = OsuMath.GetHitObjectFromTime(_hitObject.Time) as OsuSpinner;
             int duration = spinner.TimeEnd - spinner.Time;
 
             spinner.Time = newTime;
@@ -22,7 +22,6 @@ namespace Assets.OsuEditor.Timeline.Timemarks
         {
             _holder.SetActiveCircle(false);
             _holder.SetActiveSlider(false);
-            _holder.SetActiveSpinner(true);
         }
 
         public new TimemarkSpinnerStart Clone()

@@ -6,7 +6,6 @@ namespace Assets.OsuEditor
     {
         [SerializeField] private Canvas _circleCanvas;
         [SerializeField] private Canvas _sliderCanvas;
-        [SerializeField] private Canvas _spinnerCanvas;
 
         public void SetActiveCircle(bool value)
         {
@@ -16,11 +15,6 @@ namespace Assets.OsuEditor
         public void SetActiveSlider(bool value)
         {
             _sliderCanvas.gameObject.SetActive(value);
-        }
-
-        public void SetActiveSpinner(bool value)
-        {
-            _spinnerCanvas.gameObject.SetActive(value);
         }
     }
 }

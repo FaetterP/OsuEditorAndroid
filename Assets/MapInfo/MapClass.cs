@@ -22,6 +22,7 @@ namespace Assets.MapInfo
         public void UpdateComboInfos()
         {
             _comboInfos.Clear();
+            OsuHitObjects.Sort();
             int color_num = 0, number = 1;
             foreach (OsuHitObject t in OsuHitObjects)
             {

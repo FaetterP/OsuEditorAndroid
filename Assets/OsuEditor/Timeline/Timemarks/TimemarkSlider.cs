@@ -20,7 +20,6 @@ namespace Assets.OsuEditor.Timeline.Timemarks
         {
             _holder.SetActiveCircle(true);
             _holder.SetActiveSlider(true);
-            _holder.SetActiveSpinner(false);
         }
 
         public static TimemarkSlider GetSliderMiddleMark(OsuSlider obj, int time)

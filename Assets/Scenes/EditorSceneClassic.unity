@@ -302,7 +302,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _circleCanvas: {fileID: 360727328}
   _sliderCanvas: {fileID: 2017492832}
-  _spinnerCanvas: {fileID: 982487428}
 --- !u!1 &21088946
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,7 +351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   num: {fileID: 1932706206}
-  creator: {fileID: 0}
+  creator: {fileID: 643830055}
 --- !u!114 &21088949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24593,7 +24592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4e00be58e4307741905d47226471919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creator: {fileID: 0}
+  creator: {fileID: 643830055}
   num: {fileID: 1932706206}
 --- !u!114 &1975228066
 MonoBehaviour:

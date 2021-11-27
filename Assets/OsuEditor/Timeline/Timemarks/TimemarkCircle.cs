@@ -21,7 +21,8 @@ namespace Assets.OsuEditor.Timeline.Timemarks
 
         protected override void ApplyTime(int newTime)
         {
-            _hitObject.Time = newTime;
+            OsuHitObject circle = OsuMath.GetHitObjectFromTime(_hitObject.Time);
+            circle.Time = newTime;
         }
 
         void Start()
@@ -37,6 +38,7 @@ namespace Assets.OsuEditor.Timeline.Timemarks
         {
             Global.SelectedHitObject = OsuMath.GetHitObjectFromTime(_hitObject.Time);
             ActiveCanvases();
+            CheckMove();
         }
 
         void OnDestroy()
@@ -59,7 +61,6 @@ namespace Assets.OsuEditor.Timeline.Timemarks
         {
             _holder.SetActiveCircle(true);
             _holder.SetActiveSlider(false);
-            _holder.SetActiveSpinner(false);
         }
 
         public static TimemarkCircle GetCircleMark(OsuHitObject obj)
@@ -71,11 +72,6 @@ namespace Assets.OsuEditor.Timeline.Timemarks
             ret._time = obj.Time;
             ret._hitObject = obj;
             return ret;
-        }
-
-        protected void SetTime(int time)
-        {
-            _time = time;
         }
     }
 }
