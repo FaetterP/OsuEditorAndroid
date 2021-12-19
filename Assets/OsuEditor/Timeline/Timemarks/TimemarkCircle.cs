@@ -46,6 +46,16 @@ namespace Assets.OsuEditor.Timeline.Timemarks
             _creator.RemoveCircleMarkFromScreen(_time);
         }
 
+        void OnTriggerEnter2D(Collider2D col)
+        {
+            DeleteButton button = col.gameObject.GetComponent<DeleteButton>();
+            if (button == null)
+                return;
+
+            button.DeleteHitObject(OsuMath.GetHitObjectFromTime(_hitObject.Time));
+
+        }
+
         public void Init(TimemarkCircle other)
         {
             _hitObject = other._hitObject;
