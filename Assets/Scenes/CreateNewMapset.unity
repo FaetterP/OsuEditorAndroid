@@ -574,12 +574,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03226b7a868b47646afce84f1ccc0449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  artist: {fileID: 0}
-  artistUnicode: {fileID: 0}
-  title: {fileID: 0}
-  titleUnicode: {fileID: 0}
-  disable: {fileID: 0}
-  enable: {fileID: 0}
+  artist: {fileID: 60738264}
+  artistUnicode: {fileID: 1961410549}
+  title: {fileID: 84036898}
+  titleUnicode: {fileID: 1481529051}
+  disable: {fileID: 1681558440}
+  enable: {fileID: 369296509}
 --- !u!1 &165583322
 GameObject:
   m_ObjectHideFlags: 0
@@ -1472,8 +1472,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e2da12be55a2a54cbc13fae7ce2a459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  url_RU: https://osu.ppy.sh/wiki/RU/Ranking_Criteria
   url_EN: https://osu.ppy.sh/wiki/EN/Ranking_Criteria
+  url_RU: https://osu.ppy.sh/wiki/RU/Ranking_Criteria
 --- !u!114 &861999388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1844,8 +1844,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e2da12be55a2a54cbc13fae7ce2a459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  url_RU: https://osu.ppy.sh/wiki/RU/Beatmapping
   url_EN: https://osu.ppy.sh/wiki/EN/Beatmapping
+  url_RU: https://osu.ppy.sh/wiki/RU/Beatmapping
 --- !u!114 &1428450377
 MonoBehaviour:
   m_ObjectHideFlags: 0
