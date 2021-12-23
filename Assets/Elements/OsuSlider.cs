@@ -299,7 +299,23 @@ namespace Assets.Elements
             int time1 = timeLength / CountOfSlides;
             int currentTime = Global.MusicTime - Time;
 
-            int index = OsuMath.ResizeValue(0, time1, 0, _bezePoints.Count-1, currentTime);
+            int currentSlide = currentTime / time1;
+            currentTime %= time1;
+            int index = 0;
+
+            if (currentSlide < 0)
+            {
+                return new Vector2(1000, 1000);
+            }
+            else if (currentSlide % 2 == 0)
+            {
+                index = OsuMath.ResizeValue(0, time1, 0, _bezePoints.Count - 1, currentTime);
+            }
+            else
+            {
+                index = _bezePoints.Count - OsuMath.ResizeValue(0, time1, 0, _bezePoints.Count, currentTime) - 1;
+            }
+
             if (index < 0)
                 return new Vector2(1000, 1000);
 

@@ -1,10 +1,7 @@
 ﻿using Assets.Elements;
 using Assets.MapInfo;
-using Assets.Utilities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 
 namespace Assets
@@ -54,8 +51,8 @@ namespace Assets
         public static int GetMarkX(int timestamp, int XLeft, int XRigth, int timeLeft, int timeRight)
         {
             //  if (timestamp <= timeLeft || timestamp >= timeRight) { return null; }
-             double ret = XLeft + (XRigth - XLeft) * ((double)(timestamp - timeLeft) / (timeRight - timeLeft));
-             return (int)ret;
+            double ret = XLeft + (XRigth - XLeft) * ((double)(timestamp - timeLeft) / (timeRight - timeLeft));
+            return (int)ret;
 
         }
         public static string ConvertTimestampToSring(int timestamp)
@@ -80,7 +77,7 @@ namespace Assets
             for (int i = 0; i < slider.BezePoints.Count - 1; i++)
             {
                 Vector2 vec1 = UnityCoordsToOsu(slider.BezePoints[i]);
-                Vector2 vec2 = UnityCoordsToOsu(slider.BezePoints[i+1]);
+                Vector2 vec2 = UnityCoordsToOsu(slider.BezePoints[i + 1]);
                 ret += Math.Sqrt(Math.Pow(vec1.x - vec2.x, 2) + Math.Pow(vec1.y - vec2.y, 2));
             }
             return ret;
@@ -96,7 +93,7 @@ namespace Assets
         public static int GetNearestSliderSide(OsuSlider slider, Vector2 point)
         {
             List<Vector2> Centers = new List<Vector2>();
-            for(int i = 0; i < slider.SliderPoints.Count - 1; i++)
+            for (int i = 0; i < slider.SliderPoints.Count - 1; i++)
             {
                 double xsum = slider.SliderPoints[i].x + slider.SliderPoints[i + 1].x;
                 double ysum = slider.SliderPoints[i].y + slider.SliderPoints[i + 1].y;
@@ -106,7 +103,7 @@ namespace Assets
 
             int imin = 0, i0 = 0;
             double min = 0;
-            foreach(var t in Centers)
+            foreach (var t in Centers)
             {
                 if (Vector2.Distance(t, point) < min)
                 {
@@ -122,9 +119,9 @@ namespace Assets
         {
             TimingPoint ret = null;
             int razn = 1;
-            if (isParent) 
+            if (isParent)
             {
-                foreach(var t in Global.Map.TimingPoints)
+                foreach (var t in Global.Map.TimingPoints)
                 {
                     if (razn >= 0 && t.isParent)
                     {
