@@ -1,6 +1,5 @@
 ﻿using Assets.MapInfo;
 using Assets.OsuEditor;
-using Assets.OsuEditor.Timeline;
 using Assets.OsuEditor.Timeline.Timemarks;
 using Assets.Utilities;
 using System;
@@ -15,10 +14,11 @@ namespace Assets.Elements
     [RequireComponent(typeof(LineRenderer))]
     class OsuSlider : OsuCircle
     {
+        public List<SliderPoint> SliderPoints = new List<SliderPoint>();
+
         private double _length;
         private int _timeEnd;
         private int _countOfSlides;
-        public List<SliderPoint> SliderPoints = new List<SliderPoint>();
         private List<Vector2> _bezePoints = new List<Vector2>();
         private LineRenderer _thisLineRenderer;
 
@@ -291,6 +291,19 @@ namespace Assets.Elements
             sb.Append(_length);
 
             return sb.ToString();
+        }
+
+        public Vector2 GetCurrentPoint()
+        {
+            int timeLength = TimeEnd - Time;
+            int time1 = timeLength / CountOfSlides;
+            int currentTime = Global.MusicTime - Time;
+
+            int index = OsuMath.ResizeValue(0, time1, 0, _bezePoints.Count-1, currentTime);
+            if (index < 0)
+                return new Vector2(1000, 1000);
+
+            return _bezePoints[index];
         }
     }
 }

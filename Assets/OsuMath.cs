@@ -146,5 +146,17 @@ namespace Assets
             }
             return ret;
         }
+
+        public static int ResizeValue(int startFrom, int endFrom, int startTo, int endTo, int value)
+        {
+            int lengthFrom = endFrom - startFrom;
+            int lengthTo = endTo - startTo;
+
+            double mult = 1.0 * lengthTo / lengthFrom;
+
+            int newValue = (int)((value - startFrom) * mult);
+
+            return newValue + startTo;
+        }
     }
 }
