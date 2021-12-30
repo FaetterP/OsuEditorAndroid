@@ -43,6 +43,11 @@ namespace Assets.OsuEditor.Timeline.Timemarks
             _creator.RemoveMarkFromScreen(_time);
         }
 
+        void OnDisable()
+        {
+            Destroy(gameObject);
+        }
+
         public virtual void Init(Timemark other)
         {
             _time = other._time;

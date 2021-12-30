@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Music
@@ -17,10 +13,12 @@ namespace Assets.Music
         {
             thisSlider = GetComponent<Slider>();
         }
+
         public void UpdateMax(int max)
         {
             thisSlider.maxValue = max;
         }
+
         void Update()
         {
             Global.MusicTime = (int)(music.time * 1000);

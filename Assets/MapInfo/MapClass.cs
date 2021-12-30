@@ -33,7 +33,7 @@ namespace Assets.MapInfo
                     if (sum_color == 1) 
                     {
                         number++;
-                        ComboInfo toAdd = new ComboInfo(number, Colors[color_num]);
+                        ComboInfo toAdd = new ComboInfo(number, color_num);
                         _comboInfos.Add(t.Time, toAdd);
                     }
                     else if (sum_color == 5) 
@@ -41,7 +41,7 @@ namespace Assets.MapInfo
                         color_num++; 
                         color_num %= Global.Map.Colors.Count;
                         number = 1;
-                        ComboInfo toAdd = new ComboInfo(number, Colors[color_num]);
+                        ComboInfo toAdd = new ComboInfo(number, color_num);
                         _comboInfos.Add(t.Time, toAdd);
                     }
                     else
@@ -49,7 +49,7 @@ namespace Assets.MapInfo
                         color_num += (sum_color / 16) + 1;
                         color_num %= Global.Map.Colors.Count;
                         number = 1;
-                        ComboInfo toAdd = new ComboInfo(number, Colors[color_num]);
+                        ComboInfo toAdd = new ComboInfo(number, color_num);
                         _comboInfos.Add(t.Time, toAdd);
                     }
                 }
@@ -60,7 +60,7 @@ namespace Assets.MapInfo
                     if (sum_color == 2) 
                     {
                         number++;
-                        ComboInfo toAdd = new ComboInfo(number, Colors[color_num]);
+                        ComboInfo toAdd = new ComboInfo(number, color_num);
                         _comboInfos.Add(t.Time, toAdd);
                     }
                     else if 
@@ -69,7 +69,7 @@ namespace Assets.MapInfo
                         color_num++;
                         color_num = color_num % Global.Map.Colors.Count;
                         number = 1;
-                        ComboInfo toAdd = new ComboInfo(number, Colors[color_num]);
+                        ComboInfo toAdd = new ComboInfo(number, color_num);
                         _comboInfos.Add(t.Time, toAdd);
                     }
                     else 
@@ -77,13 +77,13 @@ namespace Assets.MapInfo
                         color_num += (sum_color / 16) + 1;
                         color_num = color_num % Global.Map.Colors.Count;
                         number = 1;
-                        ComboInfo toAdd = new ComboInfo(number, Colors[color_num]);
+                        ComboInfo toAdd = new ComboInfo(number, color_num);
                         _comboInfos.Add(t.Time, toAdd);
                     }
                 }
                 else if(t is OsuSpinner)
                 {
-                    ComboInfo toAdd = new ComboInfo(9999, Color.black);
+                    ComboInfo toAdd = new ComboInfo(9999, 0);
                     _comboInfos.Add(t.Time, toAdd);
                 }
             }
