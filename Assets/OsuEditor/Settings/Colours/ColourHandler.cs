@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,9 +8,9 @@ namespace Assets.OsuEditor.Settings.Colours
     {
         [SerializeField] private Text text;
         [SerializeField] private Slider r, g, b;
-        private Image image;
-        private int number = 0;
-        
+                         private Image image;
+                         private int number = 0;
+
 
         void Awake()
         {
@@ -22,10 +19,12 @@ namespace Assets.OsuEditor.Settings.Colours
             g.onValueChanged.AddListener(delegate { UpdateColourG(); });
             b.onValueChanged.AddListener(delegate { UpdateColourB(); });
         }
+
         void Start()
         {
             ChangeNumber(0);
         }
+
         private void UpdateColourR()
         {
             var c = Global.Map.Colors[number];
@@ -33,6 +32,7 @@ namespace Assets.OsuEditor.Settings.Colours
             Global.Map.Colors[number] = c;
             image.color = Global.Map.Colors[number];
         }
+
         private void UpdateColourG()
         {
             var c = Global.Map.Colors[number];
@@ -40,6 +40,7 @@ namespace Assets.OsuEditor.Settings.Colours
             Global.Map.Colors[number] = c;
             image.color = Global.Map.Colors[number];
         }
+
         private void UpdateColourB()
         {
             var c = Global.Map.Colors[number];
@@ -55,11 +56,13 @@ namespace Assets.OsuEditor.Settings.Colours
             UpdateColourNumber();
             UpdateSliders();
         }
+
         public void UpdateColourNumber()
         {
             text.text = (number + 1).ToString();
             image.color = Global.Map.Colors[number];
         }
+
         public int GetNumber()
         {
             return number;

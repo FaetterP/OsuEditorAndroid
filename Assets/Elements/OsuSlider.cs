@@ -1,10 +1,12 @@
-﻿using Assets.MapInfo;
+﻿using Assets.Elements.SliderStuff;
+using Assets.MapInfo;
 using Assets.OsuEditor;
 using Assets.OsuEditor.Timeline.Timemarks;
 using Assets.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,6 +23,7 @@ namespace Assets.Elements
         private int _countOfSlides;
         private List<Vector2> _bezePoints = new List<Vector2>();
         private LineRenderer _thisLineRenderer;
+        private SliderArrow _reverseArrow;
 
         public ReadOnlyCollection<Vector2> BezePoints
         {
@@ -69,6 +72,7 @@ namespace Assets.Elements
         void Awake()
         {
             _thisLineRenderer = GetComponent<LineRenderer>();
+            _reverseArrow = Resources.Load<SliderArrow>("ReverseArrow");
         }
 
         void Start()
@@ -80,6 +84,7 @@ namespace Assets.Elements
             PrintSliderPoints();
             UpdateBezePoints();
             PrintBezePoints();
+            PrintReverseArrow();
         }
 
         void OnMouseDown()
@@ -320,6 +325,20 @@ namespace Assets.Elements
                 return new Vector2(1000, 1000);
 
             return _bezePoints[index];
+        }
+
+        private void PrintReverseArrow()
+        {
+            if (CountOfSlides > 1)
+            {
+                Vector2 vec = _bezePoints[_bezePoints.Count - 1] - _bezePoints[_bezePoints.Count - 2];
+                int minus = Math.Sign(vec.y);
+                float angle = 180 - minus * Vector2.Angle(vec, Vector2.right);
+
+                var t = Instantiate(_reverseArrow, transform);
+                t.transform.localPosition = OsuMath.OsuCoordsToUnity(_bezePoints.Last()) - (Vector2)transform.localPosition;
+                t.transform.eulerAngles = new Vector3(0, 0, angle);
+            }
         }
     }
 }

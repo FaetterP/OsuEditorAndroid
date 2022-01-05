@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 namespace Assets.Elements
 {
+    [RequireComponent(typeof(Image))]
     class SliderBall : MonoBehaviour
     {
         [SerializeField] private OsuSlider _slider;

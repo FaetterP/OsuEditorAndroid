@@ -5,7 +5,7 @@ namespace Assets.MapInfo
     struct ComboInfo
     {
         private int _number;
-        private int _ColorIndex;
+        private int _colorIndex;
 
         public int Number
         {
@@ -19,14 +19,14 @@ namespace Assets.MapInfo
         {
             get
             {
-                return Global.Map.Colors[_ColorIndex];
+                return Global.Map.Colors[_colorIndex];
             }
         }
 
         public ComboInfo(int number, int colorIndex)
         {
             _number = number;
-            _ColorIndex = colorIndex;
+            _colorIndex = colorIndex;
         }
     }
 }
