@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 5734081}
   - component: {fileID: 5734084}
   - component: {fileID: 5734083}
-  - component: {fileID: 5734082}
+  - component: {fileID: 5734085}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -146,19 +146,6 @@ RectTransform:
   m_AnchoredPosition: {x: -0.000002861, y: -0.0000047684}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5734082
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 5734080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f90915e07c7d3ec41888e43a61e86984, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  en: Editor
-  ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u043E\u0440"
 --- !u!114 &5734083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,6 +185,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 5734080}
+--- !u!114 &5734085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5734080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0e1330591bdc54fba341e30fe3ae4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _key: menu.editor
 --- !u!1 &43275070
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,10 +545,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 439972285}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d3bf5421e8547d47bd736eb85df36e8, type: 3}
+  m_Script: {fileID: 11500000, guid: 797ce635be87ffe418cb7f66fe018e3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lang: 1
+  _language: 30
 --- !u!61 &439972290
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -585,7 +584,7 @@ GameObject:
   - component: {fileID: 465163749}
   - component: {fileID: 465163750}
   m_Layer: 5
-  m_Name: Toggle
+  m_Name: ToggleFPS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -762,11 +761,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 480989715}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f90915e07c7d3ec41888e43a61e86984, type: 3}
+  m_Script: {fileID: 11500000, guid: ac0e1330591bdc54fba341e30fe3ae4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  en: Creators
-  ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u0435\u043B\u0438"
+  _key: menu.creators
 --- !u!114 &480989718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1002,7 +1000,7 @@ GameObject:
   - component: {fileID: 724401172}
   - component: {fileID: 724401175}
   m_Layer: 5
-  m_Name: StartButton
+  m_Name: EditorButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1354,10 +1352,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1026797342}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d3bf5421e8547d47bd736eb85df36e8, type: 3}
+  m_Script: {fileID: 11500000, guid: 797ce635be87ffe418cb7f66fe018e3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lang: 0
+  _language: 10
 --- !u!61 &1026797347
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1538,11 +1536,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1161650845}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f90915e07c7d3ec41888e43a61e86984, type: 3}
+  m_Script: {fileID: 11500000, guid: ac0e1330591bdc54fba341e30fe3ae4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  en: "\u0421\u043C\u0435\u043D\u0438\u0442\u044C \u044F\u0437\u044B\u043A"
-  ru: Switch language
+  _key: menu.settings.lang
 --- !u!114 &1161650848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1595,7 +1592,7 @@ GameObject:
   - component: {fileID: 1288480147}
   - component: {fileID: 1288480146}
   m_Layer: 5
-  m_Name: Creators
+  m_Name: CreatorsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1836,11 +1833,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1557821458}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f90915e07c7d3ec41888e43a61e86984, type: 3}
+  m_Script: {fileID: 11500000, guid: ac0e1330591bdc54fba341e30fe3ae4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  en: Settings
-  ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
+  _key: menu.settings
 --- !u!114 &1557821461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1924,11 +1920,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1676565283}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f90915e07c7d3ec41888e43a61e86984, type: 3}
+  m_Script: {fileID: 11500000, guid: ac0e1330591bdc54fba341e30fe3ae4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  en: Back to menu
-  ru: "\u0412\u0435\u0440\u043D\u0443\u0442\u044C\u0441\u044F \u0432 \u043C\u0435\u043D\u044E"
+  _key: menu.settings.goBack
 --- !u!114 &1676565286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2108,12 +2103,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1752525524}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f90915e07c7d3ec41888e43a61e86984, type: 3}
+  m_Script: {fileID: 11500000, guid: ac0e1330591bdc54fba341e30fe3ae4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  en: Enable FPS counter
-  ru: "\u0412\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u0441\u0447\u0451\u0442\u0447\u0438\u043A
-    FPS"
+  _key: menu.settings.enableFPS
 --- !u!114 &1752525527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2393,7 +2386,7 @@ GameObject:
   - component: {fileID: 2140537254}
   - component: {fileID: 2140537253}
   m_Layer: 5
-  m_Name: Settings
+  m_Name: SettingsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

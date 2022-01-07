@@ -193,12 +193,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8987909}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f90915e07c7d3ec41888e43a61e86984, type: 3}
+  m_Script: {fileID: 11500000, guid: ac0e1330591bdc54fba341e30fe3ae4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  en: Artist
-  ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C \u043D\u0430
-    \u0430\u043D\u0433\u043B\u0438\u0439\u0441\u043A\u043E\u043C\n"
+  _key: createMapset.artist
 --- !u!1 &60738262
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,11 +770,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 304985297}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f90915e07c7d3ec41888e43a61e86984, type: 3}
+  m_Script: {fileID: 11500000, guid: ac0e1330591bdc54fba341e30fe3ae4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  en: Romanised Artist
-  ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C"
+  _key: createMapset.artistUnicode
 --- !u!114 &304985300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -923,7 +920,6 @@ GameObject:
   - component: {fileID: 425303988}
   - component: {fileID: 425303992}
   - component: {fileID: 425303991}
-  - component: {fileID: 425303990}
   - component: {fileID: 425303989}
   m_Layer: 5
   m_Name: Path
@@ -961,21 +957,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9606aaf1087f57f4ebbbb37cc93b7abe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &425303990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 425303987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f90915e07c7d3ec41888e43a61e86984, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  en: Place the music file (.mp3) and background (.jpg) in the map folder
-  ru: "\u041F\u043E\u043C\u0435\u0441\u0442\u0438\u0442\u0435 \u0432 \u043F\u0430\u043F\u043A\u0443
-    \u043A\u0430\u0440\u0442\u044B \u0444\u0430\u0439\u043B \u0441 \u043C\u0443\u0437\u044B\u043A\u043E\u0439
-    (.mp3) \u0438 \u0444\u043E\u043D (.jpg)."
 --- !u!114 &425303991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1059,11 +1040,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 533344300}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f90915e07c7d3ec41888e43a61e86984, type: 3}
+  m_Script: {fileID: 11500000, guid: ac0e1330591bdc54fba341e30fe3ae4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  en: Romanised Title
-  ru: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u043D\u0430 \u0430\u043D\u0433\u043B\u0438\u0439\u0441\u043A\u043E\u043C"
+  _key: createMapset.titleUnicode
 --- !u!114 &533344303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1221,21 +1201,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 670004405}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f90915e07c7d3ec41888e43a61e86984, type: 3}
+  m_Script: {fileID: 11500000, guid: ac0e1330591bdc54fba341e30fe3ae4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  en: Due to the large number of beatmap submissions, the standart of approval is
-    relatively high. Please ensure your beatmap is at least timed properly, or it
-    will likely be ignoreg!
-  ru: "\u0418\u0437-\u0437\u0430 \u0431\u043E\u043B\u044C\u0448\u043E\u0433\u043E
-    \u0447\u0438\u0441\u043B\u0430 \u0437\u0430\u0433\u0440\u0443\u0436\u0430\u0435\u043C\u044B\u0445
-    \u043A\u0430\u0440\u0442 \u0441\u0442\u0430\u043D\u0434\u0430\u0440\u0442 \u0434\u043B\u044F
-    \u043E\u0434\u043E\u0431\u0440\u0435\u043D\u0438\u044F \u0434\u043E\u0441\u0442\u0430\u0442\u043E\u0447\u043D\u043E
-    \u0432\u044B\u0441\u043E\u043A. \u041F\u043E\u0436\u0430\u043B\u0443\u0439\u0441\u0442\u0430,
-    \u0443\u0431\u0435\u0434\u0438\u0442\u0435\u0441\u044C \u0432 \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u0435
-    \u0441\u0432\u043E\u0435\u0439 \u043A\u0430\u0440\u0442\u044B, \u0438\u043D\u0430\u0447\u0435,
-    \u0432\u0435\u0440\u043E\u044F\u0442\u043D\u0435\u0435 \u0432\u0441\u0435\u0433\u043E,
-    \u043E\u043D\u0430 \u0431\u0443\u0434\u0435\u0442 \u043F\u0440\u043E\u0438\u0433\u043D\u043E\u0440\u0438\u0440\u043E\u0432\u0430\u043D\u0430!"
+  _key: createMapset.note.text
 --- !u!114 &670004408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1362,7 +1331,6 @@ GameObject:
   - component: {fileID: 861999389}
   - component: {fileID: 861999388}
   - component: {fileID: 861999387}
-  - component: {fileID: 861999386}
   - component: {fileID: 861999385}
   - component: {fileID: 861999384}
   m_Layer: 5
@@ -1387,8 +1355,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 231, y: 37}
-  m_SizeDelta: {x: 430, y: 35}
+  m_AnchoredPosition: {x: 183, y: 37}
+  m_SizeDelta: {x: 550, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!61 &861999384
 BoxCollider2D:
@@ -1413,7 +1381,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 430, y: 35}
+  m_Size: {x: 550, y: 35}
   m_EdgeRadius: 0
 --- !u!23 &861999385
 MeshRenderer:
@@ -1447,20 +1415,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &861999386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 861999382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f90915e07c7d3ec41888e43a61e86984, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  en: Official Submission Criteria
-  ru: "\u041E\u0444\u0438\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0435 \u043A\u0440\u0438\u0442\u0435\u0440\u0438\u0438
-    \u0440\u0430\u043D\u043A\u0438\u043D\u0433\u0430"
 --- !u!114 &861999387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1469,11 +1423,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 861999382}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e2da12be55a2a54cbc13fae7ce2a459, type: 3}
+  m_Script: {fileID: 11500000, guid: 5568e3e0cd10b8d40a22607fe8bb7ab7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  url_EN: https://osu.ppy.sh/wiki/EN/Ranking_Criteria
-  url_RU: https://osu.ppy.sh/wiki/RU/Ranking_Criteria
+  _key: createMapset.criteria
+  _keyUrl: createMapset.criteria.url
 --- !u!114 &861999388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1631,11 +1585,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1149351198}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f90915e07c7d3ec41888e43a61e86984, type: 3}
+  m_Script: {fileID: 11500000, guid: ac0e1330591bdc54fba341e30fe3ae4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  en: No files found.
-  ru: "\u0424\u0430\u0439\u043B\u044B \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u044B."
+  _key: createMapset.error
 --- !u!114 &1149351201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1760,7 +1713,6 @@ GameObject:
   - component: {fileID: 1428450378}
   - component: {fileID: 1428450377}
   - component: {fileID: 1428450376}
-  - component: {fileID: 1428450375}
   - component: {fileID: 1428450374}
   - component: {fileID: 1428450379}
   m_Layer: 5
@@ -1820,19 +1772,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &1428450375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1428450372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f90915e07c7d3ec41888e43a61e86984, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  en: Editor Guide/FAQ
-  ru: "\u0420\u0443\u043A\u043E\u0432\u043E\u0434\u0441\u0442\u0432\u043E/\u0427\u0430\u0412\u043E"
 --- !u!114 &1428450376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1841,11 +1780,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1428450372}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e2da12be55a2a54cbc13fae7ce2a459, type: 3}
+  m_Script: {fileID: 11500000, guid: 5568e3e0cd10b8d40a22607fe8bb7ab7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  url_EN: https://osu.ppy.sh/wiki/EN/Beatmapping
-  url_RU: https://osu.ppy.sh/wiki/RU/Beatmapping
+  _key: createMapset.guide
+  _keyUrl: createMapset.guide.url
 --- !u!114 &1428450377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2088,16 +2027,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1485745672}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f90915e07c7d3ec41888e43a61e86984, type: 3}
+  m_Script: {fileID: 11500000, guid: ac0e1330591bdc54fba341e30fe3ae4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  en: 'Place the music file (.mp3) and background (.jpg) in the map folder
-
-
-    Path to maps:'
-  ru: "\u041F\u043E\u043C\u0435\u0441\u0442\u0438\u0442\u0435 \u0432 \u043F\u0430\u043F\u043A\u0443
-    \u043A\u0430\u0440\u0442\u044B \u0444\u0430\u0439\u043B \u0441 \u043C\u0443\u0437\u044B\u043A\u043E\u0439
-    (.mp3) \u0438 \u0444\u043E\u043D (.jpg).\n\n\u041F\u0443\u0442\u044C \u043A \u043A\u0430\u0440\u0442\u0430\u043C:"
+  _key: createMapset.putFiles
 --- !u!114 &1485745675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2130,7 +2063,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 'place files
+
+'
 --- !u!222 &1485745676
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2243,11 +2178,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1550596209}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f90915e07c7d3ec41888e43a61e86984, type: 3}
+  m_Script: {fileID: 11500000, guid: ac0e1330591bdc54fba341e30fe3ae4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  en: Next
-  ru: "\u0414\u0430\u043B\u0435\u0435"
+  _key: createMapset.next
 --- !u!114 &1550596212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2405,11 +2339,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1677318205}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f90915e07c7d3ec41888e43a61e86984, type: 3}
+  m_Script: {fileID: 11500000, guid: ac0e1330591bdc54fba341e30fe3ae4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  en: Title
-  ru: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435\n \u043D\u0430 \u0430\u043D\u0433\u043B\u0438\u0439\u0441\u043A\u043E\u043C"
+  _key: createMapset.title
 --- !u!114 &1677318208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3004,11 +2937,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2008100538}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f90915e07c7d3ec41888e43a61e86984, type: 3}
+  m_Script: {fileID: 11500000, guid: ac0e1330591bdc54fba341e30fe3ae4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  en: A quick note
-  ru: "\u041A\u0440\u0430\u0442\u043A\u043E\u0435 \u043F\u0440\u0438\u043C\u0435\u0447\u0430\u043D\u0438\u0435\n"
+  _key: createMapset.note
 --- !u!114 &2008100541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3092,11 +3024,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2065305855}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f90915e07c7d3ec41888e43a61e86984, type: 3}
+  m_Script: {fileID: 11500000, guid: ac0e1330591bdc54fba341e30fe3ae4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  en: Check files
-  ru: "\u041F\u0440\u043E\u0432\u0435\u0440\u0438\u0442\u044C \u0444\u0430\u0439\u043B\u044B"
+  _key: createMapset.check
 --- !u!114 &2065305858
 MonoBehaviour:
   m_ObjectHideFlags: 0

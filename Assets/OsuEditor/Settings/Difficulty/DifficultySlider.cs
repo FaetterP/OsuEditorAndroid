@@ -24,7 +24,7 @@ namespace Assets.OsuEditor.Settings.Difficulty
         protected virtual void ChangeValue()
         {
             _thisSlider.value = Mathf.Round(_thisSlider.value);
-            _text.text = _text.GetComponent<LangWriter>().GetText() + " - " + _thisSlider.value;
+            //_text.text = _text.GetComponent<LangWriter>().GetText() + " - " + _thisSlider.value;
             SetValue(_thisSlider.value);
         }
 

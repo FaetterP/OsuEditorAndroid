@@ -1,0 +1,104 @@
+﻿# Menu
+menu.editor=Редактор
+menu.settings=Настройки
+menu.creators=Создатели
+
+menu.settings.lang=Сменить язык
+menu.settings.enableFPS=Включить счётчик FPS
+menu.settings.goBack=Назад
+
+menu.load.createMapset=Создать новый мапсет
+menu.load.createMap=Создать новую карту
+menu.load.saveLog=Сохранить лог
+menu.load.back=Назад
+
+# CreateMapset
+createMapset.artist=Исполнитель (Латиница)
+createMapset.artistUnicode=Исполнитель (Юникод)
+createMapset.title=Название (Латиница)
+createMapset.titleUnicode=Название (Юникод)
+createMapset.note=Краткое примечание
+createMapset.note.text=Из-за большого числа загружаемых карт стандарт для одобрения достаточно высок. Пожалуйста, убедитесь в качестве своей карты, иначе, вероятнее всего, она будет проигнорирована!
+createMapset.guide=Руководство/ЧаВо
+createMapset.guide.url=https://osu.ppy.sh/wiki/ru/Beatmapping
+createMapset.criteria=Официальные критерии ранжирования
+createMapset.criteria.url=https://osu.ppy.sh/wiki/ru/Ranking_Criteria
+createMapset.next=Далее
+
+createMapset.putFiles=Поместите в папку карты файл с музыкой (.mp3) и фон (.jpg).\n\nПуть к картам:
+createMapset.check=Проверить файлы
+createMapset.error=Файлы не найдены.
+
+# CreateMap
+createMap.difficulty=Сложность
+createMap.tags=Теги
+createMap.creator=Создатель карты
+createMap.source=Источник
+createMap.hp=Скорость убывания HP
+createMap.cs=Размер нот
+createMap.ar=Скорость появления
+createMap.od=Общая сложность
+createMap.sm=Множитель длины слайдеров
+createMap.st=Слайдертики
+createMap.note=Краткое примечание
+createMap.note.text=Из-за большого числа загружаемых карт стандарт для одобрения достаточно высок. Пожалуйста, убедитесь в качестве своей карты, иначе, вероятнее всего, она будет проигнорирована!
+createMap.guide=Руководство/ЧаВо
+createMap.guide.url=https://osu.ppy.sh/wiki/ru/Beatmapping
+createMap.criteria=Официальные критерии ранжирования
+createMap.criteria.url=https://osu.ppy.sh/wiki/ru/Ranking_Criteria
+createMap.next=Создать карту
+
+# Editor
+editor.settings=Настройки
+editor.timing=
+
+editor.settings.hp=Скорость убывания HP
+editor.settings.cs=Размер нот
+editor.settings.ar=Скорость появления
+editor.settings.od=Общая сложность
+editor.settings.sm=Множитель длины слайдеров
+editor.settings.st=Слайдертики
+
+editor.settings.countdown=Обратный отсчёт
+editor.settings.countdown.note=
+editor.settings.countdown.half=Половина
+editor.settings.countdown.normal=Стандартно
+editor.settings.countdown.double=Удвоенный
+
+editor.settings.colours=Цвета комбо
+
+editor.settings.widescreen=Широкоэкранная поддержка
+editor.settings.epilepsy=Предупреждение об эпилепсии
+
+editor.settings.volume=Громкость
+
+editor.settings.metadata=Метаданные
+editor.settings.metadata.artist=Исполнитель (Латиница)
+editor.settings.metadata.artistUnicode=Исполнитель (Юникод)
+editor.settings.metadata.title=Название (Латиница)
+editor.settings.metadata.titleUnicode=Название (Юникод)
+editor.settings.metadata.difficulty=Сложность
+editor.settings.metadata.tags=Теги
+editor.settings.metadata.creator=Создатель карты
+editor.settings.metadata.source=Источник
+editor.settings.metadata.back=Назад
+
+editor.timing.setPreview=Использовать текущее время как превью
+editor.timing.isKiai=Kiai?
+editor.timing.3/4=
+editor.timing.4/4=
+editor.timing.5/4=
+editor.timing.6/4=
+editor.timing.7/4=
+editor.timing.back=Назад
+
+editor.timing.addParent.back=Назад
+editor.timing.addParent.reset=Сброс
+editor.timing.addParent.done=Готово
+editor.timing.addParent.tapHere=Нажимайте сюда!
+
+editor.exit.message=Сохранить карту перед выходом?
+
+# AiMod
+AiMod.message.objectsTooClose=
+AiMod.message.

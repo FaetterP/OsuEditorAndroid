@@ -1,0 +1,104 @@
+﻿# Menu
+menu.editor=Editor
+menu.settings=Settings
+menu.creators=Creators
+
+menu.settings.lang=Change language
+menu.settings.enableFPS=Enable FPS counter
+menu.settings.goBack=Back
+
+menu.createMapset=Create new mapset
+menu.createMap=Create new map
+menu.load.saveLog=Save log
+menu.load.back=Back
+
+# CreateMapset
+createMapset.artist=Romanised Artist
+createMapset.artistUnicode=Artist Unicode
+createMapset.title=Romanised Title
+createMapset.titleUnicode=Title Unicode
+createMapset.note=A quick note
+createMapset.note.text=Due to the large number of beatmap submissions, the standart of approval is relatively high. Please ensure your beatmap is at least timed properly, or it will likely be ignoreg!
+createMapset.guide=Editor Guide/FAQ
+createMapset.guide.url=https://osu.ppy.sh/wiki/en/Beatmapping
+createMapset.criteria=Official Submission Criteria
+createMapset.criteria.url=https://osu.ppy.sh/wiki/en/Ranking_Criteria
+createMapset.next=Next
+
+createMapset.putFiles=Place the music file (.mp3) and background (.jpg) in the map folder.\n\nPath to maps:
+createMapset.check=Check files
+createMapset.error=No files found.
+
+# CreateMap
+createMap.difficulty=Difficulty
+createMap.tags=Tags
+createMap.creator=Beatmap Creator
+createMap.source=Source
+createMap.hp=HP Drain Rate
+createMap.cs=Circle Size
+createMap.ar=Approach Rate
+createMap.od=Overall Difficulty
+createMap.sm=Slider Length Multiplier
+createMap.st=Slider Tick Rate
+createMap.note=A quick note
+createMap.note.text=Due to the large number of beatmap submissions, the standart of approval is relatively high. Please ensure your beatmap is at least timed properly, or it will likely be ignoreg!
+createMap.guide=Editor Guide/FAQ
+createMap.guide.url=https://osu.ppy.sh/wiki/en/Beatmapping
+createMap.criteria=Official Submission Criteria
+createMap.criteria.url=https://osu.ppy.sh/wiki/en/Ranking_Criteria
+createMap.next=Create map
+
+# Editor
+editor.settings=Settings
+editor.timing=
+
+editor.settings.hp=HP Drain Rate
+editor.settings.cs=Circle Size
+editor.settings.ar=Approach Rate
+editor.settings.od=Overall Difficulty
+editor.settings.sm=Slider Length Multiplier
+editor.settings.st=Slider Tick Rate
+
+editor.settings.countdown=Countdown
+editor.settings.countdown.note=
+editor.settings.countdown.half=Half
+editor.settings.countdown.normal=Normal
+editor.settings.countdown.double=Double
+
+editor.settings.colours=Combo colours
+
+editor.settings.widescreen=Widescreen support
+editor.settings.epilepsy=Epilepsy warning
+
+editor.settings.volume=Volume
+
+editor.settings.metadata=Metadata
+editor.settings.metadata.artist=Romanised Artist
+editor.settings.metadata.artistUnicode=Artist Unicode
+editor.settings.metadata.title=Romanised Title
+editor.settings.metadata.titleUnicode=Title Unicode
+editor.settings.metadata.difficulty=Difficulty
+editor.settings.metadata.tags=Tags
+editor.settings.metadata.creator=Beatmap Creator
+editor.settings.metadata.source=Source
+editor.settings.metadata.back=Back
+
+editor.timing.setPreview=Use the current time as a preview
+editor.timing.isKiai=Is Kiai
+editor.timing.3/4=
+editor.timing.4/4=
+editor.timing.5/4=
+editor.timing.6/4=
+editor.timing.7/4=
+editor.timing.back=Back
+
+editor.timing.addParent.back=Back
+editor.timing.addParent.reset=Reset
+editor.timing.addParent.done=Done
+editor.timing.addParent.tapHere=Tap here!
+
+editor.exit.message=Save the map before exit?
+
+# AiMod
+AiMod.message.objectsTooClose=
+AiMod.message.

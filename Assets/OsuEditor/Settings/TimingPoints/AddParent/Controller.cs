@@ -21,12 +21,12 @@ namespace Assets.OsuEditor.Settings.TimingPoints.AddParent
         private List<double> times = new List<double>();
         private string[] messages_ru = new string[9] { "Нажимайте в такт песне!", "Нажимайте в такт песне!", "Нажимайте в такт песне!", "Продолжайте нажимать.", "Продолжайте нажимать.", "Ещё 3 раза...", "Ещё 2 раза...", "Ещё 1 раз...", "Готово. Если метроном звучит неправльно, нажмите 'Сброс', чтобы начать сначала." };
         private string[] messages_en = new string[9] { "Tap to the beat of the song!", "Press to the beat of the song!", "Press to the beat of the song!", "Keep tapping.", "Keep tapping.", "3 more times...", "2 more times...", " 1 more time...", "Done. If the metronome sounds wrong, click 'Reset' to start over." };
-        private Dictionary<Lang, string[]> dc = new Dictionary<Lang, string[]>();
+        //private Dictionary<Lang, string[]> dc = new Dictionary<Lang, string[]>();
 
         void Awake()
         {
-            dc.Add(Lang.EN, messages_en);
-            dc.Add(Lang.RU, messages_ru);
+            //dc.Add(Lang.EN, messages_en);
+            //dc.Add(Lang.RU, messages_ru);
         }
 
         public void Reset()
@@ -35,13 +35,13 @@ namespace Assets.OsuEditor.Settings.TimingPoints.AddParent
             MusicSlider.value = time_start;
             Music.Pause();
             times.Clear();
-            text.text = dc[Global.Lang][times.Count];
+            //text.text = dc[Global.Lang][times.Count];
         }
 
         public void AddTime(double time)
         {
             times.Add(time);
-            text.text = dc[Global.Lang][times.Count];
+            //text.text = dc[Global.Lang][times.Count];
             if (times.Count > 7) { status = 2; sr_time = 0; foreach (double t in times) { sr_time += t; } sr_time = sr_time / times.Count; }
         }
 

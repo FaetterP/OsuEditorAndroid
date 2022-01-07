@@ -1159,17 +1159,15 @@ RectTransform:
 --- !u!114 &581225104
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114768424981489906, guid: db2e9130ff9e8e245a5c4a34c3545ba4,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 581225102}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f90915e07c7d3ec41888e43a61e86984, type: 3}
+  m_Script: {fileID: 11500000, guid: ac0e1330591bdc54fba341e30fe3ae4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  en: Create new mapset
-  ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043D\u043E\u0432\u044B\u0439 \u043C\u0430\u043F\u0441\u0435\u0442"
+  _key: menu.load.createMapset
 --- !u!114 &581225105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2753,11 +2751,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1338377070}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f90915e07c7d3ec41888e43a61e86984, type: 3}
+  m_Script: {fileID: 11500000, guid: ac0e1330591bdc54fba341e30fe3ae4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  en: Save log
-  ru: "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C \u043B\u043E\u0433"
+  _key: menu.load.saveLog
 --- !u!114 &1338377073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2838,17 +2835,15 @@ RectTransform:
 --- !u!114 &1363489608
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114768424981489906, guid: db2e9130ff9e8e245a5c4a34c3545ba4,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1363489606}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f90915e07c7d3ec41888e43a61e86984, type: 3}
+  m_Script: {fileID: 11500000, guid: ac0e1330591bdc54fba341e30fe3ae4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  en: Create new map
-  ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043D\u043E\u0432\u0443\u044E \u043A\u0430\u0440\u0442\u0443"
+  _key: menu.load.createMap
 --- !u!114 &1363489609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3574,11 +3569,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2089442131}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f90915e07c7d3ec41888e43a61e86984, type: 3}
+  m_Script: {fileID: 11500000, guid: ac0e1330591bdc54fba341e30fe3ae4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  en: Back
-  ru: "\u041D\u0430\u0437\u0430\u0434"
+  _key: menu.load.back
 --- !u!114 &2089442134
 MonoBehaviour:
   m_ObjectHideFlags: 0
