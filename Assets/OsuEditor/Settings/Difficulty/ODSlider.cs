@@ -11,5 +11,10 @@
         {
             return Global.Map.Difficulty.OverallDifficulty;
         }
+
+        protected override string GetKey()
+        {
+            return "editor.settings.od";
+        }
     }
 }

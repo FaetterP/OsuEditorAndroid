@@ -8,7 +8,7 @@ namespace Assets.Utilities.Lang
     {
         [SerializeField] private string _key;
                          private Text _thisText;
-                         internal LocalizedString _content;
+                         protected LocalizedString _content;
 
         internal void Awake()
         {

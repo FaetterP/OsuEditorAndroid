@@ -11,5 +11,10 @@
         {
             return Global.Map.Difficulty.ApproachRate;
         }
+
+        protected override string GetKey()
+        {
+            return "editor.settings.ar";
+        }
     }
 }

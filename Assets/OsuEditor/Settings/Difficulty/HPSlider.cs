@@ -11,5 +11,10 @@
         {
             return Global.Map.Difficulty.HPDrainRate;
         }
+
+        protected override string GetKey()
+        {
+            return "editor.settings.hp";
+        }
     }
 }

@@ -11,5 +11,10 @@
         {
             return Global.Map.Difficulty.CircleSize;
         }
+
+        protected override string GetKey()
+        {
+            return "editor.settings.cs";
+        }
     }
 }

@@ -50,6 +50,7 @@ createMap.next=Создать карту
 
 # Editor
 editor.settings=Настройки
+editor.settings.back=Назад
 editor.timing=
 
 editor.settings.hp=Скорость убывания HP
@@ -96,6 +97,15 @@ editor.timing.addParent.back=Назад
 editor.timing.addParent.reset=Сброс
 editor.timing.addParent.done=Готово
 editor.timing.addParent.tapHere=Нажимайте сюда!
+editor.timing.addParent.message.0=Нажимайте в такт песне!
+editor.timing.addParent.message.1=Нажимайте в такт песне!
+editor.timing.addParent.message.2=Нажимайте в такт песне!
+editor.timing.addParent.message.3=Продолжайте нажимать.
+editor.timing.addParent.message.4=Продолжайте нажимать.
+editor.timing.addParent.message.5=Ещё 3 раза...
+editor.timing.addParent.message.6=Ещё 2 раза...
+editor.timing.addParent.message.7=Ещё 1 раз...
+editor.timing.addParent.message.8=Готово. Если метроном звучит неправльно, нажмите 'Сброс', чтобы начать сначала.
 
 editor.exit.message=Сохранить карту перед выходом?
 

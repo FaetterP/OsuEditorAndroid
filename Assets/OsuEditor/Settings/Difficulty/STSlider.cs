@@ -11,5 +11,10 @@
         {
             return Global.Map.Difficulty.SliderTickRate;
         }
+
+        protected override string GetKey()
+        {
+            return "editor.settings.st";
+        }
     }
 }

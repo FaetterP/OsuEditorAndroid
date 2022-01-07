@@ -26,5 +26,10 @@ namespace Assets.OsuEditor.Settings.Difficulty
                 }
             }
         }
+
+        protected override string GetKey()
+        {
+            return "editor.settings.sm";
+        }
     }
 }

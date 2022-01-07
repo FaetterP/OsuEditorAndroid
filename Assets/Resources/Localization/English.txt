@@ -50,6 +50,7 @@ createMap.next=Create map
 
 # Editor
 editor.settings=Settings
+editor.settings.back=Back
 editor.timing=
 
 editor.settings.hp=HP Drain Rate
@@ -96,6 +97,15 @@ editor.timing.addParent.back=Back
 editor.timing.addParent.reset=Reset
 editor.timing.addParent.done=Done
 editor.timing.addParent.tapHere=Tap here!
+editor.timing.addParent.message.0=Tap to the beat of the song!
+editor.timing.addParent.message.1=Press to the beat of the song!
+editor.timing.addParent.message.2=Press to the beat of the song!
+editor.timing.addParent.message.3=Keep tapping.
+editor.timing.addParent.message.4=Keep tapping.
+editor.timing.addParent.message.5=3 more times...
+editor.timing.addParent.message.6=2 more times...
+editor.timing.addParent.message.7=1 more time...
+editor.timing.addParent.message.8=Done. If the metronome sounds wrong, click 'Reset' to start over.
 
 editor.exit.message=Save the map before exit?
 
