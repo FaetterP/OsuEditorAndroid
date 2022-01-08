@@ -1,7 +1,6 @@
 ﻿using Assets.Elements;
 using Assets.MapInfo;
 using Assets.OsuEditor;
-using Assets.Utilities;
 
 namespace Assets
 {
@@ -9,7 +8,7 @@ namespace Assets
     {
         public static int MusicLength = 1;
         public static int MusicTime = 0;
-        
+
         public static MapClass Map = new MapClass();
         public static int AR_ms
         {
@@ -24,6 +23,6 @@ namespace Assets
 
         public static LeftStatus? LeftStatus = null;
         public static OsuHitObject SelectedHitObject;
-        public static SliderStatus? SliderStatus = null; 
+        public static SliderStatus? SliderStatus = null;
     }
 }
