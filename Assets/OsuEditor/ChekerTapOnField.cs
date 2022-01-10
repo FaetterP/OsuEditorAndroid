@@ -7,16 +7,16 @@ namespace Assets.OsuEditor
 {
     class ChekerTapOnField : MonoBehaviour
     {
-        [SerializeField] private CreatorTimemarks creator;
-                         private OsuCircle circle;
-                         private OsuSlider slider;
-                         private OsuSpinner spinner;
+        [SerializeField] private CreatorTimemarks _creator;
+                         private OsuCircle _circle;
+                         private OsuSlider _slider;
+                         private OsuSpinner _spinner;
 
         void Awake()
         {
-            circle = Resources.Load<GameObject>("OsuCircle").GetComponent<OsuCircle>();
-            slider = Resources.Load<GameObject>("OsuSlider").GetComponent<OsuSlider>();
-            spinner = Resources.Load<GameObject>("OsuSpinner").GetComponent<OsuSpinner>();
+            _circle = Resources.Load<OsuCircle>("OsuCircle");
+            _slider = Resources.Load<OsuSlider>("OsuSlider");
+            _spinner = Resources.Load<OsuSpinner>("OsuSpinner");
         }
 
         void OnMouseDown()
@@ -28,15 +28,15 @@ namespace Assets.OsuEditor
             switch (Global.LeftStatus)
             {
                 case LeftStatus.Circle:
-                    OsuCircle added_ci = circle.Clone();
+                    OsuCircle added_ci = _circle.Clone();
                     added_ci.SetCoords(pos);
                     added_ci.Time = Global.MusicTime;
                     added_ci.combo_sum = 1;
-                    Global.Map.OsuHitObjects.Add(added_ci);
+                    Global.Map.AddHitObject(added_ci);
                     break;
 
                 case LeftStatus.Slider:
-                    OsuSlider added_sl = slider.Clone();
+                    OsuSlider added_sl = _slider.Clone();
                     added_sl.SetCoords(pos);
                     added_sl.Time = Global.MusicTime;
                     added_sl.combo_sum = 2;
@@ -45,20 +45,18 @@ namespace Assets.OsuEditor
                     added_sl.CountOfSlides = 1;
                     added_sl.Length = 100 * Global.Map.Difficulty.SliderMultiplier;
                     added_sl.UpdateTimeEnd();
-                    Global.Map.OsuHitObjects.Add(added_sl);
+                    Global.Map.AddHitObject(added_sl);
                     break;
 
                 case LeftStatus.Spinner:
-                    OsuSpinner added_sp = spinner.Clone();
+                    OsuSpinner added_sp = _spinner.Clone();
                     added_sp.SetCoords(256, 192);
                     added_sp.Time = Global.MusicTime;
                     added_sp.TimeEnd = Global.MusicTime+1000;
-                    Global.Map.OsuHitObjects.Add(added_sp);
+                    Global.Map.AddHitObject(added_sp);
                     break;
             }
-            Global.Map.OsuHitObjects.Sort();
-            Global.Map.UpdateComboInfos();
-            creator.UpdateCircleMarks();
+            _creator.UpdateCircleMarks();
         }
     }
 }

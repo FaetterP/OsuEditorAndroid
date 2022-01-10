@@ -13004,7 +13004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f248d43b26f02b448b33b429167a2798, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creator: {fileID: 0}
+  _creator: {fileID: 643830055}
 --- !u!61 &1131817488
 BoxCollider2D:
   m_ObjectHideFlags: 0

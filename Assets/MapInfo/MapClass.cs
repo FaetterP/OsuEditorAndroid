@@ -1,5 +1,6 @@
 ﻿using Assets.Elements;
 using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
@@ -14,6 +15,7 @@ namespace Assets.MapInfo
         public Difficulty Difficulty = new Difficulty();
         public Events Events = new Events();
         public List<TimingPoint> TimingPoints = new List<TimingPoint>();
+
         public List<Color> Colors = new List<Color>();
         public List<OsuHitObject> OsuHitObjects = new List<OsuHitObject>();
 
@@ -92,6 +94,33 @@ namespace Assets.MapInfo
         public ComboInfo GetComboInfo(int time)
         {
             return _comboInfos[time];
+        }
+
+        public void AddHitObject(OsuHitObject obj)
+        {
+            if (IsContains(obj.Time))
+            {
+                int index = OsuHitObjects.Select(x => x.Time).ToList().IndexOf(obj.Time);
+                OsuHitObjects.RemoveAt(index);
+                OsuHitObjects.Add(obj);
+            }
+            else
+            {
+                OsuHitObjects.Add(obj);
+            }
+
+            OsuHitObjects.Sort();
+            UpdateComboInfos();
+        }
+
+        private bool IsContains(int time)
+        {
+            foreach(var t in OsuHitObjects)
+            {
+                if (t.Time == time)
+                    return true;
+            }
+            return false;
         }
 
         private string GetMapTXT()
