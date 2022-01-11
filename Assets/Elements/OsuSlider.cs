@@ -285,10 +285,10 @@ namespace Assets.Elements
             sb.Append("P|");
             foreach (var t in SliderPoints)
             {
-                sb.Append(t.x + ":" + t.y + "|");
+                sb.Append((int)t.x + ":" + (int)t.y + "|");
                 if (t.IsStatic)
                 {
-                    sb.Append(t.x + ":" + t.y + "|");
+                    sb.Append((int)t.x + ":" + (int)t.y + "|");
                 }
             }
             sb.Remove(sb.Length - 1, 1);

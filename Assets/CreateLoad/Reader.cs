@@ -247,7 +247,7 @@ namespace Assets.CreateLoad
             for (int i = 1; i < points.Length; i++)
             {
                 string[] xy = points[i].Split(':');
-                SliderPoint toAdd = new SliderPoint(int.Parse(xy[0]), int.Parse(xy[1]));
+                SliderPoint toAdd = new SliderPoint((int)double.Parse(xy[0]), (int)double.Parse(xy[1]));
 
                 if (toAdd == last)
                 {
