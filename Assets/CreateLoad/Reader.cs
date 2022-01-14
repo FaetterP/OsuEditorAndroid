@@ -2,6 +2,7 @@
 using Assets.MapInfo;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace Assets.CreateLoad
         private OsuCircle _circleSample;
         private OsuSlider _sliderSample;
         private OsuSpinner _spinnerSample;
+        private IFormatProvider _formatter = new NumberFormatInfo { NumberDecimalSeparator = "." };
 
         public void LoadMapFromFile(string path)
         {
@@ -143,7 +145,7 @@ namespace Assets.CreateLoad
 
         private double GetDoubleValue(string field)
         {
-            return double.Parse(GetValue(field));
+            return double.Parse(GetValue(field), _formatter);
         }
 
         private bool GetBoolValue(string field)
@@ -186,7 +188,7 @@ namespace Assets.CreateLoad
             TimingPoint ret = new TimingPoint();
             ret.Offset = int.Parse(param[0]);
 
-            double divisor = double.Parse(param[1]);
+            double divisor = double.Parse(param[1], _formatter);
             if (divisor > 0)
             {
                 ret.isParent = true;
@@ -247,7 +249,7 @@ namespace Assets.CreateLoad
             for (int i = 1; i < points.Length; i++)
             {
                 string[] xy = points[i].Split(':');
-                SliderPoint toAdd = new SliderPoint((int)double.Parse(xy[0]), (int)double.Parse(xy[1]));
+                SliderPoint toAdd = new SliderPoint((int)double.Parse(xy[0], _formatter), (int)double.Parse(xy[1], _formatter));
 
                 if (toAdd == last)
                 {
@@ -260,7 +262,7 @@ namespace Assets.CreateLoad
                 }
             }
             added.CountOfSlides = int.Parse(param[6]);
-            added.Length = double.Parse(param[7]);
+            added.Length = double.Parse(param[7], _formatter);
             added.UpdateTimeEnd();
 
             Global.Map.OsuHitObjects.Add(added);

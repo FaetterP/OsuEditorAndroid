@@ -6,6 +6,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 using Assets.Utilities;
+using System.Globalization;
 
 namespace Assets.OsuEditor.Settings.TimingPoints
 {
@@ -21,11 +22,12 @@ namespace Assets.OsuEditor.Settings.TimingPoints
         [SerializeField] private CreatorMusicLineMarks creator;
 
         [SerializeField] private LoaderTimingPoints loader;
+        private IFormatProvider _formatter = new NumberFormatInfo { NumberDecimalSeparator = "." };
 
         public void SetTimingPoint(TimingPoint timingPoint)
         {
             Offset.text = timingPoint.Offset.ToString();
-            if (timingPoint.isParent) { BPM.text = (60000f/timingPoint.BeatLength).ToString(); }
+            if (timingPoint.isParent) { BPM.text = (60000f / timingPoint.BeatLength).ToString(); }
             else { BPM.text = timingPoint.Mult.ToString(); }
             Volume.text = timingPoint.Volume.ToString();
             isKiai.isOn = timingPoint.Kiai;
@@ -45,23 +47,23 @@ namespace Assets.OsuEditor.Settings.TimingPoints
             TimingPoint.Kiai = isKiai.isOn;
             if (TimingPoint.isParent)
             {
-                double newBPM = double.Parse(BPM.text);
+                double newBPM = double.Parse(BPM.text, _formatter);
                 bool need = false;
-                foreach(var t in Global.Map.TimingPoints)
+                foreach (var t in Global.Map.TimingPoints)
                 {
                     if (t == TimingPoint) { need = true; continue; }
-                    if (need) 
-                    { 
+                    if (need)
+                    {
                         if (t.isParent) { break; }
                         //t.BPM = newBPM;
-                     //   Debug.Log(t.Offset + " " + t.BPM);
+                        //   Debug.Log(t.Offset + " " + t.BPM);
                     }
                 }
                 //TimingPoint.BPM = newBPM;
             }
             else
             {
-                TimingPoint.Mult = double.Parse(BPM.text);
+                TimingPoint.Mult = double.Parse(BPM.text, _formatter);
                 //TimingPoint.BPM = OsuMath.GetNearestTimingPointLeft(TimingPoint.Offset, true).BPM;
             }
             TimingPoint.Volume = int.Parse(Volume.text);
