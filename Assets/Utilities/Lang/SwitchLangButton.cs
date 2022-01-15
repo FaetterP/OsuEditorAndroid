@@ -9,6 +9,12 @@ namespace Assets.Utilities.Lang
         void OnMouseDown()
         {
             LocalizedString.ChangeLanguage(_language);
+
+            foreach(var t in FindObjectsOfType<LocalizedText>())
+            {
+                t.gameObject.SetActive(false);
+                t.gameObject.SetActive(true);
+            }
         }
     }
 }

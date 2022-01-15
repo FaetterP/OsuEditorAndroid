@@ -12,6 +12,8 @@ menu.load.createMap=Создать новую карту
 menu.load.saveLog=Сохранить лог
 menu.load.back=Назад
 
+menu.creators.back=Назад
+
 # CreateMapset
 createMapset.artist=Исполнитель (Латиница)
 createMapset.artistUnicode=Исполнитель (Юникод)

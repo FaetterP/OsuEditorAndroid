@@ -12,6 +12,8 @@ menu.createMap=Create new map
 menu.load.saveLog=Save log
 menu.load.back=Back
 
+menu.creators.back=Back
+
 # CreateMapset
 createMapset.artist=Romanised Artist
 createMapset.artistUnicode=Artist Unicode
