@@ -112,6 +112,10 @@ editor.timing.addParent.message.8=Готово. Если метроном зву
 editor.exit.message=Сохранить карту перед выходом?
 
 # AiMod
+editor.aiMod=AiMod
+editor.aiMod.back=Назад
+editor.aiMod.refresh=Обновить
+
 AiMod.message.noProblemsFound=Проблем не найдено.
 
 AiMod.message.objectsTooClose=Эти объекты удалены друг от друга менее чем на 10 мс!

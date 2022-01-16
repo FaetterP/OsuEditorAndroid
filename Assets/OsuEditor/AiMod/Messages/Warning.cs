@@ -4,7 +4,7 @@ namespace Assets.OsuEditor.AiMod.Messages
 {
     class Warning : AiMessage
     {
-        private Sprite _icon;
+        private static Sprite _icon;
 
         public Warning(string text, int? time) : base(text, time)
         {
@@ -17,6 +17,9 @@ namespace Assets.OsuEditor.AiMod.Messages
 
         public override Sprite GetIcon()
         {
+            if (_icon == null)
+                InitIcon();
+
             return _icon;
         }
     }

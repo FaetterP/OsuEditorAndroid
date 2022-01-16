@@ -2,7 +2,7 @@
 
 namespace Assets.OsuEditor.AiMod
 {
-    class ReloadAiModButton : MonoBehaviour
+    class RefreshAiModButton : MonoBehaviour
     {
         [SerializeField] private AiMessagesLoader _loader;
 

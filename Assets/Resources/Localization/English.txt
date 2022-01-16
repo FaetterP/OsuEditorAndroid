@@ -112,6 +112,10 @@ editor.timing.addParent.message.8=Done. If the metronome sounds wrong, click 'Re
 editor.exit.message=Save the map before exit?
 
 # AiMod
+editor.aiMod=AiMod
+editor.aiMod.back=Back
+editor.aiMod.refresh=Refresh
+
 AiMod.message.noProblemsFound=No problems were found in this map!
 
 AiMod.message.objectsTooClose=These two objects are less than 10ms apart!

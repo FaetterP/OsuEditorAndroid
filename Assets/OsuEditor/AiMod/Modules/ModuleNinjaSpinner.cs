@@ -21,7 +21,7 @@ namespace Assets.OsuEditor.AiMod.Modules
                     OsuSpinner spinner = t as OsuSpinner;
                     foreach (var tt in Global.Map.OsuHitObjects)
                     {
-                        if (tt.Time >= spinner.Time && tt.Time <= spinner.TimeEnd)
+                        if (tt.Time >= spinner.Time && tt.Time <= spinner.TimeEnd && tt!=spinner)
                         {
                             ret.Add(new Error(_message.GetValue(), tt.Time));
                         }
