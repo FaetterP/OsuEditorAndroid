@@ -112,5 +112,9 @@ editor.timing.addParent.message.8=Готово. Если метроном зву
 editor.exit.message=Сохранить карту перед выходом?
 
 # AiMod
-AiMod.message.objectsTooClose=
-AiMod.message.
+AiMod.message.noProblemsFound=Проблем не найдено.
+
+AiMod.message.objectsTooClose=Эти объекты удалены друг от друга менее чем на 10 мс!
+AiMod.message.simultaneousObjects=Эти объекты появляются в один и тот же момент времени.
+AiMod.message.noHitsounds=Ни на одном объекте нет хитсаундов. Они необходимы для рейтинговых карт.
+AiMod.message.ninjaSpinner=Этот спиннер появляется на экране позже, чем объекты, идущие после него.

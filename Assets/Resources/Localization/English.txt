@@ -112,5 +112,9 @@ editor.timing.addParent.message.8=Done. If the metronome sounds wrong, click 'Re
 editor.exit.message=Save the map before exit?
 
 # AiMod
-AiMod.message.objectsTooClose=
-AiMod.message.
+AiMod.message.noProblemsFound=No problems were found in this map!
+
+AiMod.message.objectsTooClose=These two objects are less than 10ms apart!
+AiMod.message.simultaneousObjects=These two objects exist at the same point in time!
+AiMod.message.noHitsounds=There are no hitsounds on any objects. Hitsounds are required for rankable beatmaps.
+AiMod.message.ninjaSpinner=This spinner appears onscreen later than objects which follow it.

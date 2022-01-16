@@ -1,0 +1,26 @@
+﻿using UnityEngine;
+
+namespace Assets.OsuEditor.AiMod.Messages
+{
+    class Error : AiMessage
+    {
+        private static Sprite _icon;
+
+        public Error(string text, int? time) : base(text, time)
+        {
+        }
+
+        public override void InitIcon()
+        {
+            _icon = Resources.Load<Sprite>(@"Icons/Error");
+        }
+
+        public override Sprite GetIcon()
+        {
+            if (_icon == null)
+                InitIcon();
+
+            return _icon;
+        }
+    }
+}
