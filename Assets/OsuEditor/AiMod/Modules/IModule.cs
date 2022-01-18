@@ -5,6 +5,8 @@ namespace Assets.OsuEditor.AiMod.Modules
 {
     interface IModule
     {
+        ModuleType Type { get; }
+
         List<AiMessage> GetMessages();
     }
 }

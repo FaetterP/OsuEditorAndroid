@@ -9,6 +9,8 @@ namespace Assets.OsuEditor.AiMod.Modules
     {
         private LocalizedString _message = new LocalizedString("AiMod.message.noHitsounds");
 
+        public ModuleType Type => ModuleType.Compose;
+
         public List<AiMessage> GetMessages()
         {
             List<AiMessage> ret = new List<AiMessage>();
