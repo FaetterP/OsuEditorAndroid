@@ -14,6 +14,14 @@ namespace Assets.OsuEditor.AiMod.Modes
             _modules.Add(new ModuleSimultaneousObjects());
             _modules.Add(new ModuleNoHitsounds());
             _modules.Add(new ModuleNinjaSpinner());
+            _modules.Add(new ModuleNoBackgroundImage());
+            _modules.Add(new ModuleAllTimingSectionsQuiet());
+
+            _modules.Add(new ModuleSliderTooLarge());
+            _modules.Add(new ModuleLongCombo());
+            _modules.Add(new ModuleObjectOffscreen());
+            _modules.Add(new ModuleObjectEndOffscreen());
+            _modules.Add(new ModuleShortSpinner());
         }
 
         public List<AiMessage> FindError()
