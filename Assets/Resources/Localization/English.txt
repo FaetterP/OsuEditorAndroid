@@ -129,3 +129,6 @@ AiMod.message.longCombo=This combo is very long. Consider splitting it up.
 AiMod.message.objectOffscreen=Object is offscreen!
 AiMod.message.objectEndOffscreen=Object's end is offscreen!
 AiMod.message.shortSpinner=This spinner is too short. Auto must achieve at least 1000 bonus points on spinners.
+AiMod.message.backgroundTooLarge=Background image is larger than 2560x1440.
+AiMod.message.mapTooLong=This beatmap is over 6 minutes long. Consider shortening it if it's not a marathon-style map.
+AiMod.message.mapTooShort=Your beatmap is shorter than 45 seconds. Consider making it longer.

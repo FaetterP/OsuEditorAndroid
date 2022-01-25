@@ -22,6 +22,9 @@ namespace Assets.OsuEditor.AiMod.Modes
             _modules.Add(new ModuleObjectOffscreen());
             _modules.Add(new ModuleObjectEndOffscreen());
             _modules.Add(new ModuleShortSpinner());
+            _modules.Add(new ModuleBackgroundTooLarge());
+            _modules.Add(new ModuleMapTooLong());
+            _modules.Add(new ModuleMapTooShort());
         }
 
         public List<AiMessage> FindError()

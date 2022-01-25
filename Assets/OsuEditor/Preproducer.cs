@@ -9,7 +9,7 @@ namespace Assets.Editor
 {
     class Preproducer : MonoBehaviour
     {
-        [SerializeField] private Image _background;
+        [SerializeField] private Background _background;
         [SerializeField] private AudioSource _music;
         [SerializeField] private TimeLine _line;
         [SerializeField] private CreatorMusicLineMarks _creator;
@@ -30,7 +30,8 @@ namespace Assets.Editor
         private void SetBackground()
         {
             Rect textureRect = new Rect(0, 0, _wwwBackground.texture.width, _wwwBackground.texture.height);
-            _background.sprite = Sprite.Create(_wwwBackground.texture, textureRect, Vector2.zero);
+            Sprite sprite = Sprite.Create(_wwwBackground.texture, textureRect, Vector2.zero);
+            _background.SetSprite(sprite);
         }
 
         public void SetMusic()

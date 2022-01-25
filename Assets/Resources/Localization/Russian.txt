@@ -129,3 +129,6 @@ AiMod.message.longCombo=Комбо слишком длинное, рекомен
 AiMod.message.objectOffscreen=Объект выходит за пределы экрана.
 AiMod.message.objectEndOffscreen=Конец объекта выходит за пределы экрана.
 AiMod.message.shortSpinner=Этот спиннер слишком короткий. Авто должен набирать на спиннерах хотя бы 1000 очков бонуса.
+AiMod.message.backgroundTooLarge=Разрешение фона выше, чем 2560x1440.
+AiMod.message.mapTooLong=Ваша карта длиннее 6 минут. Если это не марафон, постарайтесь её укоротить.
+AiMod.message.mapTooShort=Ваша карта короче 45 секунд. Постарайтесь сделать её длинней.

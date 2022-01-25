@@ -296,7 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2722d2ba6f96b54ea81ba9610377633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _background: {fileID: 881869826}
+  _background: {fileID: 881869825}
   _music: {fileID: 963955356}
   _line: {fileID: 102507094}
   _creator: {fileID: 972605517}
@@ -11291,6 +11291,7 @@ GameObject:
   - component: {fileID: 881869824}
   - component: {fileID: 881869827}
   - component: {fileID: 881869826}
+  - component: {fileID: 881869825}
   m_Layer: 5
   m_Name: background
   m_TagString: Untagged
@@ -11317,6 +11318,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1422, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &881869825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881869823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b62219720b72b3d478b51c76537698af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &881869826
 MonoBehaviour:
   m_ObjectHideFlags: 0

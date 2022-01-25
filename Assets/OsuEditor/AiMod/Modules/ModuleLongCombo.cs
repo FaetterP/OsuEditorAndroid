@@ -1,4 +1,5 @@
-﻿using Assets.OsuEditor.AiMod.Messages;
+﻿using Assets.Elements;
+using Assets.OsuEditor.AiMod.Messages;
 using Assets.Utilities.Lang;
 using System.Collections.Generic;
 
@@ -16,6 +17,9 @@ namespace Assets.OsuEditor.AiMod.Modules
 
             foreach (var t in Global.Map.OsuHitObjects)
             {
+                if (t is OsuSpinner)
+                    continue;
+
                 if (Global.Map.GetComboInfo(t.Time).Number >= 25)
                 {
                     ret.Add(new Warning(_message.GetValue(), t.Time));

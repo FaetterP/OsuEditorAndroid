@@ -1,11 +1,8 @@
 ﻿using Assets.Elements;
 using Assets.OsuEditor.AiMod.Messages;
 using Assets.Utilities.Lang;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Assets.OsuEditor.AiMod.Modules
 {
@@ -21,7 +18,7 @@ namespace Assets.OsuEditor.AiMod.Modules
 
             foreach (var t in Global.Map.OsuHitObjects)
             {
-                if(t is OsuSlider)
+                if (t is OsuSlider)
                 {
                     OsuSlider slider = t as OsuSlider;
                     double x = slider.SliderPoints.Last().x;
