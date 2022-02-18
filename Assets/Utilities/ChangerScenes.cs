@@ -9,10 +9,10 @@ namespace Assets.Utilities
 {
     class ChangerScenes : MonoBehaviour
     {
-        [SerializeField] private int number = 0;
+        [SerializeField] private Scenes number;
         void OnMouseDown()
         {
-            SceneManager.LoadScene(number);
+            SceneManager.LoadScene((int)number);
         }
     }
 }

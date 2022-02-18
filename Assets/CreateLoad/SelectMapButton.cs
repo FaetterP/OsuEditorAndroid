@@ -1,4 +1,5 @@
 ﻿using Assets.CreateLoad.LoadExceptions;
+using Assets.Utilities;
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -27,7 +28,7 @@ namespace Assets.CreateLoad
                 return;
             }
 
-            SceneManager.LoadScene(4);
+            SceneManager.LoadScene((int)Scenes.EditorClassic);
         }
 
         public void SetText(string text)

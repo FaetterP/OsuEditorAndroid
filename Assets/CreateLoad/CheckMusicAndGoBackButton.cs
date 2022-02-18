@@ -1,8 +1,9 @@
-﻿using System.IO;
+﻿using Assets.Utilities;
+using System.IO;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Assets.CreateLoad
 {
@@ -14,7 +15,7 @@ namespace Assets.CreateLoad
             if (IsContainsFiles())
             {
                 FndlMusicAndBackground();
-                SceneManager.LoadScene(2);
+                SceneManager.LoadScene((int)Scenes.CreateMap);
             }
             else
             {
