@@ -5,13 +5,13 @@ namespace Assets.CreateLoad
 {
     class ContentElementMap : MonoBehaviour
     {
-        [SerializeField] private Text textOnElement;
-        [SerializeField] private SelectMapButton button;
+        [SerializeField] private Text _textOnElement;
+        [SerializeField] private SelectMapButton _button;
 
         public void SetText(string text)
         {
-            textOnElement.text = text;
-            button.SetText(text);
+            _textOnElement.text = text;
+            _button.SetText(text);
         }
     }
 }

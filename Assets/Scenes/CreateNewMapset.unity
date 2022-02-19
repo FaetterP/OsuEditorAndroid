@@ -619,12 +619,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03226b7a868b47646afce84f1ccc0449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  artist: {fileID: 60738264}
-  artistUnicode: {fileID: 1961410549}
-  title: {fileID: 84036898}
-  titleUnicode: {fileID: 1481529051}
-  disable: {fileID: 1681558440}
-  enable: {fileID: 369296509}
+  _artist: {fileID: 60738264}
+  _artistUnicode: {fileID: 1961410549}
+  _title: {fileID: 84036898}
+  _titleUnicode: {fileID: 1481529051}
+  _disabledCanvas: {fileID: 1681558440}
+  _enabledCanvas: {fileID: 369296509}
 --- !u!1 &165583322
 GameObject:
   m_ObjectHideFlags: 0
@@ -889,7 +889,7 @@ GameObject:
   - component: {fileID: 369296508}
   - component: {fileID: 369296507}
   m_Layer: 5
-  m_Name: SecondCanvas
+  m_Name: CheckCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2576,7 +2576,7 @@ GameObject:
   - component: {fileID: 1681558439}
   - component: {fileID: 1681558438}
   m_Layer: 5
-  m_Name: MainCanvas
+  m_Name: InputCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2857,7 +2857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9cb0d96179b6b42941d2eaa8f4e790, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  error: {fileID: 1149351201}
+  _errorText: {fileID: 1149351201}
 --- !u!61 &1897306759
 BoxCollider2D:
   m_ObjectHideFlags: 0

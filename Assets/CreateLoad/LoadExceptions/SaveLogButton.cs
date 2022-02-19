@@ -8,14 +8,14 @@ namespace Assets.CreateLoad.LoadExceptions
 {
     class SaveLogButton : MonoBehaviour
     {
-        public Exception exception;
-        [SerializeField] private Text _pathText;        
+        [SerializeField] private Text _pathText;
+        public Exception Exception;
 
-        void OnMouseDown()
+        private void OnMouseDown()
         {
             string name = "log " + Global.Map.Metadata.TitleUnicode + " (" + Global.Map.Metadata.Version + ").txt";
             _pathText.text = "";
-            _pathText.text += Application.persistentDataPath+"/"+name;
+            _pathText.text += Application.persistentDataPath + "/" + name;
 
             File.WriteAllText(_pathText.text, GetText());
         }
@@ -23,7 +23,7 @@ namespace Assets.CreateLoad.LoadExceptions
         private string GetText()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(exception.ToString());
+            sb.Append(Exception.ToString());
             sb.Append("\n---------------------------------------------------------\n");
             sb.Append(File.ReadAllText(Global.FullPathToMap));
 

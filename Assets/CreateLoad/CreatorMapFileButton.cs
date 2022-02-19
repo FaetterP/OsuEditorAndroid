@@ -8,19 +8,36 @@ namespace Assets.CreateLoad
 {
     class CreatorMapFileButton : MonoBehaviour
     {
-        [SerializeField] private Text difficulty, creator, source, tags;
-        void OnMouseDown()
+        [SerializeField] private Text _difficulty, _creator, _source, _tags;
+
+        private void OnMouseDown()
         {
-            string[] strarr = Global.FullPathToMapFolder.Split('/');
-            string str = strarr[strarr.Length - 2];
-            string artist = str.Split('-')[0];
-            string name = str.Split('-')[1];
-            FileStream fileStream = File.Open(Global.FullPathToMapFolder + "/" + artist + "-" + name + " (" + creator.text + ") [" + difficulty.text + "].osu", FileMode.OpenOrCreate);
+            string[] pathArray = Global.FullPathToMapFolder.Split('/');
+            string[] str = pathArray[pathArray.Length - 2].Split('-');
+            string artist = str[0];
+            string name = str[1];
+
+            FillImageAndMusic();
+
+            string fileName = Global.FullPathToMapFolder + "/" + artist + "-" + name + " (" + _creator.text + ") [" + _difficulty.text + "].osu";
+            FileStream fileStream = File.Open(fileName, FileMode.OpenOrCreate);
             StreamWriter sw = new StreamWriter(fileStream);
-            sw.Write(EmptyMap.GetText(Global.Map.General.AudioFilename, Global.Map.Metadata.Title, Global.Map.Metadata.TitleUnicode, Global.Map.Metadata.Artist, Global.Map.Metadata.ArtistUnicode, creator.text, difficulty.text, source.text, tags.text, Global.Map.Events.BackgroungImage));
+            sw.Write(EmptyMap.GetText(Global.Map.General.AudioFilename, name, name, artist, artist, _creator.text, _difficulty.text, _source.text, _tags.text, Global.Map.Events.BackgroungImage));
             sw.Close();
 
             SceneManager.LoadScene((int)Scenes.LoadMap);
+        }
+
+        private void FillImageAndMusic()
+        {
+            foreach (var t in new DirectoryInfo(Global.FullPathToMapFolder).GetFiles())
+            {
+                if (t.Name.EndsWith(".jpg"))
+                    Global.Map.Events.BackgroungImage = t.Name;
+
+                if (t.Name.EndsWith(".mp3"))
+                    Global.Map.General.AudioFilename = t.Name;
+            }
         }
     }
 }

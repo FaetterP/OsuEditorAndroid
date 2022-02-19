@@ -4,10 +4,11 @@ namespace Assets.CreateLoad
 {
     class UpdateMapsetsButton : MonoBehaviour
     {
-        [SerializeField] private LoaderMapsets loader;
-        void OnMouseDown()
+        [SerializeField] private LoaderMapsets _loader;
+
+        private void OnMouseDown()
         {
-            loader.UpdateMapsets();
+            _loader.UpdateMapsets();
         }
     }
 }

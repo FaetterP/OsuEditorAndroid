@@ -3,9 +3,9 @@ namespace Assets.CreateLoad
 {
     class EmptyMap
     {
-    public static string GetText(string audioFilename, string title, string titleUnicode, string artist, string artistUnicode, string creator, string version, string source, string tags, string background)
+        public static string GetText(string audioFilename, string title, string titleUnicode, string artist, string artistUnicode, string creator, string version, string source, string tags, string background)
         {
-            string ret = 
+            string ret =
                 "osu file format v14\n\n" +
                 "[General]\n" +
                 "AudioFilename: " + audioFilename + "\n" +

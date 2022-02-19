@@ -16,7 +16,7 @@ namespace Assets.CreateLoad.LoadExceptions
             _canvasExc.gameObject.SetActive(true);
             _canvasList.gameObject.SetActive(false);
             _exceptionText.text = e.ToString();
-            _saveButton.exception = e;
+            _saveButton.Exception = e;
         }
     }
 }

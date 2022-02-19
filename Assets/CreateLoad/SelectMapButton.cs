@@ -11,9 +11,10 @@ namespace Assets.CreateLoad
         private string _mapName;
         private static Reader s_reader;
 
-        void OnMouseDown()
+        private void OnMouseDown()
         {
-            if (s_reader == null) { s_reader = FindObjectOfType<Reader>(); }
+            if (s_reader == null) 
+                s_reader = FindObjectOfType<Reader>();
 
             string path = Global.FullPathToMapFolder + _mapName;
             Global.FullPathToMap = path;

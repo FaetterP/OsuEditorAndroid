@@ -5,9 +5,9 @@ namespace Assets.CreateLoad
 {
     class LoaderMaps : MonoBehaviour
     {
-        [SerializeField] private ContentElementMap mapElement;
+        [SerializeField] private ContentElementMap _mapElement;
 
-        void Start()
+        private void Start()
         {
             ClearContent();
         }
@@ -19,7 +19,7 @@ namespace Assets.CreateLoad
             {
                 if (t.Name.EndsWith(".osu"))
                 {
-                    ContentElementMap created = Instantiate(mapElement, transform);
+                    ContentElementMap created = Instantiate(_mapElement, transform);
                     created.SetText(t.Name);
                 }
             }

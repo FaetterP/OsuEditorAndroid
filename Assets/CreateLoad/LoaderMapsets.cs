@@ -5,9 +5,9 @@ namespace Assets.CreateLoad
 {
     class LoaderMapsets : MonoBehaviour
     {
-        [SerializeField] private ContentElementMapset mapElement;
+        [SerializeField] private ContentElementMapset _mapElement;
 
-        void Start()
+        private void Start()
         {
             UpdateMapsets();
         }
@@ -18,8 +18,10 @@ namespace Assets.CreateLoad
 
             foreach(var t in new DirectoryInfo(Application.persistentDataPath).GetDirectories())
             {
-                if (t.Name == "Unity") { continue; }
-                ContentElementMapset created = Instantiate(mapElement, transform);
+                if (t.Name == "Unity") 
+                    continue;
+
+                ContentElementMapset created = Instantiate(_mapElement, transform);
                 created.SetText(t.Name);
             }
         }

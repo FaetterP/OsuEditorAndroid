@@ -6,35 +6,37 @@ namespace Assets.CreateLoad
 {
     class CreatorMapFolder : MonoBehaviour
     {
-        [SerializeField] private InputField artist, artistUnicode, title, titleUnicode;
-        [SerializeField] private Canvas disable, enable;
-        void OnMouseDown()
+        [SerializeField] private InputField _artist, _artistUnicode, _title, _titleUnicode;
+        [SerializeField] private Canvas _disabledCanvas, _enabledCanvas;
+
+        private void OnMouseDown()
         {
             if (IsAllFieldsFilled())
             {
                 FillMetadata();
 
-                string folderName = artistUnicode.text + " - " + titleUnicode.text;
+                string folderName = _artistUnicode.text + " - " + _titleUnicode.text;
                 Global.FullPathToMapFolder = Application.persistentDataPath + "/" + folderName + "/";
                 Directory.CreateDirectory(Global.FullPathToMapFolder);
 
-                disable.gameObject.SetActive(false);
-                enable.gameObject.SetActive(true);
+                _disabledCanvas.gameObject.SetActive(false);
+                _enabledCanvas.gameObject.SetActive(true);
             }
         }
 
         private bool IsAllFieldsFilled()
         {
-            return artist.text != "" && artistUnicode.text != "" && title.text != "" && titleUnicode.text != "";
+            return _artist.text != "" && _artistUnicode.text != "" && _title.text != "" && _titleUnicode.text != "";
         }
 
         private void FillMetadata()
         {
             var metadata = Global.Map.Metadata;
-            metadata.Artist = artist.text;
-            metadata.ArtistUnicode = artistUnicode.text;
-            metadata.Title = title.text;
-            metadata.TitleUnicode = titleUnicode.text;
+
+            metadata.Artist = _artist.text;
+            metadata.ArtistUnicode = _artistUnicode.text;
+            metadata.Title = _title.text;
+            metadata.TitleUnicode = _titleUnicode.text;
         }
     }
 }
