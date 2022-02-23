@@ -13,7 +13,7 @@ namespace Assets.CreateLoad
 
         private void OnMouseDown()
         {
-            if (s_reader == null) 
+            if (s_reader == null)
                 s_reader = FindObjectOfType<Reader>();
 
             string path = Global.FullPathToMapFolder + _mapName;
@@ -21,7 +21,7 @@ namespace Assets.CreateLoad
 
             try
             {
-                s_reader.LoadMapFromFile(path);
+                Global.Map = s_reader.LoadMapFromFile(path);
             }
             catch (Exception e)
             {

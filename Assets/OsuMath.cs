@@ -1,5 +1,4 @@
 ﻿using Assets.Elements;
-using Assets.MapInfo;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +13,7 @@ namespace Assets
             if (n == 0) return 0;
             return comb(n - 1, k - 1) + comb(n - 1, k);
         }
+
         public static List<Vector2> GetInterPointBeze(List<SliderPoint> points, int n)
         {
             List<Vector2> ret = new List<Vector2>();
@@ -29,11 +29,11 @@ namespace Assets
                     vec.y += (float)(Math.Pow(1 - (i) * h, i0) * Math.Pow((i) * h, points.Count - 1 - i0) * comb(points.Count - 1, i0) * points[i0].y);
                     ret[i] = vec;
                 }
-
             }
 
             return ret;
         }
+
         public static Vector2 OsuCoordsToUnity(Vector2 osuCoords)
         {
             Vector2 ret = new Vector2();
@@ -41,6 +41,7 @@ namespace Assets
             ret.y = (osuCoords.y * 3 / -2) + 288;
             return ret;
         }
+
         public static Vector2 UnityCoordsToOsu(Vector2 unityCoords)
         {
             Vector2 ret = new Vector2();
@@ -48,13 +49,14 @@ namespace Assets
             ret.y = (unityCoords.y - 288) * 2 / -3;
             return ret;
         }
+
         public static int GetMarkX(int timestamp, int XLeft, int XRigth, int timeLeft, int timeRight)
         {
-            //  if (timestamp <= timeLeft || timestamp >= timeRight) { return null; }
             double ret = XLeft + (XRigth - XLeft) * ((double)(timestamp - timeLeft) / (timeRight - timeLeft));
             return (int)ret;
 
         }
+
         public static string ConvertTimestampToSring(int timestamp)
         {
             string ret = "";
@@ -65,12 +67,7 @@ namespace Assets
             else { ret += (timestamp % 60000) % 1000; }
             return ret;
         }
-        public static double SliderLengthToAddedTime(double length, double multiplier, double beat_length)
-        {
-            double ret;
-            ret = (length * beat_length) / (multiplier * 100.0 * Global.Map.Difficulty.SliderMultiplier);
-            return ret;
-        }
+
         public static double GetLengthOfSlider(OsuSlider slider)
         {
             double ret = 0;
@@ -82,14 +79,7 @@ namespace Assets
             }
             return ret;
         }
-        public static OsuHitObject GetHitObjectFromTime(int time)
-        {
-            foreach (var t in Global.Map.OsuHitObjects)
-            {
-                if (t.Time == time) { return t; }
-            }
-            return null;
-        }
+
         public static int GetNearestSliderSide(OsuSlider slider, Vector2 point)
         {
             List<Vector2> Centers = new List<Vector2>();
@@ -113,35 +103,6 @@ namespace Assets
                 i0++;
             }
             return imin;
-        }
-
-        public static TimingPoint GetNearestTimingPointLeft(int time, bool isParent)
-        {
-            TimingPoint ret = null;
-            int razn = 1;
-            if (isParent)
-            {
-                foreach (var t in Global.Map.TimingPoints)
-                {
-                    if (razn >= 0 && t.isParent)
-                    {
-                        razn = time - t.Offset;
-                        ret = t;
-                    }
-                }
-            }
-            else
-            {
-                foreach (var t in Global.Map.TimingPoints)
-                {
-                    razn = time - t.Offset;
-                    if (razn >= 0)
-                    {
-                        ret = t;
-                    }
-                }
-            }
-            return ret;
         }
 
         public static int ResizeValue(int startFrom, int endFrom, int startTo, int endTo, int value)

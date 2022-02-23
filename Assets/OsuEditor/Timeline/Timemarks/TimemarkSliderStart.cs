@@ -15,7 +15,7 @@ namespace Assets.OsuEditor.Timeline.Timemarks
 
         protected override void ApplyTime(int newTime)
         {
-            OsuSlider slider = OsuMath.GetHitObjectFromTime(_hitObject.Time) as OsuSlider;
+            OsuSlider slider = Global.Map.GetHitObjectFromTime(_hitObject.Time) as OsuSlider;
             int duration = slider.TimeEnd - slider.Time;
             slider.Time = newTime;
             slider.TimeEnd = newTime + duration;

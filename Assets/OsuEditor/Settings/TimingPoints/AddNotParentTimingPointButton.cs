@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Assets.MapInfo;
-using Assets.Utilities;
+﻿using Assets.MapInfo;
 using UnityEngine;
 
 namespace Assets.OsuEditor.Settings.TimingPoints
@@ -15,7 +10,7 @@ namespace Assets.OsuEditor.Settings.TimingPoints
         void OnMouseDown()
         {
             TimingPoint added = new TimingPoint();
-            TimingPoint nearest = OsuMath.GetNearestTimingPointLeft(Global.MusicTime, true);
+            TimingPoint nearest = Global.Map.GetNearestTimingPointLeft(Global.MusicTime, true);
             added.BeatLength = nearest.BeatLength;
             //added.BPM = nearest.BPM;
             added.isParent = false;
@@ -23,7 +18,7 @@ namespace Assets.OsuEditor.Settings.TimingPoints
             added.Meter = 4;
             added.Offset = Global.MusicTime;
             added.Volume = 100;
-            Global.Map.TimingPoints.Add(added);
+            Global.Map.AddTimingPoint(added);
 
             loader.UpdateTimingPoints();
             creator.UpdateMarks();

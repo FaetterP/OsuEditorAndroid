@@ -21,7 +21,7 @@ namespace Assets.OsuEditor.Timeline.Timemarks
 
         protected override void ApplyTime(int newTime)
         {
-            OsuHitObject circle = OsuMath.GetHitObjectFromTime(_hitObject.Time);
+            OsuHitObject circle = Global.Map.GetHitObjectFromTime(_hitObject.Time);
             circle.Time = newTime;
         }
 
@@ -36,7 +36,7 @@ namespace Assets.OsuEditor.Timeline.Timemarks
 
         void OnMouseDown()
         {
-            Global.SelectedHitObject = OsuMath.GetHitObjectFromTime(_hitObject.Time);
+            Global.SelectedHitObject = Global.Map.GetHitObjectFromTime(_hitObject.Time);
             ActiveCanvases();
             CheckMove();
         }
@@ -52,7 +52,7 @@ namespace Assets.OsuEditor.Timeline.Timemarks
             if (button == null)
                 return;
 
-            button.DeleteHitObject(OsuMath.GetHitObjectFromTime(_hitObject.Time));
+            button.DeleteHitObject(Global.Map.GetHitObjectFromTime(_hitObject.Time));
 
         }
 

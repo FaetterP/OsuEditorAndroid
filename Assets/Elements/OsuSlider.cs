@@ -117,7 +117,7 @@ namespace Assets.Elements
                     case TouchPhase.Ended:
                         if (_isMoving)
                         {
-                            OsuHitObject obj = OsuMath.GetHitObjectFromTime(Time);
+                            OsuHitObject obj = Global.Map.GetHitObjectFromTime(Time);
                             var pos = OsuMath.UnityCoordsToOsu(transform.localPosition);
 
                             obj.SetCoords(pos);
@@ -192,8 +192,8 @@ namespace Assets.Elements
 
         public void UpdateTimeEnd()
         {
-            TimingPoint timingPoint = OsuMath.GetNearestTimingPointLeft(Time, false);
-            _timeEnd = Time + (int)OsuMath.SliderLengthToAddedTime(_length, timingPoint.Mult, timingPoint.BeatLength) * CountOfSlides;
+            TimingPoint timingPoint = Global.Map.GetNearestTimingPointLeft(Time, false);
+            _timeEnd = Time + (int)Global.Map.SliderLengthToAddedTime(_length, timingPoint.Mult, timingPoint.BeatLength) * CountOfSlides;
         }
 
         private void PrintSliderPoints()
@@ -252,10 +252,10 @@ namespace Assets.Elements
             TimemarkSlider toAdd1 = TimemarkSlider.GetSliderEndMark(this);
             ret[_countOfSlides] = toAdd1;
 
-            TimingPoint timingPoint = OsuMath.GetNearestTimingPointLeft(Time, false);
+            TimingPoint timingPoint = Global.Map.GetNearestTimingPointLeft(Time, false);
             for (int i = 1; i < CountOfSlides; i++)
             {
-                int time = Time + (int)OsuMath.SliderLengthToAddedTime(Length, timingPoint.Mult, timingPoint.BeatLength) * i;
+                int time = Time + (int)Global.Map.SliderLengthToAddedTime(Length, timingPoint.Mult, timingPoint.BeatLength) * i;
                 TimemarkSlider toAdd2 = TimemarkSlider.GetSliderMiddleMark(this, time);
                 ret[i] = toAdd2;
             }

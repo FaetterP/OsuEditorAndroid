@@ -27,7 +27,7 @@ namespace Assets.OsuEditor.Settings.TimingPoints.AddParent
             added.Mult = 1;
             added.Offset = Controller.time_start;
             added.Volume = 100;
-            Global.Map.TimingPoints.Add(added);
+            Global.Map.AddTimingPoint(added);
 
             Enable.gameObject.SetActive(true);
             Disable.gameObject.SetActive(false);

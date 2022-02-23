@@ -35,8 +35,8 @@ namespace Assets.OsuEditor.Settings.TimingPoints
 
         private void Fix()
         {
-            Global.Map.TimingPoints.Sort(new PeopleComparer());
-            Global.Map.TimingPoints.Sort();
+            //Global.Map.TimingPoints.Sort(new PeopleComparer());
+            //Global.Map.TimingPoints.Sort();
             TimingPoint timingPoint = Global.Map.TimingPoints[0];
             if (timingPoint.isParent == false && timingPoint.Offset!= Global.Map.TimingPoints[1].Offset)
             {

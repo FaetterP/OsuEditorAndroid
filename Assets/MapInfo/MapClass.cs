@@ -1,25 +1,39 @@
 ﻿using Assets.Elements;
-using System.IO;
-using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.MapInfo
 {
     class MapClass
     {
-        public General General = new General();
-        public Editor Editor = new Editor();
-        public Metadata Metadata = new Metadata();
-        public Difficulty Difficulty = new Difficulty();
-        public Events Events = new Events();
-        public List<TimingPoint> TimingPoints = new List<TimingPoint>();
+        public General General;
+        public Editor Editor;
+        public Metadata Metadata;
+        public Difficulty Difficulty;
+        public Events Events;
+        public List<Color> Colors;
+        public List<OsuHitObject> OsuHitObjects;
 
-        public List<Color> Colors = new List<Color>();
-        public List<OsuHitObject> OsuHitObjects = new List<OsuHitObject>();
+        private Dictionary<int, ComboInfo> _comboInfos;
 
-        private Dictionary<int, ComboInfo> _comboInfos = new Dictionary<int, ComboInfo>();
+        private List<TimingPoint> _timingPoints;
+        public ReadOnlyCollection<TimingPoint> TimingPoints => _timingPoints.AsReadOnly();
+
+        public MapClass()
+        {
+            General = new General();
+            Editor = new Editor();
+            Metadata = new Metadata();
+            Difficulty = new Difficulty();
+            Events = new Events();
+            _timingPoints = new List<TimingPoint>();
+            Colors = new List<Color>();
+            OsuHitObjects = new List<OsuHitObject>();
+            _comboInfos = new Dictionary<int, ComboInfo>();
+        }
 
         public void UpdateComboInfos()
         {
@@ -32,16 +46,16 @@ namespace Assets.MapInfo
                 {
                     int sum_color = (t as OsuCircle).combo_sum;
                     (t as OsuCircle).combo_sum = sum_color;
-                    if (sum_color == 1) 
+                    if (sum_color == 1)
                     {
                         number++;
                         ComboInfo toAdd = new ComboInfo(number, color_num);
                         _comboInfos.Add(t.Time, toAdd);
                     }
-                    else if (sum_color == 5) 
+                    else if (sum_color == 5)
                     {
-                        color_num++; 
-                        color_num %= Global.Map.Colors.Count;
+                        color_num++;
+                        color_num %= Colors.Count;
                         number = 1;
                         ComboInfo toAdd = new ComboInfo(number, color_num);
                         _comboInfos.Add(t.Time, toAdd);
@@ -49,7 +63,7 @@ namespace Assets.MapInfo
                     else
                     {
                         color_num += (sum_color / 16) + 1;
-                        color_num %= Global.Map.Colors.Count;
+                        color_num %= Colors.Count;
                         number = 1;
                         ComboInfo toAdd = new ComboInfo(number, color_num);
                         _comboInfos.Add(t.Time, toAdd);
@@ -59,31 +73,31 @@ namespace Assets.MapInfo
                 {
                     int sum_color = (t as OsuSlider).combo_sum;
                     (t as OsuSlider).combo_sum = sum_color;
-                    if (sum_color == 2) 
+                    if (sum_color == 2)
                     {
                         number++;
                         ComboInfo toAdd = new ComboInfo(number, color_num);
                         _comboInfos.Add(t.Time, toAdd);
                     }
-                    else if 
-                        (sum_color == 6) 
+                    else if
+                        (sum_color == 6)
                     {
                         color_num++;
-                        color_num = color_num % Global.Map.Colors.Count;
+                        color_num = color_num % Colors.Count;
                         number = 1;
                         ComboInfo toAdd = new ComboInfo(number, color_num);
                         _comboInfos.Add(t.Time, toAdd);
                     }
-                    else 
+                    else
                     {
                         color_num += (sum_color / 16) + 1;
-                        color_num = color_num % Global.Map.Colors.Count;
+                        color_num = color_num % Colors.Count;
                         number = 1;
                         ComboInfo toAdd = new ComboInfo(number, color_num);
                         _comboInfos.Add(t.Time, toAdd);
                     }
                 }
-                else if(t is OsuSpinner)
+                else if (t is OsuSpinner)
                 {
                     ComboInfo toAdd = new ComboInfo(9999, 0);
                     _comboInfos.Add(t.Time, toAdd);
@@ -115,7 +129,7 @@ namespace Assets.MapInfo
 
         private bool IsContains(int time)
         {
-            foreach(var t in OsuHitObjects)
+            foreach (var t in OsuHitObjects)
             {
                 if (t.Time == time)
                     return true;
@@ -176,27 +190,28 @@ namespace Assets.MapInfo
                 "//Storyboard Sound Samples\n" +
                 "\n" +
                 "[TimingPoints]\n";
-            foreach(var t in TimingPoints)
+            foreach (var t in TimingPoints)
             {
                 ret += t.ToString() + "\n";
             }
             ret += "\n" +
              "[Colours]\n";
             int i = 1;
-            foreach(var t in Colors)
+            foreach (var t in Colors)
             {
                 ret += "Combo" + i + " : " + (int)(t.r * 255) + "," + (int)(t.g * 255) + "," + (int)(t.b * 255) + "\n";
                 i++;
             }
             ret += "\n" +
             "[HitObjects]\n";
-            foreach(var t in OsuHitObjects)
+            foreach (var t in OsuHitObjects)
             {
-                ret += t.ToString()+"\n";
+                ret += t.ToString() + "\n";
             }
 
             return ret;
         }
+
         public void SaveToFile()
         {
             StreamWriter sw = new StreamWriter(Global.FullPathToMap);
@@ -207,12 +222,74 @@ namespace Assets.MapInfo
         public ReadOnlyCollection<TimingPoint> GetParentTimingPoints()
         {
             List<TimingPoint> ret = new List<TimingPoint>();
-            foreach(var point in TimingPoints)
+            foreach (var point in _timingPoints)
             {
                 if (point.isParent)
                     ret.Add(point);
             }
             return ret.AsReadOnly();
+        }
+
+        public void AddTimingPoint(TimingPoint added)
+        {
+            _timingPoints.Add(added);
+        }
+
+        public void RemoveTimingPoint(TimingPoint removed)
+        {
+            if (_timingPoints.Count <= 1)
+                return;
+
+            _timingPoints.Remove(removed);
+            if (_timingPoints[0].isParent == false)
+                _timingPoints[0].isParent = true;
+        }
+
+        /////////////////////////////////////////////
+
+        public OsuHitObject GetHitObjectFromTime(int time)
+        {
+            foreach (var t in OsuHitObjects)
+            {
+                if (t.Time == time) { return t; }
+            }
+            return null;
+        }
+
+        public TimingPoint GetNearestTimingPointLeft(int time, bool isParent)
+        {
+            TimingPoint ret = null;
+            int razn = 1;
+            if (isParent)
+            {
+                foreach (var t in TimingPoints)
+                {
+                    if (razn >= 0 && t.isParent)
+                    {
+                        razn = time - t.Offset;
+                        ret = t;
+                    }
+                }
+            }
+            else
+            {
+                foreach (var t in TimingPoints)
+                {
+                    razn = time - t.Offset;
+                    if (razn >= 0)
+                    {
+                        ret = t;
+                    }
+                }
+            }
+            return ret;
+        }
+
+        public double SliderLengthToAddedTime(double length, double multiplier, double beat_length)
+        {
+            double ret;
+            ret = (length * beat_length) / (multiplier * 100.0 * Difficulty.SliderMultiplier);
+            return ret;
         }
     }
 }

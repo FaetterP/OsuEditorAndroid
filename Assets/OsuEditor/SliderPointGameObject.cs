@@ -62,9 +62,9 @@ namespace Assets.OsuEditor
                             thisPoint.x = pos.x;
                             thisPoint.y = pos.y;
                             _isMoving = false;
-                            (OsuMath.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateBezePoints();
-                            (OsuMath.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateLength();
-                            (OsuMath.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateTimeEnd();
+                            (Global.Map.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateBezePoints();
+                            (Global.Map.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateLength();
+                            (Global.Map.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateTimeEnd();
                             Destroy(thisSlider.gameObject);
                             _creator.UpdateCircleMarks();
                         }
@@ -103,9 +103,9 @@ namespace Assets.OsuEditor
                         break;
                 }
 
-                (OsuMath.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateBezePoints();
-                (OsuMath.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateLength();
-                (OsuMath.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateTimeEnd();
+                (Global.Map.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateBezePoints();
+                (Global.Map.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateLength();
+                (Global.Map.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateTimeEnd();
                 Destroy(thisSlider.gameObject);
                 _creator.UpdateCircleMarks();
             }

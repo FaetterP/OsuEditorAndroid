@@ -68,7 +68,7 @@ namespace Assets.OsuEditor.Settings.TimingPoints
             }
             TimingPoint.Volume = int.Parse(Volume.text);
             TimingPoint.Meter = Meter.value + 3;
-            TimingPoint.BeatLength = OsuMath.GetNearestTimingPointLeft(TimingPoint.Offset, true).BeatLength;
+            TimingPoint.BeatLength = Global.Map.GetNearestTimingPointLeft(TimingPoint.Offset, true).BeatLength;
 
             loader.UpdateTimingPoints();
             TimingPoint = null;

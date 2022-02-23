@@ -68,7 +68,7 @@ namespace Assets.Elements
                     case TouchPhase.Ended:
                         if (_isMoving)
                         {
-                            OsuHitObject obj = OsuMath.GetHitObjectFromTime(Time);
+                            OsuHitObject obj = Global.Map.GetHitObjectFromTime(Time);
                             var pos = OsuMath.UnityCoordsToOsu(transform.localPosition);
                             obj.SetCoords(pos);
                             Destroy(gameObject);
