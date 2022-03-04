@@ -4,10 +4,18 @@ namespace Assets.OsuEditor.Settings.TimingPoints
 {
     class RemoveTimingPointButton : MonoBehaviour
     {
+        [SerializeField] private TimingPointElement _element;
+        private LoaderTimingPoints _loader;
+
+        private void Awake()
+        {
+            _loader = FindObjectOfType<LoaderTimingPoints>();
+        }
+
         void OnMouseDown()
         {
-            Global.Map.RemoveTimingPoint(transform.parent.GetComponent<TimingPointElement>().timingPoint);
-            transform.parent.parent.GetComponent<LoaderTimingPoints>().UpdateTimingPoints();
+            Global.Map.RemoveTimingPoint(_element.timingPoint);
+            _loader.UpdateTimingPoints();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Assets.OsuEditor.Settings.TimingPoints
     {
         void OnMouseDown()
         {
-            FindObjectOfType<SaveTimingPointButtonAndEditor>().SetTimingPoint(transform.parent.GetComponent<TimingPointElement>().timingPoint);
+            FindObjectOfType<SaveTimingPointButtonAndEditor>().SelectTimingPoint(transform.parent.GetComponent<TimingPointElement>().timingPoint);
         }
     }
 }

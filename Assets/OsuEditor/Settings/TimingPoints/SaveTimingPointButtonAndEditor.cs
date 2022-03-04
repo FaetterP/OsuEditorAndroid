@@ -1,83 +1,83 @@
 ﻿using Assets.MapInfo;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
-using Assets.Utilities;
-using System.Globalization;
 
 namespace Assets.OsuEditor.Settings.TimingPoints
 {
     class SaveTimingPointButtonAndEditor : MonoBehaviour
     {
-        private TimingPoint TimingPoint;
+        [SerializeField] private LoaderTimingPoints _loader;
+        [SerializeField] private CreatorMusicLineMarks _creator;
+        [Header("Timing Point Settings")]
+        [SerializeField] private InputField _offset;
+        [SerializeField] private InputField _bpm;
+        [SerializeField] private Dropdown _meter;
+        [SerializeField] private InputField _volume;
+        [SerializeField] private Toggle _isKiai;
 
-        [SerializeField] private InputField Offset;
-        [SerializeField] private InputField BPM;
-        [SerializeField] private Dropdown Meter;
-        [SerializeField] private InputField Volume;
-        [SerializeField] private Toggle isKiai;
-        [SerializeField] private CreatorMusicLineMarks creator;
-
-        [SerializeField] private LoaderTimingPoints loader;
+        private TimingPoint _editedTimingPoint;
         private IFormatProvider _formatter = new NumberFormatInfo { NumberDecimalSeparator = "." };
 
-        public void SetTimingPoint(TimingPoint timingPoint)
+        public void SelectTimingPoint(TimingPoint timingPoint)
         {
-            Offset.text = timingPoint.Offset.ToString();
-            if (timingPoint.isParent) { BPM.text = (60000f / timingPoint.BeatLength).ToString(); }
-            else { BPM.text = timingPoint.Mult.ToString(); }
-            Volume.text = timingPoint.Volume.ToString();
-            isKiai.isOn = timingPoint.Kiai;
-            TimingPoint = timingPoint;
-            Meter.value = TimingPoint.Meter - 3;
+            _offset.text = timingPoint.Offset.ToString();
+            if (timingPoint.isParent) { _bpm.text = (60000f / timingPoint.BeatLength).ToString(); }
+            else { _bpm.text = timingPoint.Mult.ToString(); }
+            _volume.text = timingPoint.Volume.ToString();
+            _isKiai.isOn = timingPoint.Kiai;
+            _editedTimingPoint = timingPoint;
+            _meter.value = _editedTimingPoint.Meter - 3;
         }
 
         public TimingPoint GetTimingPoint()
         {
-            return TimingPoint;
+            return _editedTimingPoint;
         }
 
         void OnMouseDown()
         {
-            if (TimingPoint == null) { return; }
-            TimingPoint.Offset = int.Parse(Offset.text);
-            TimingPoint.Kiai = isKiai.isOn;
-            if (TimingPoint.isParent)
+            if (_editedTimingPoint == null)
+                return;
+
+            _editedTimingPoint.Offset = int.Parse(_offset.text);
+            _editedTimingPoint.Kiai = _isKiai.isOn;
+            if (_editedTimingPoint.isParent)
             {
-                double newBPM = double.Parse(BPM.text, _formatter);
+                double newBPM = double.Parse(_bpm.text, _formatter);
                 bool need = false;
                 foreach (var t in Global.Map.TimingPoints)
                 {
-                    if (t == TimingPoint) { need = true; continue; }
+                    if (t == _editedTimingPoint) 
+                    {
+                        need = true;
+                        continue; 
+                    }
                     if (need)
                     {
                         if (t.isParent) { break; }
-                        //t.BPM = newBPM;
-                        //   Debug.Log(t.Offset + " " + t.BPM);
                     }
                 }
-                //TimingPoint.BPM = newBPM;
             }
             else
             {
-                TimingPoint.Mult = double.Parse(BPM.text, _formatter);
-                //TimingPoint.BPM = OsuMath.GetNearestTimingPointLeft(TimingPoint.Offset, true).BPM;
+                _editedTimingPoint.Mult = double.Parse(_bpm.text, _formatter);
             }
-            TimingPoint.Volume = int.Parse(Volume.text);
-            TimingPoint.Meter = Meter.value + 3;
-            TimingPoint.BeatLength = Global.Map.GetNearestTimingPointLeft(TimingPoint.Offset, true).BeatLength;
+            _editedTimingPoint.Volume = int.Parse(_volume.text);
+            _editedTimingPoint.Meter = _meter.value + 3;
+            _editedTimingPoint.BeatLength = Global.Map.GetNearestTimingPointLeft(_editedTimingPoint.Offset, true).BeatLength;
 
-            loader.UpdateTimingPoints();
-            TimingPoint = null;
-            Offset.text = "";
-            BPM.text = "";
-            Meter.value = 0;
-            Volume.text = "";
-            isKiai.isOn = false;
-            creator.UpdateMarks();
+            Global.Map.SortTimingPoints();
+
+            _loader.UpdateTimingPoints();
+            _editedTimingPoint = null;
+            _offset.text = "";
+            _bpm.text = "";
+            _meter.value = 0;
+            _volume.text = "";
+            _isKiai.isOn = false;
+            _creator.UpdateMarks();
         }
     }
 }

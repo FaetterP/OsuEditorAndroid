@@ -1,9 +1,13 @@
 ﻿using Assets.Elements;
+using Assets.OsuEditor.Timeline;
+using UnityEngine;
 
 namespace Assets.OsuEditor.Settings.Difficulty
 {
     class SMSlider : DifficultySlider
     {
+        [SerializeField] private CreatorTimemarks _creator;
+
         protected override void SetValue(double value)
         {
             Global.Map.Difficulty.SliderMultiplier = value;
@@ -25,6 +29,8 @@ namespace Assets.OsuEditor.Settings.Difficulty
                     (t as OsuSlider).UpdateTimeEnd();
                 }
             }
+
+            _creator.UpdateCircleMarks();
         }
 
         protected override string GetKey()

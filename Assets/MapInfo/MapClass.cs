@@ -233,6 +233,9 @@ namespace Assets.MapInfo
         public void AddTimingPoint(TimingPoint added)
         {
             _timingPoints.Add(added);
+            _timingPoints.Sort();
+
+            UpdateTimingPointsBPM();
         }
 
         public void RemoveTimingPoint(TimingPoint removed)
@@ -243,6 +246,23 @@ namespace Assets.MapInfo
             _timingPoints.Remove(removed);
             if (_timingPoints[0].isParent == false)
                 _timingPoints[0].isParent = true;
+
+            UpdateTimingPointsBPM();
+        }
+
+        private void UpdateTimingPointsBPM()
+        {
+            double lastBPM = -1;
+            foreach(var t in _timingPoints)
+            {
+                if (t.isParent)
+                {
+                    lastBPM = t.BeatLength;
+                    continue;
+                }
+
+                t.BeatLength = lastBPM;
+            }
         }
 
         /////////////////////////////////////////////
@@ -290,6 +310,11 @@ namespace Assets.MapInfo
             double ret;
             ret = (length * beat_length) / (multiplier * 100.0 * Difficulty.SliderMultiplier);
             return ret;
+        }
+
+        public void SortTimingPoints()
+        {
+            _timingPoints.Sort();
         }
     }
 }
