@@ -1,10 +1,9 @@
-﻿using Assets.Scripts.OsuEditor.Timeline;
-using Assets.Scripts.OsuEditor.Timeline.Timemarks;
+﻿using Assets.Scripts.OsuEditor.Timeline.Timemarks;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.Elements
+namespace Assets.Scripts.OsuEditor.HitObjects
 {
     class OsuSpinner : OsuHitObject
     {
@@ -23,17 +22,17 @@ namespace Assets.Scripts.Elements
             }
         }
 
-        void Awake()
+        private void Awake()
         {
             _thisImage = GetComponent<Image>();
         }
 
-        void Start()
+        private void Start()
         {
             gameObject.transform.localPosition = OsuMath.OsuCoordsToUnity(new Vector2(X, Y));
         }
 
-        void Update()
+        private void Update()
         {
             if (Global.MusicTime < Time - Global.AR_ms)
             {

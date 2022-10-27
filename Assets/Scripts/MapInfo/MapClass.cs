@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Elements;
+﻿using Assets.Scripts.OsuEditor.HitObjects;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -253,7 +253,7 @@ namespace Assets.Scripts.MapInfo
         private void UpdateTimingPointsBPM()
         {
             double lastBPM = -1;
-            foreach(var t in _timingPoints)
+            foreach (var t in _timingPoints)
             {
                 if (t.isParent)
                 {

@@ -1,46 +1,43 @@
-﻿using Assets.Scripts.Elements;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Assets.Scripts.OsuEditor.HitObjects;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.OsuEditor.HitSounds
 {
+    [RequireComponent(typeof(Image))]
     class Finish : MonoBehaviour
     {
-        private Image thisImage;
+        private Image _thisImage;
 
-        void Awake()
+        private void Awake()
         {
-            thisImage = GetComponent<Image>();
+            _thisImage = GetComponent<Image>();
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
-            if((Global.SelectedHitObject as OsuCircle).Finish)
+            if ((Global.SelectedHitObject as OsuCircle).Finish)
             {
-                thisImage.color = new Color(1, 1, 1, 1);
+                _thisImage.color = new Color(1, 1, 1, 1);
             }
             else
             {
-                thisImage.color = new Color(1, 1, 1, 0.5f);
+                _thisImage.color = new Color(1, 1, 1, 0.5f);
             }
         }
 
-        void OnMouseDown()
+        private void OnMouseDown()
         {
             OsuCircle c = (Global.SelectedHitObject as OsuCircle);
             if (c.Finish)
             {
                 c.Finish = false;
-                thisImage.color = new Color(1, 1, 1, 0.5f);
+                _thisImage.color = new Color(1, 1, 1, 0.5f);
             }
             else
             {
                 c.Finish = true;
-                thisImage.color = new Color(1, 1, 1, 1);
+                _thisImage.color = new Color(1, 1, 1, 1);
             }
         }
     }

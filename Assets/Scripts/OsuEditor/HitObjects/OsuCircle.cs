@@ -1,12 +1,11 @@
 ﻿using Assets.Scripts.MapInfo;
-using Assets.Scripts.OsuEditor.Timeline;
 using Assets.Scripts.OsuEditor.Timeline.Timemarks;
 using Assets.Scripts.Utilities;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.Elements
+namespace Assets.Scripts.OsuEditor.HitObjects
 {
     [RequireComponent(typeof(Image))]
     [RequireComponent(typeof(PrinterNumber))]

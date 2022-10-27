@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.Elements.SliderStuff
+namespace Assets.Scripts.OsuEditor.HitObjects.SliderStuff
 {
     class SliderArrow : MonoBehaviour
     {

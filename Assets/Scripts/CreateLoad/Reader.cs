@@ -1,5 +1,6 @@
-﻿using Assets.Scripts.Elements;
-using Assets.Scripts.MapInfo;
+﻿using Assets.Scripts.MapInfo;
+using Assets.Scripts.OsuEditor.HitObjects;
+using Assets.Scripts.OsuEditor.HitObjects.SliderStuff;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Elements;
+﻿using Assets.Scripts.OsuEditor.HitObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Elements;
+﻿using Assets.Scripts.OsuEditor.HitObjects;
+using Assets.Scripts.OsuEditor.HitObjects.SliderStuff;
 using Assets.Scripts.OsuEditor.Timeline;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,14 +13,14 @@ namespace Assets.Scripts.OsuEditor
                          private OsuSlider _slider;
                          private OsuSpinner _spinner;
 
-        void Awake()
+        private void Awake()
         {
             _circle = Resources.Load<OsuCircle>("OsuCircle");
             _slider = Resources.Load<OsuSlider>("OsuSlider");
             _spinner = Resources.Load<OsuSpinner>("OsuSpinner");
         }
 
-        void OnMouseDown()
+        private void OnMouseDown()
         {
             Touch touch = Input.GetTouch(0);
             var pos = transform.parent.worldToLocalMatrix.MultiplyPoint(Camera.main.ScreenToWorldPoint(touch.position));

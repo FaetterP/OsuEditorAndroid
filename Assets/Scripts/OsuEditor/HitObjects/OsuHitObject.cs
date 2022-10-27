@@ -1,9 +1,8 @@
-﻿using Assets.Scripts.OsuEditor;
-using Assets.Scripts.OsuEditor.Timeline.Timemarks;
+﻿using Assets.Scripts.OsuEditor.Timeline.Timemarks;
 using System;
 using UnityEngine;
 
-namespace Assets.Scripts.Elements
+namespace Assets.Scripts.OsuEditor.HitObjects
 {
     abstract class OsuHitObject : MonoBehaviour, IComparable<OsuHitObject>
     {
@@ -50,12 +49,12 @@ namespace Assets.Scripts.Elements
             return Time.CompareTo(p.Time);
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             Destroy(gameObject);
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
             CreatorHitObjects.RemoveObjectFromList(Time);
         }

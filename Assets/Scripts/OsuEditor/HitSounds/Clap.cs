@@ -1,8 +1,4 @@
-﻿using Assets.Scripts.Elements;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Assets.Scripts.OsuEditor.HitObjects;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,14 +8,14 @@ namespace Assets.Scripts.OsuEditor.HitSounds
     {
         private Image thisImage;
 
-        void Awake()
+        private void Awake()
         {
             thisImage = GetComponent<Image>();
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
-            if((Global.SelectedHitObject as OsuCircle).Clap)
+            if ((Global.SelectedHitObject as OsuCircle).Clap)
             {
                 thisImage.color = new Color(1, 1, 1, 1);
             }
@@ -28,7 +24,8 @@ namespace Assets.Scripts.OsuEditor.HitSounds
                 thisImage.color = new Color(1, 1, 1, 0.5f);
             }
         }
-        void OnMouseDown()
+
+        private void OnMouseDown()
         {
             OsuCircle c = (Global.SelectedHitObject as OsuCircle);
             if (c.Clap)

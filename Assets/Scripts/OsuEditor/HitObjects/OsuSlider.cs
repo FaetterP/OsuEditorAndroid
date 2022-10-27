@@ -1,6 +1,5 @@
-﻿using Assets.Scripts.Elements.SliderStuff;
-using Assets.Scripts.MapInfo;
-using Assets.Scripts.OsuEditor;
+﻿using Assets.Scripts.MapInfo;
+using Assets.Scripts.OsuEditor.HitObjects.SliderStuff;
 using Assets.Scripts.OsuEditor.Timeline.Timemarks;
 using Assets.Scripts.Utilities;
 using System;
@@ -11,7 +10,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.Elements
+namespace Assets.Scripts.OsuEditor.HitObjects
 {
     [RequireComponent(typeof(LineRenderer))]
     class OsuSlider : OsuCircle
@@ -69,13 +68,13 @@ namespace Assets.Scripts.Elements
             }
         }
 
-        void Awake()
+        private void Awake()
         {
             _thisLineRenderer = GetComponent<LineRenderer>();
             _reverseArrow = Resources.Load<SliderArrow>("ReverseArrow");
         }
 
-        void Start()
+        private void Start()
         {
             _comboInfo = Global.Map.GetComboInfo(Time);
 
@@ -87,12 +86,12 @@ namespace Assets.Scripts.Elements
             PrintReverseArrow();
         }
 
-        void OnMouseDown()
+        private void OnMouseDown()
         {
             _isMoving = true;
         }
 
-        void Update()
+        private void Update()
         {
             int razn = Time - Global.MusicTime;
             if (Time - Global.MusicTime > Global.AR_ms || _timeEnd - Global.MusicTime < 0)

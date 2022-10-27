@@ -1,31 +1,28 @@
-﻿using Assets.Scripts.Elements;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Assets.Scripts.OsuEditor.HitObjects;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.OsuEditor.HitSounds
 {
+    [RequireComponent(typeof(Image))]
     class Whistle : MonoBehaviour
     {
-        private Image thisImage;
+        private Image _thisImage;
 
         void Awake()
         {
-            thisImage = GetComponent<Image>();
+            _thisImage = GetComponent<Image>();
         }
 
         void OnEnable()
         {
-            if((Global.SelectedHitObject as OsuCircle).Whisle)
+            if ((Global.SelectedHitObject as OsuCircle).Whisle)
             {
-                thisImage.color = new Color(1, 1, 1, 1);
+                _thisImage.color = new Color(1, 1, 1, 1);
             }
             else
             {
-                thisImage.color = new Color(1, 1, 1, 0.5f);
+                _thisImage.color = new Color(1, 1, 1, 0.5f);
             }
         }
         void OnMouseDown()
@@ -34,12 +31,12 @@ namespace Assets.Scripts.OsuEditor.HitSounds
             if (c.Whisle)
             {
                 c.Whisle = false;
-                thisImage.color = new Color(1, 1, 1, 0.5f);
+                _thisImage.color = new Color(1, 1, 1, 0.5f);
             }
             else
             {
                 c.Whisle = true;
-                thisImage.color = new Color(1, 1, 1, 1);
+                _thisImage.color = new Color(1, 1, 1, 1);
             }
         }
     }

@@ -1,31 +1,28 @@
-﻿using Assets.Scripts.Elements;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Assets.Scripts.OsuEditor.HitObjects;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.OsuEditor.HitSounds
 {
+    [RequireComponent(typeof(Dropdown))]
     class Sampleset : MonoBehaviour
     {
-        Dropdown thisDropdown;
+        private Dropdown _thisDropdown;
 
-        void Awake()
+        private void Awake()
         {
-            thisDropdown = GetComponent<Dropdown>();
-            thisDropdown.onValueChanged.AddListener(delegate { UpdateSampleset(); });
+            _thisDropdown = GetComponent<Dropdown>();
+            _thisDropdown.onValueChanged.AddListener(delegate { UpdateSampleset(); });
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
-            thisDropdown.value = (Global.SelectedHitObject as OsuCircle).Sampleset;
+            _thisDropdown.value = (Global.SelectedHitObject as OsuCircle).Sampleset;
         }
 
         private void UpdateSampleset()
         {
-            (Global.SelectedHitObject as OsuCircle).Sampleset = thisDropdown.value;
+            (Global.SelectedHitObject as OsuCircle).Sampleset = _thisDropdown.value;
         }
     }
 }

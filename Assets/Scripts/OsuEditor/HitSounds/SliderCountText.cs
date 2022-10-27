@@ -1,25 +1,22 @@
-﻿using Assets.Scripts.Elements;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Assets.Scripts.OsuEditor.HitObjects;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.OsuEditor.HitSounds
 {
+    [RequireComponent(typeof(Text))]
     class SliderCountText : MonoBehaviour
     {
-        Text count;
+        private Text _textCount;
 
-        void Awake()
+        private void Awake()
         {
-            count = GetComponent<Text>();
+            _textCount = GetComponent<Text>();
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
-            count.text = (Global.SelectedHitObject as OsuSlider).CountOfSlides.ToString();
+            _textCount.text = (Global.SelectedHitObject as OsuSlider).CountOfSlides.ToString();
         }
     }
 }

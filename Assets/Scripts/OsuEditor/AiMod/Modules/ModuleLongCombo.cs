@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Elements;
+﻿using Assets.Scripts.OsuEditor.HitObjects;
 using Assets.Scripts.OsuEditor.AiMod.Messages;
 using Assets.Scripts.Utilities.Lang;
 using System.Collections.Generic;

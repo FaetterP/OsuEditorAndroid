@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Elements;
+﻿using Assets.Scripts.OsuEditor.HitObjects;
+using Assets.Scripts.OsuEditor.HitObjects.SliderStuff;
 using Assets.Scripts.OsuEditor.Timeline;
 using System;
 using UnityEngine;

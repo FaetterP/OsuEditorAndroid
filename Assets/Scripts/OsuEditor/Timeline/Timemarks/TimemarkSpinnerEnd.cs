@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Elements;
+﻿using Assets.Scripts.OsuEditor.HitObjects;
 using UnityEngine;
 
 namespace Assets.Scripts.OsuEditor.Timeline.Timemarks

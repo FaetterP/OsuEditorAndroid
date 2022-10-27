@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Elements;
+﻿using Assets.Scripts.OsuEditor.HitObjects;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,9 +10,9 @@ namespace Assets.Scripts.OsuEditor
 
         void Update()
         {
-            foreach(OsuHitObject t in Global.Map.OsuHitObjects)
+            foreach (OsuHitObject t in Global.Map.OsuHitObjects)
             {
-                if (Global.MusicTime + Global.AR_ms<t.Time) { break; }
+                if (Global.MusicTime + Global.AR_ms < t.Time) { break; }
 
                 if (!_hitObjectsOnScreen.Contains(t.Time) && t.IsRightTime())
                 {

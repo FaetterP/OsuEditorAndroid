@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Elements;
+﻿using Assets.Scripts.OsuEditor.HitObjects;
 using Assets.Scripts.OsuEditor.Timeline;
 using UnityEngine;
 
