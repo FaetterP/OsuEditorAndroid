@@ -44,10 +44,15 @@ namespace Assets.Scripts.MapInfo
             foreach (OsuHitObject hitObject in OsuHitObjects)
             {
                 int newColorIndex = hitObject.UpdateComboColor(Colors.ToArray(), lastColorIndex, lastNumber);
+                Debug.Log($"{lastColorIndex} {newColorIndex}");
                 if (newColorIndex != lastColorIndex)
                 {
                     lastColorIndex = newColorIndex;
                     lastNumber = 1;
+                }
+                else
+                {
+                    lastNumber++;
                 }
             }
         }

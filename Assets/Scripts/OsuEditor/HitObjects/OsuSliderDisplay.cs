@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.OsuEditor.HitObjects
 {
+    [RequireComponent(typeof(PrinterNumber), typeof(Image))]
     class OsuSliderDisplay : OsuCircleDisplay
     {
         [SerializeField] private SliderArrow _reverseArrow;

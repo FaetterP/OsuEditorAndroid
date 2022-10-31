@@ -66,7 +66,7 @@ namespace Assets.Scripts.OsuEditor.Timeline
                 {
                     if (_circleMarksToCreate.ContainsKey(timemark)) 
                     {
-                        Debug.Log(timemark.GetType());
+                        //Debug.Log(timemark.GetType());
                         continue;
                     }
                     //Debug.Log($"{hitObject.Time} {_circleMarksToCreate.ContainsKey(timemark)} {timemark.Time}");

@@ -152,8 +152,6 @@ namespace Assets.Scripts.MapInfo.HitObjects
             TimemarkCircle[] ret = new TimemarkCircle[1];
 
             TimemarkCircle toAdd = TimemarkCircle.GetCircleMark(this);
-            TimemarkCircle toAdd1 = TimemarkCircle.GetCircleMark(this);
-            Debug.Log(toAdd==toAdd1);
             toAdd.Init(this);
             ret[0] = toAdd;
 
