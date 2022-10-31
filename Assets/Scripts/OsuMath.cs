@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.OsuEditor.HitObjects;
+﻿using Assets.Scripts.MapInfo.HitObjects;
+using Assets.Scripts.OsuEditor.HitObjects;
 using Assets.Scripts.OsuEditor.HitObjects.SliderStuff;
 using System;
 using System.Collections.Generic;
@@ -72,10 +73,10 @@ namespace Assets
         public static double GetLengthOfSlider(OsuSlider slider)
         {
             double ret = 0;
-            for (int i = 0; i < slider.BezePoints.Count - 1; i++)
+            for (int i = 0; i < slider.BezierPoints.Count - 1; i++)
             {
-                Vector2 vec1 = UnityCoordsToOsu(slider.BezePoints[i]);
-                Vector2 vec2 = UnityCoordsToOsu(slider.BezePoints[i + 1]);
+                Vector2 vec1 = UnityCoordsToOsu(slider.BezierPoints[i]);
+                Vector2 vec2 = UnityCoordsToOsu(slider.BezierPoints[i + 1]);
                 ret += Math.Sqrt(Math.Pow(vec1.x - vec2.x, 2) + Math.Pow(vec1.y - vec2.y, 2));
             }
             return ret;

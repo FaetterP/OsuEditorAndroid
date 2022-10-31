@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.OsuEditor.HitObjects;
+﻿using Assets.Scripts.MapInfo.HitObjects;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,27 +6,25 @@ namespace Assets.Scripts.OsuEditor
 {
     class CreatorHitObjects : MonoBehaviour
     {
-        private static List<int> _hitObjectsOnScreen = new List<int>();
+        private static List<OsuHitObject> _hitObjectsOnScreen = new List<OsuHitObject>();
 
         void Update()
         {
-            foreach (OsuHitObject t in Global.Map.OsuHitObjects)
+            foreach (OsuHitObject hitObject in Global.Map.OsuHitObjects)
             {
-                if (Global.MusicTime + Global.AR_ms < t.Time) { break; }
+                if (Global.MusicTime + Global.AR_ms < hitObject.Time) { break; }
 
-                if (!_hitObjectsOnScreen.Contains(t.Time) && t.IsRightTime())
+                if (!_hitObjectsOnScreen.Contains(hitObject) && hitObject.IsRightTime())
                 {
-                    OsuHitObject created = Instantiate(t, gameObject.transform);
-                    created.Init(t);
-                    created.transform.SetAsFirstSibling();
-                    _hitObjectsOnScreen.Add(t.Time);
+                    hitObject.SpawnHitObject();
+                    _hitObjectsOnScreen.Add(hitObject);
                 }
             }
         }
 
-        public static void RemoveObjectFromList(int time)
+        public static void RemoveObjectFromList(OsuHitObject hitObject)
         {
-            _hitObjectsOnScreen.Remove(time);
+            _hitObjectsOnScreen.Remove(hitObject);
         }
     }
 }

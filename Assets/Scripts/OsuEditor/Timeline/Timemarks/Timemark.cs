@@ -48,9 +48,9 @@ namespace Assets.Scripts.OsuEditor.Timeline.Timemarks
             Destroy(gameObject);
         }
 
-        public virtual void Init(Timemark other)
+        public virtual void Init(Timemark timemark)
         {
-            _time = other._time;
+            _time = timemark.Time;
         }
 
         public bool IsRightTime()
@@ -58,10 +58,10 @@ namespace Assets.Scripts.OsuEditor.Timeline.Timemarks
             return Global.MusicTime > _time - Global.AR_ms && Global.MusicTime < _time + Global.AR_ms;
         }
 
-        public Timemark Clone()
-        {
-            return (Timemark)MemberwiseClone();
-        }
+        //public Timemark Clone()
+        //{
+        //    return (Timemark)MemberwiseClone();
+        //}
 
         public int CompareTo(Timemark other)
         {

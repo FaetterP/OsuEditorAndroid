@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.OsuEditor.HitObjects;
+﻿using Assets.Scripts.MapInfo.HitObjects;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.MapInfo
 {
-    class MapClass
+    class Beatmap
     {
         public General General;
         public Editor Editor;
@@ -22,7 +22,7 @@ namespace Assets.Scripts.MapInfo
         private List<TimingPoint> _timingPoints;
         public ReadOnlyCollection<TimingPoint> TimingPoints => _timingPoints.AsReadOnly();
 
-        public MapClass()
+        public Beatmap()
         {
             General = new General();
             Editor = new Editor();
@@ -37,70 +37,17 @@ namespace Assets.Scripts.MapInfo
 
         public void UpdateComboInfos()
         {
-            _comboInfos.Clear();
+            //_comboInfos.Clear();
             OsuHitObjects.Sort();
-            int color_num = 0, number = 1;
-            foreach (OsuHitObject t in OsuHitObjects)
+
+            int lastColorIndex = 0, lastNumber = 1;
+            foreach (OsuHitObject hitObject in OsuHitObjects)
             {
-                if (t is OsuCircle && !(t is OsuSlider))
+                int newColorIndex = hitObject.UpdateComboColor(Colors.ToArray(), lastColorIndex, lastNumber);
+                if (newColorIndex != lastColorIndex)
                 {
-                    int sum_color = (t as OsuCircle).combo_sum;
-                    (t as OsuCircle).combo_sum = sum_color;
-                    if (sum_color == 1)
-                    {
-                        number++;
-                        ComboInfo toAdd = new ComboInfo(number, color_num);
-                        _comboInfos.Add(t.Time, toAdd);
-                    }
-                    else if (sum_color == 5)
-                    {
-                        color_num++;
-                        color_num %= Colors.Count;
-                        number = 1;
-                        ComboInfo toAdd = new ComboInfo(number, color_num);
-                        _comboInfos.Add(t.Time, toAdd);
-                    }
-                    else
-                    {
-                        color_num += (sum_color / 16) + 1;
-                        color_num %= Colors.Count;
-                        number = 1;
-                        ComboInfo toAdd = new ComboInfo(number, color_num);
-                        _comboInfos.Add(t.Time, toAdd);
-                    }
-                }
-                else if (t is OsuSlider)
-                {
-                    int sum_color = (t as OsuSlider).combo_sum;
-                    (t as OsuSlider).combo_sum = sum_color;
-                    if (sum_color == 2)
-                    {
-                        number++;
-                        ComboInfo toAdd = new ComboInfo(number, color_num);
-                        _comboInfos.Add(t.Time, toAdd);
-                    }
-                    else if
-                        (sum_color == 6)
-                    {
-                        color_num++;
-                        color_num = color_num % Colors.Count;
-                        number = 1;
-                        ComboInfo toAdd = new ComboInfo(number, color_num);
-                        _comboInfos.Add(t.Time, toAdd);
-                    }
-                    else
-                    {
-                        color_num += (sum_color / 16) + 1;
-                        color_num = color_num % Colors.Count;
-                        number = 1;
-                        ComboInfo toAdd = new ComboInfo(number, color_num);
-                        _comboInfos.Add(t.Time, toAdd);
-                    }
-                }
-                else if (t is OsuSpinner)
-                {
-                    ComboInfo toAdd = new ComboInfo(9999, 0);
-                    _comboInfos.Add(t.Time, toAdd);
+                    lastColorIndex = newColorIndex;
+                    lastNumber = 1;
                 }
             }
         }

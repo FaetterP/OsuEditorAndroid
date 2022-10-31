@@ -1,24 +1,30 @@
-﻿using Assets.Scripts.OsuEditor.HitObjects;
+﻿using Assets.Scripts.MapInfo.HitObjects;
+using Assets.Scripts.OsuEditor.HitObjects;
 using UnityEngine;
 
 namespace Assets.Scripts.OsuEditor.Timeline.Timemarks
 {
-    class TimemarkSpinnerStart : TimemarkCircle
+    class TimemarkSpinnerStart : TimemarkHitObject
     {
+        private OsuSpinner _spinner;
+        private CanvasHolder _holder;
+
         private static TimemarkSpinnerStart s_spinnerStartTimemark;
 
-        void Start() { }
+        void Awake()
+        {
+            _creator = FindObjectOfType<CreatorTimemarks>();
+            _holder = FindObjectOfType<CanvasHolder>();
+        }
 
         protected override void ApplyTime(int newTime)
         {
-            OsuSpinner spinner = Global.Map.GetHitObjectFromTime(_hitObject.Time) as OsuSpinner;
-            int duration = spinner.TimeEnd - spinner.Time;
+            int duration = _spinner.TimeEnd - _spinner.Time;
 
-            spinner.Time = newTime;
-            spinner.TimeEnd = newTime + duration;
+            _spinner.SetTimeStart(newTime);
         }
 
-        override protected void ActiveCanvases()
+        protected void ActiveCanvases()
         {
             _holder.SetActiveCircle(false);
             _holder.SetActiveSlider(false);
@@ -35,10 +41,15 @@ namespace Assets.Scripts.OsuEditor.Timeline.Timemarks
                 s_spinnerStartTimemark = Resources.Load<TimemarkSpinnerStart>("SpinnerTimemarkStart");
 
             TimemarkSpinnerStart ret = s_spinnerStartTimemark.Clone();
-            ret._hitObject = obj;
+            ret._spinner = obj;
             ret._time = obj.Time;
 
             return ret;
+        }
+
+        public override void Init(OsuHitObject hitObjecet)
+        {
+            _spinner = hitObjecet as OsuSpinner;
         }
     }
 }

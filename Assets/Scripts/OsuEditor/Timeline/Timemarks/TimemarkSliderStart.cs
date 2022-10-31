@@ -1,13 +1,30 @@
-﻿using Assets.Scripts.OsuEditor.HitObjects;
+﻿using Assets.Scripts.MapInfo.HitObjects;
+using Assets.Scripts.OsuEditor.HitObjects;
 using UnityEngine;
 
 namespace Assets.Scripts.OsuEditor.Timeline.Timemarks
 {
-    class TimemarkSliderStart : TimemarkCircle
+    class TimemarkSliderStart : TimemarkHitObject
     {
+        private OsuSlider _slider;
+        private CanvasHolder _holder;
+
         private static TimemarkSliderStart s_sliderBeginTimemark;
 
-        override protected void ActiveCanvases()
+        void Awake()
+        {
+            _creator = FindObjectOfType<CreatorTimemarks>();
+            _holder = FindObjectOfType<CanvasHolder>();
+        }
+
+        void OnMouseDown()
+        {
+            Global.SelectedHitObject = _slider;
+            ActiveCanvases();
+            CheckMove();
+        }
+
+        private void ActiveCanvases()
         {
             _holder.SetActiveCircle(true);
             _holder.SetActiveSlider(true);
@@ -15,10 +32,7 @@ namespace Assets.Scripts.OsuEditor.Timeline.Timemarks
 
         protected override void ApplyTime(int newTime)
         {
-            OsuSlider slider = Global.Map.GetHitObjectFromTime(_hitObject.Time) as OsuSlider;
-            int duration = slider.TimeEnd - slider.Time;
-            slider.Time = newTime;
-            slider.TimeEnd = newTime + duration;
+            _slider.SetTimeStart(newTime);
         }
 
         public new TimemarkSliderStart Clone()
@@ -26,7 +40,7 @@ namespace Assets.Scripts.OsuEditor.Timeline.Timemarks
             return (TimemarkSliderStart)MemberwiseClone();
         }
 
-        public static TimemarkSliderStart GetSliderStartMark(OsuSlider obj)
+        public static TimemarkSliderStart GetSliderStartMark(OsuSlider slider)
         {
             if (s_sliderBeginTimemark == null)
             {
@@ -34,10 +48,15 @@ namespace Assets.Scripts.OsuEditor.Timeline.Timemarks
             }
 
             TimemarkSliderStart mark = s_sliderBeginTimemark.Clone();
-            mark._time = obj.Time;
-            mark._hitObject = obj;
+            mark._time = slider.Time;
+            mark._slider = slider;
 
             return mark;
+        }
+
+        public override void Init(OsuHitObject hitObjecet)
+        {
+            _slider = hitObjecet as OsuSlider;
         }
     }
 }

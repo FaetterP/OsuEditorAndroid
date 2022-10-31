@@ -9,19 +9,17 @@ namespace Assets.Scripts.CreateLoad
     class SelectMapButton : MonoBehaviour
     {
         private string _mapName;
-        private static Reader s_reader;
 
         private void OnMouseDown()
         {
-            if (s_reader == null)
-                s_reader = FindObjectOfType<Reader>();
+            Reader reader = new Reader();
 
             string path = Global.FullPathToMapFolder + _mapName;
             Global.FullPathToMap = path;
 
             try
             {
-                Global.Map = s_reader.LoadMapFromFile(path);
+                Global.Map = reader.LoadMapFromFile(path);
             }
             catch (Exception e)
             {

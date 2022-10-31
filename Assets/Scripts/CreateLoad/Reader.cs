@@ -1,6 +1,5 @@
 ﻿using Assets.Scripts.MapInfo;
-using Assets.Scripts.OsuEditor.HitObjects;
-using Assets.Scripts.OsuEditor.HitObjects.SliderStuff;
+using Assets.Scripts.MapInfo.HitObjects;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -10,21 +9,18 @@ using UnityEngine;
 
 namespace Assets.Scripts.CreateLoad
 {
-    class Reader : MonoBehaviour
+    class Reader
     {
         private string[] _lines;
         private double _lastParentLenght = -1;
-        private OsuCircle _circleSample;
-        private OsuSlider _sliderSample;
-        private OsuSpinner _spinnerSample;
         private IFormatProvider _formatter = new NumberFormatInfo { NumberDecimalSeparator = "." };
 
-        private MapClass map;
+        private Beatmap map;
 
-        public MapClass LoadMapFromFile(string path)
+        public Beatmap LoadMapFromFile(string path)
         {
             _lines = File.ReadAllLines(path);
-            map = new MapClass();
+            map = new Beatmap();
 
             map.General.AudioFilename = GetValue("AudioFilename:");
             map.General.AudioLeadIn = GetIntValue("AudioLeadIn:");
@@ -102,23 +98,27 @@ namespace Assets.Scripts.CreateLoad
                 map.Colors.Add(new Color(230 / 255f, 230 / 255f, 250 / 255f));
             }
 
-            _circleSample = Resources.Load<OsuCircle>("OsuCircle");
-            _sliderSample = Resources.Load<OsuSlider>("OsuSlider");
-            _spinnerSample = Resources.Load<OsuSpinner>("OsuSpinner");
-
-            foreach (var t in GetBlock("[HitObjects]").Split('\n'))
+            foreach (string line in GetBlock("[HitObjects]").Split('\n'))
             {
-                if (t.Contains('|'))
-                    map.OsuHitObjects.Add(ConvertSlider(t));
+                if (line.Contains('|'))
+                    map.OsuHitObjects.Add(new OsuSlider(line));
 
-                else if (t.Split(',').Length == 6)
-                    map.OsuHitObjects.Add(ConvertCircle(t));
+                else if (line.Split(',').Length == 6)
+                    map.OsuHitObjects.Add(new OsuCircle(line));
 
-                else if (t.Split(',').Length == 7)
-                    map.OsuHitObjects.Add(ConvertSpinner(t));
+                else if (line.Split(',').Length == 7)
+                    map.OsuHitObjects.Add(new OsuSpinner(line));
             }
 
             map.UpdateComboInfos();
+            foreach (OsuHitObject hitObject in map.OsuHitObjects)
+            {
+                if (hitObject is OsuSlider)
+                {
+                    OsuSlider slider = hitObject as OsuSlider;
+                    slider.UpdateTimeEnd(map);
+                }
+            }
             return map;
         }
 
@@ -210,78 +210,6 @@ namespace Assets.Scripts.CreateLoad
             ret.Kiai = param[7] == "1";
 
             return ret;
-        }
-
-        private OsuCircle ConvertCircle(string line)
-        {
-            string[] param = line.Split(',');
-            OsuCircle circle = _circleSample.Clone();
-
-            Vector2 coords = new Vector2(int.Parse(param[0]), int.Parse(param[1]));
-            circle.SetCoords(coords);
-            circle.Time = int.Parse(param[2]);
-            circle.combo_sum = int.Parse(param[3]);
-
-            int num = int.Parse(param[4]);
-            if (num >= 8) { circle.Clap = true; num -= 8; }
-            if (num >= 4) { circle.Finish = true; num -= 4; }
-            if (num >= 2) { circle.Whisle = true; }
-
-            string[] arr = param[5].Split(':');
-            circle.Sampleset = int.Parse(arr[0]);
-            circle.Additions = int.Parse(arr[1]);
-
-            return circle;
-        }
-
-        private OsuSlider ConvertSlider(string line)
-        {
-            string[] param = line.Split(',');
-            OsuSlider slider = _sliderSample.Clone();
-
-            Vector2 coords = new Vector2(int.Parse(param[0]), int.Parse(param[1]));
-            slider.SetCoords(coords);
-            slider.Time = int.Parse(param[2]);
-            slider.combo_sum = int.Parse(param[3]);
-            slider.SliderPoints = new List<SliderPoint>();
-            string[] points = param[5].Split('|');
-
-            SliderPoint last = new SliderPoint(int.MaxValue, int.MaxValue);
-            for (int i = 1; i < points.Length; i++)
-            {
-                string[] xy = points[i].Split(':');
-                SliderPoint toAdd = new SliderPoint((int)double.Parse(xy[0], _formatter), (int)double.Parse(xy[1], _formatter));
-
-                if (toAdd == last)
-                {
-                    slider.SliderPoints.Last().SwitchStatic();
-                }
-                else
-                {
-                    slider.SliderPoints.Add(toAdd);
-                    last = toAdd;
-                }
-            }
-            slider.CountOfSlides = int.Parse(param[6]);
-            slider.Length = double.Parse(param[7], _formatter);
-
-            TimingPoint timingPoint = map.GetNearestTimingPointLeft(slider.Time, false);
-            slider.TimeEnd = slider.Time + (int)map.SliderLengthToAddedTime(slider.Length, timingPoint.Mult, timingPoint.BeatLength) * slider.CountOfSlides;
-
-            return slider;
-        }
-
-        private OsuSpinner ConvertSpinner(string line)
-        {
-            string[] param = line.Split(',');
-            OsuSpinner spinner = _spinnerSample.Clone();
-
-            Vector2 coords = new Vector2(int.Parse(param[0]), int.Parse(param[1]));
-            spinner.SetCoords(coords);
-            spinner.Time = int.Parse(param[2]);
-            spinner.TimeEnd = int.Parse(param[5]);
-
-            return spinner;
         }
     }
 }

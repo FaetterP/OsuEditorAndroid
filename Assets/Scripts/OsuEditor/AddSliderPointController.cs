@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.OsuEditor.HitObjects;
+﻿using Assets.Scripts.MapInfo.HitObjects;
+using Assets.Scripts.OsuEditor.HitObjects;
 using Assets.Scripts.OsuEditor.HitObjects.SliderStuff;
 using UnityEngine;
 
@@ -16,11 +17,10 @@ namespace Assets.Scripts.OsuEditor
                     var pos = transform.parent.worldToLocalMatrix.MultiplyPoint(Camera.main.ScreenToWorldPoint(touch.position));
                     pos = OsuMath.UnityCoordsToOsu(pos);
                     SliderPoint added = new SliderPoint((int)pos.x, (int)pos.y);
-                    (Global.SelectedHitObject as OsuSlider).SliderPoints.Add(added);
-                    (Global.SelectedHitObject as OsuSlider).UpdateBezePoints();
-                    (Global.SelectedHitObject as OsuSlider).UpdateLength();
-                    (Global.SelectedHitObject as OsuSlider).UpdateTimeEnd();
-                    OsuSlider[] arr = FindObjectsOfType<OsuSlider>();
+                    (Global.SelectedHitObject as OsuSlider).AddSliderPoint(added);
+                    (Global.SelectedHitObject as OsuSlider).UpdateBezierPoints();
+
+                    OsuSliderDisplay[] arr = FindObjectsOfType<OsuSliderDisplay>();
                     foreach (var t in arr)
                     {
                         Destroy(t.gameObject);

@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.OsuEditor.HitObjects;
+﻿using Assets.Scripts.MapInfo.HitObjects;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,13 +9,13 @@ namespace Assets.Scripts.OsuEditor.HitSounds
     {
         private Dropdown _thisDropdown;
 
-        void Awake()
+        private void Awake()
         {
             _thisDropdown = GetComponent<Dropdown>();
             _thisDropdown.onValueChanged.AddListener(delegate { UpdateAdditions(); });
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             _thisDropdown.value = (Global.SelectedHitObject as OsuCircle).Additions;
         }

@@ -1,15 +1,15 @@
-﻿using Assets.Scripts.OsuEditor.HitObjects;
-using Assets.Scripts.MapInfo;
+﻿using Assets.Scripts.MapInfo;
+using Assets.Scripts.MapInfo.HitObjects;
 using Assets.Scripts.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.OsuEditor.Timeline.Timemarks
 {
-    class TimemarkCircle : MovableTimemark
+    class TimemarkCircle : TimemarkHitObject
     {
-        protected OsuHitObject _hitObject;
-        protected CanvasHolder _holder;
+        public OsuCircle _circle;
+        private CanvasHolder _holder;
 
         private static TimemarkCircle s_circleTimemark;
 
@@ -21,22 +21,20 @@ namespace Assets.Scripts.OsuEditor.Timeline.Timemarks
 
         protected override void ApplyTime(int newTime)
         {
-            OsuHitObject circle = Global.Map.GetHitObjectFromTime(_hitObject.Time);
-            circle.Time = newTime;
+            _circle.SetTime(newTime);
         }
 
         void Start()
         {
-            ComboInfo combo = Global.Map.GetComboInfo(_hitObject.Time);
-            GetComponent<Image>().color = combo.Color;
+            GetComponent<Image>().color = _circle.ComboColor;
 
             PrinterNumber printer = gameObject.AddComponent<PrinterNumber>();
-            printer.Print(combo.Number);
+            printer.Print(_circle.ComboNumber);
         }
 
         void OnMouseDown()
         {
-            Global.SelectedHitObject = Global.Map.GetHitObjectFromTime(_hitObject.Time);
+            Global.SelectedHitObject = _circle;
             ActiveCanvases();
             CheckMove();
         }
@@ -52,17 +50,17 @@ namespace Assets.Scripts.OsuEditor.Timeline.Timemarks
             if (button == null)
                 return;
 
-            button.DeleteHitObject(Global.Map.GetHitObjectFromTime(_hitObject.Time));
+            button.DeleteHitObject(_circle);
 
         }
 
-        public void Init(TimemarkCircle other)
+        public override void Init(OsuHitObject circle)
         {
-            _hitObject = other._hitObject;
-            base.Init(other);
+            _circle = circle as OsuCircle;
+            //base.Init(circle);
         }
 
-        public new TimemarkCircle Clone()
+        public TimemarkCircle Clone()
         {
             return (TimemarkCircle)MemberwiseClone();
         }
@@ -73,14 +71,16 @@ namespace Assets.Scripts.OsuEditor.Timeline.Timemarks
             _holder.SetActiveSlider(false);
         }
 
-        public static TimemarkCircle GetCircleMark(OsuHitObject obj)
+        public static TimemarkCircle GetCircleMark(OsuCircle circle)
         {
             if (s_circleTimemark == null)
                 s_circleTimemark = Resources.Load<TimemarkCircle>("CircleTimemark");
 
             TimemarkCircle ret = s_circleTimemark.Clone();
-            ret._time = obj.Time;
-            ret._hitObject = obj;
+            ret._time = circle.Time;
+            ret._circle = circle;
+
+            ret.Init(circle);
             return ret;
         }
     }

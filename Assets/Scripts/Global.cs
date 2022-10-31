@@ -1,6 +1,6 @@
-﻿using Assets.Scripts.OsuEditor.HitObjects;
-using Assets.Scripts.MapInfo;
+﻿using Assets.Scripts.MapInfo;
 using Assets.Scripts.OsuEditor;
+using Assets.Scripts.MapInfo.HitObjects;
 
 namespace Assets
 {
@@ -9,7 +9,7 @@ namespace Assets
         public static int MusicLength = 1;
         public static int MusicTime = 0;
 
-        public static MapClass Map = new MapClass();
+        public static Beatmap Map = new Beatmap();
         public static int AR_ms
         {
             get

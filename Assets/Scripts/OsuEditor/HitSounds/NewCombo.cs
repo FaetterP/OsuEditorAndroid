@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.OsuEditor.HitObjects;
+﻿using Assets.Scripts.MapInfo.HitObjects;
+using Assets.Scripts.OsuEditor.HitObjects;
 using Assets.Scripts.OsuEditor.Timeline;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,11 +9,11 @@ namespace Assets.Scripts.OsuEditor.HitSounds
     class NewCombo : MonoBehaviour
     {
         [SerializeField] private CreatorTimemarks creator;
-        private Image thisImage;
+        private Image _thisImage;
 
         private void Awake()
         {
-            thisImage = GetComponent<Image>();
+            _thisImage = GetComponent<Image>();
         }
 
         private void OnEnable()
@@ -20,34 +21,36 @@ namespace Assets.Scripts.OsuEditor.HitSounds
             OsuCircle c = Global.SelectedHitObject as OsuCircle;
             if (Global.SelectedHitObject is OsuSlider)
             {
-                if (c.combo_sum == 2) { thisImage.color = new Color(1, 1, 1, 0.5f); }
-                else { thisImage.color = new Color(1, 1, 1, 1); }
+                if (c.ComboSum == 2) { _thisImage.color = new Color(1, 1, 1, 0.5f); }
+                else { _thisImage.color = new Color(1, 1, 1, 1); }
             }
             else
             {
-                if (c.combo_sum == 1) { thisImage.color = new Color(1, 1, 1, 0.5f); }
-                else { thisImage.color = new Color(1, 1, 1, 1); }
+                if (c.ComboSum == 1) { _thisImage.color = new Color(1, 1, 1, 0.5f); }
+                else { _thisImage.color = new Color(1, 1, 1, 1); }
             }
         }
 
         private void OnMouseDown()
         {
-            OsuCircle c = Global.SelectedHitObject as OsuCircle;
+            OsuHitObject selectedObject = Global.SelectedHitObject;
             if (Global.SelectedHitObject is OsuSlider)
             {
-                if (c.combo_sum >= 6) { c.combo_sum += 16; }
-                if (c.combo_sum == 2) { c.combo_sum = 6; }
-                if (c.combo_sum == (Global.Map.Colors.Count - 1) * 16 + 6) { c.combo_sum = 2; }
+                OsuSlider slider = Global.SelectedHitObject as OsuSlider;
+                if (slider.ComboSum >= 6) { slider.ComboSum += 16; }
+                if (slider.ComboSum == 2) { slider.ComboSum = 6; }
+                if (slider.ComboSum == (Global.Map.Colors.Count - 1) * 16 + 6) { slider.ComboSum = 2; }
             }
-            else
+            else if (Global.SelectedHitObject is OsuCircle)
             {
-                if (c.combo_sum >= 5) { c.combo_sum += 16; }
-                if (c.combo_sum == 1) { c.combo_sum = 5; }
-                if (c.combo_sum == (Global.Map.Colors.Count - 1) * 16 + 5) { c.combo_sum = 1; }
+                OsuCircle circle = Global.SelectedHitObject as OsuCircle;
+                if (circle.ComboSum >= 5) { circle.ComboSum += 16; }
+                if (circle.ComboSum == 1) { circle.ComboSum = 5; }
+                if (circle.ComboSum == (Global.Map.Colors.Count - 1) * 16 + 5) { circle.ComboSum = 1; }
             }
 
             OnEnable();
-            foreach (var t in FindObjectsOfType<OsuCircle>())
+            foreach (var t in FindObjectsOfType<OsuCircleDisplay>())
             {
                 Destroy(t.gameObject);
             }

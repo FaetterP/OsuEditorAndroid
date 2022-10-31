@@ -1,5 +1,5 @@
-﻿using Assets.Scripts.OsuEditor.HitObjects;
-using Assets.Scripts.OsuEditor.HitObjects.SliderStuff;
+﻿using Assets.Scripts.MapInfo.HitObjects;
+using Assets.Scripts.OsuEditor.HitObjects;
 using Assets.Scripts.OsuEditor.Timeline;
 using System;
 using UnityEngine;
@@ -12,33 +12,33 @@ namespace Assets.Scripts.OsuEditor
     {
         [SerializeField] private Sprite _staticPointSprite, _notStaticPointSprite;
                          public SliderPoint thisPoint;
-                         public OsuSlider thisSlider;
+                         public OsuSliderDisplay _thisSliderDisplay;
                          private bool _isMoving = false;
                          private CreatorTimemarks _creator;
 
-        void Start()
+        private void Start()
         {
             _creator = FindObjectOfType<CreatorTimemarks>();
             GetComponent<Image>().sprite = thisPoint.IsStatic ? _staticPointSprite : _notStaticPointSprite;
         }
 
-        void Update()
+        private void Update()
         {
-            if (Global.SelectedHitObject != null && Global.SelectedHitObject.Time == thisSlider.Time)
+            if (Global.SelectedHitObject != null && Global.SelectedHitObject.Time == _thisSliderDisplay.Time)
             {
                 GetComponent<BoxCollider2D>().enabled = true;
                 GetComponent<Image>().color = new Color(1, 1, 1, 1);
-                thisSlider.GetComponent<LineRenderer>().enabled = true;
+                _thisSliderDisplay.EnableSliderPoints(); ;
             }
             else
             {
                 GetComponent<BoxCollider2D>().enabled = false;
                 GetComponent<Image>().color = new Color(1, 1, 1, 0);
-                thisSlider.GetComponent<LineRenderer>().enabled = false;
+                _thisSliderDisplay.DisableSliderPoints();
             }
             try
             {
-                if (Global.SelectedHitObject.Time != thisSlider.Time) { return; }
+                if (Global.SelectedHitObject.Time != _thisSliderDisplay.Time) { return; }
             }
             catch { return; }
             if (Input.touchCount == 1)
@@ -59,14 +59,14 @@ namespace Assets.Scripts.OsuEditor
                         if (_isMoving)
                         {
                             Vector2 pos = transform.localPosition;
-                            pos = OsuMath.UnityCoordsToOsu(pos+ new Vector2(thisSlider.transform.localPosition.x, thisSlider.transform.localPosition.y));
+                            pos = OsuMath.UnityCoordsToOsu(pos+ new Vector2(_thisSliderDisplay.transform.localPosition.x, _thisSliderDisplay.transform.localPosition.y));
                             thisPoint.x = pos.x;
                             thisPoint.y = pos.y;
                             _isMoving = false;
-                            (Global.Map.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateBezePoints();
-                            (Global.Map.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateLength();
-                            (Global.Map.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateTimeEnd();
-                            Destroy(thisSlider.gameObject);
+
+                            _thisSliderDisplay.UpdateBezier();
+
+                            Destroy(_thisSliderDisplay.gameObject);
                             _creator.UpdateCircleMarks();
                         }
                         break;
@@ -94,9 +94,9 @@ namespace Assets.Scripts.OsuEditor
                 switch (Global.SliderStatus)
                 {
                     case SliderStatus.Remove:
-                        if (thisSlider.SliderPoints.Count > 1)
+                        if (_thisSliderDisplay.Slider.SliderPoints.Count > 1)
                         {
-                            thisSlider.SliderPoints.Remove(thisPoint);
+                            _thisSliderDisplay.Slider.RemoveSliderPoint(thisPoint);
                         }
                         break;
                     case SliderStatus.Switch:
@@ -104,10 +104,8 @@ namespace Assets.Scripts.OsuEditor
                         break;
                 }
 
-                (Global.Map.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateBezePoints();
-                (Global.Map.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateLength();
-                (Global.Map.GetHitObjectFromTime(thisSlider.Time) as OsuSlider).UpdateTimeEnd();
-                Destroy(thisSlider.gameObject);
+                _thisSliderDisplay.UpdateBezier();
+                Destroy(_thisSliderDisplay.gameObject);
                 _creator.UpdateCircleMarks();
             }
         }

@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.OsuEditor.HitObjects.SliderStuff
+﻿namespace Assets.Scripts.MapInfo.HitObjects
 {
     class SliderPoint
     {

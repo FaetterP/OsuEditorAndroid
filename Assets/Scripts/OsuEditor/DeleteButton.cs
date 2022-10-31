@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.OsuEditor.HitObjects;
+﻿using Assets.Scripts.MapInfo.HitObjects;
+using Assets.Scripts.OsuEditor.HitObjects;
 using Assets.Scripts.OsuEditor.Timeline;
 using UnityEngine;
 
@@ -13,14 +14,14 @@ namespace Assets.Scripts.OsuEditor
             _creator = FindObjectOfType<CreatorTimemarks>();
         }
 
-        public void DeleteHitObject(OsuHitObject obj)
+        public void DeleteHitObject(OsuHitObject hitObject)
         {
-            Global.Map.OsuHitObjects.Remove(obj);
+            Global.Map.OsuHitObjects.Remove(hitObject);
             Global.Map.UpdateComboInfos();
 
-            foreach (var t in FindObjectsOfType<OsuHitObject>())
+            foreach (var hitObjectDisplay in FindObjectsOfType<OsuHitObjectDisplay>())
             {
-                Destroy(t.gameObject);
+                Destroy(hitObjectDisplay.gameObject);
             }
 
             _creator.UpdateCircleMarks();

@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.OsuEditor.HitObjects;
+﻿using Assets.Scripts.MapInfo.HitObjects;
 using Assets.Scripts.OsuEditor.AiMod.Messages;
 using Assets.Scripts.Utilities.Lang;
 using System.Collections.Generic;
@@ -15,11 +15,11 @@ namespace Assets.Scripts.OsuEditor.AiMod.Modules
         {
             List<AiMessage> ret = new List<AiMessage>();
 
-            foreach (var t in Global.Map.OsuHitObjects)
+            foreach (var hitObject in Global.Map.OsuHitObjects)
             {
-                if (t is OsuSlider)
+                if (hitObject is OsuSlider)
                 {
-                    OsuSlider slider = t as OsuSlider;
+                    OsuSlider slider = hitObject as OsuSlider;
                     if (slider.SliderPoints.Count >= 20)
                     {
                         ret.Add(new Warning(_message.GetValue(), slider.Time));

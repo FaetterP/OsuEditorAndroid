@@ -1,22 +1,29 @@
-﻿using Assets.Scripts.OsuEditor.HitObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Assets.Scripts.MapInfo.HitObjects;
 using UnityEngine;
 
 namespace Assets.Scripts.OsuEditor.Timeline.Timemarks
 {
-    class TimemarkSlider : TimemarkCircle
+    class TimemarkSlider : TimemarkHitObject
     {
         private static TimemarkSlider s_sliderMiddleTimemark;
         private static TimemarkSlider s_sliderEndTimemark;
 
-        protected override void ApplyTime(int newTime)
+        private OsuSlider _slider;
+        private CanvasHolder _holder;
+
+        void Awake()
         {
+            _creator = FindObjectOfType<CreatorTimemarks>();
+            _holder = FindObjectOfType<CanvasHolder>();
         }
 
-        override protected void ActiveCanvases()
+        void OnMouseDown()
+        {
+            Global.SelectedHitObject = _slider;
+            ActiveCanvases();
+        }
+
+        protected void ActiveCanvases()
         {
             _holder.SetActiveCircle(true);
             _holder.SetActiveSlider(true);
@@ -31,12 +38,12 @@ namespace Assets.Scripts.OsuEditor.Timeline.Timemarks
 
             TimemarkSlider mark = s_sliderMiddleTimemark.Clone();
             mark._time = time;
-            mark._hitObject = obj;
+            mark._slider = obj;
 
             return mark;
         }
 
-        public static TimemarkSlider GetSliderEndMark(OsuSlider obj)
+        public static TimemarkSlider GetSliderEndMark(OsuSlider slider)
         {
             if (s_sliderEndTimemark == null)
             {
@@ -44,15 +51,21 @@ namespace Assets.Scripts.OsuEditor.Timeline.Timemarks
             }
 
             TimemarkSlider mark = s_sliderEndTimemark.Clone();
-            mark._time = obj.TimeEnd;
-            mark._hitObject = obj;
-
+            mark._time = slider.TimeEnd;
+            mark._slider = slider;
             return mark;
         }
 
         public new TimemarkSlider Clone()
         {
             return (TimemarkSlider)MemberwiseClone();
+        }
+
+        protected override void ApplyTime(int newTime) { }
+
+        public override void Init(OsuHitObject hitObjecet)
+        {
+            _slider = hitObjecet as OsuSlider;
         }
     }
 }

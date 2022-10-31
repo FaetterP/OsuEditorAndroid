@@ -1,5 +1,5 @@
-﻿using Assets.Scripts.OsuEditor.HitObjects;
-using Assets.Scripts.MapInfo;
+﻿using Assets.Scripts.MapInfo;
+using Assets.Scripts.MapInfo.HitObjects;
 using Assets.Scripts.OsuEditor.Timeline.Timemarks;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,7 +10,7 @@ namespace Assets.Scripts.OsuEditor.Timeline
     class CreatorTimemarks : MonoBehaviour
     {
         private List<Timemark> _marksToCreate = new List<Timemark>();
-        private List<TimemarkCircle> _circleMarksToCreate = new List<TimemarkCircle>();
+        private Dictionary<TimemarkHitObject, OsuHitObject> _circleMarksToCreate = new Dictionary<TimemarkHitObject, OsuHitObject>();
         private List<int> _marksOnScreen = new List<int>();
         private List<int> _circleMarksOnScreen = new List<int>();
 
@@ -33,14 +33,19 @@ namespace Assets.Scripts.OsuEditor.Timeline
                     }
                 }
             }
-            foreach (var t in _circleMarksToCreate)
+
+            foreach (TimemarkHitObject t in _circleMarksToCreate.Keys)
             {
                 if (!_circleMarksOnScreen.Contains(t.Time))
                 {
                     if (t.IsRightTime())
                     {
-                        TimemarkCircle created = Instantiate(t, transform);
-                        created.Init(t);
+                        // Debug.Log(t.GetType());
+                        if (t is TimemarkCircle)
+                        {
+                            TimemarkHitObject created = Instantiate(t, transform);
+                            (created as TimemarkCircle).Init(_circleMarksToCreate[t]);
+                        }
                         _circleMarksOnScreen.Add(t.Time);
                     }
                 }
@@ -59,7 +64,13 @@ namespace Assets.Scripts.OsuEditor.Timeline
             {
                 foreach (var timemark in hitObject.GetTimemark())
                 {
-                    _circleMarksToCreate.Add(timemark);
+                    if (_circleMarksToCreate.ContainsKey(timemark)) 
+                    {
+                        Debug.Log(timemark.GetType());
+                        continue;
+                    }
+                    //Debug.Log($"{hitObject.Time} {_circleMarksToCreate.ContainsKey(timemark)} {timemark.Time}");
+                    _circleMarksToCreate.Add(timemark, hitObject);
                 }
             }
         }

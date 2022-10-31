@@ -66,7 +66,7 @@ namespace Assets.Scripts.OsuEditor.Timeline.Timemarks
 
             ApplyTime(newTime);
 
-            foreach (var t in FindObjectsOfType<OsuHitObject>())
+            foreach (var t in FindObjectsOfType<OsuHitObjectDisplay>())
             {
                 Destroy(t.gameObject);
             }

@@ -6,11 +6,11 @@ namespace Assets.Scripts.OsuEditor.HitObjects.SliderStuff
     [RequireComponent(typeof(Image))]
     class SliderBall : MonoBehaviour
     {
-        [SerializeField] private OsuSlider _slider;
+        [SerializeField] private OsuSliderDisplay _slider;
 
         private void Start()
         {
-            GetComponent<Image>().color = _slider.ComboColor;
+            GetComponent<Image>().color = _slider.Slider.ComboColor;
         }
 
         private void Update()

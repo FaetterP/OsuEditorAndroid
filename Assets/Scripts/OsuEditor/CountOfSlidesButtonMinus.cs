@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.OsuEditor.HitObjects;
+﻿using Assets.Scripts.MapInfo.HitObjects;
+using Assets.Scripts.OsuEditor.HitObjects;
 using Assets.Scripts.OsuEditor.Timeline;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,15 +13,16 @@ namespace Assets.Scripts.OsuEditor
 
         void OnMouseDown()
         {
-            if((Global.SelectedHitObject as OsuSlider).CountOfSlides > 1)
+            OsuSlider slider = Global.SelectedHitObject as OsuSlider;
+
+            if (slider.CountOfSlides > 1)
             {
-                (Global.SelectedHitObject as OsuSlider).CountOfSlides -= 1;
                 _textNumber.text = (Global.SelectedHitObject as OsuSlider).CountOfSlides.ToString();
 
-                (Global.SelectedHitObject as OsuSlider).UpdateTimeEnd();
+                (Global.SelectedHitObject as OsuSlider).UpdateTimeEnd(Global.Map);
                 _creator.UpdateCircleMarks();
 
-                foreach (var t in FindObjectsOfType<OsuSlider>())
+                foreach (var t in FindObjectsOfType<OsuSliderDisplay>())
                 {
                     Destroy(t.gameObject);
                 }

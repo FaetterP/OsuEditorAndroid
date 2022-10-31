@@ -1,25 +1,33 @@
-﻿using Assets.Scripts.OsuEditor.HitObjects;
+﻿using Assets.Scripts.MapInfo.HitObjects;
+using Assets.Scripts.OsuEditor.HitObjects;
 using UnityEngine;
 
 namespace Assets.Scripts.OsuEditor.Timeline.Timemarks
 {
-    class TimemarkSpinnerEnd : TimemarkCircle
+    class TimemarkSpinnerEnd : TimemarkHitObject
     {
+        private OsuSpinner _spinner;
+        private CanvasHolder _holder;
+
         private static TimemarkSpinnerEnd s_spinnerEndTimemark;
+
+        void Awake()
+        {
+            _creator = FindObjectOfType<CreatorTimemarks>();
+            _holder = FindObjectOfType<CanvasHolder>();
+        }
 
         void Start() { }
 
         protected override void ApplyTime(int newTime)
         {
-            OsuSpinner spinner = Global.Map.GetHitObjectFromTime(_hitObject.Time) as OsuSpinner;
+            if (newTime < _spinner.Time)
+                newTime = _spinner.Time + 1000;
 
-            if (newTime < spinner.Time)
-                newTime = spinner.Time + 1000;
-
-            spinner.TimeEnd = newTime;
+            _spinner.SetTimeEnd(newTime);
         }
 
-        override protected void ActiveCanvases()
+        protected void ActiveCanvases()
         {
             _holder.SetActiveCircle(false);
             _holder.SetActiveSlider(false);
@@ -30,16 +38,21 @@ namespace Assets.Scripts.OsuEditor.Timeline.Timemarks
             return (TimemarkSpinnerEnd)MemberwiseClone();
         }
 
-        public static TimemarkSpinnerEnd GetTimemark(OsuSpinner obj)
+        public static TimemarkSpinnerEnd GetTimemark(OsuSpinner spinner)
         {
             if (s_spinnerEndTimemark == null)
                 s_spinnerEndTimemark = Resources.Load<TimemarkSpinnerEnd>("SpinnerTimemarkEnd");
 
             TimemarkSpinnerEnd ret = s_spinnerEndTimemark.Clone();
-            ret._hitObject = obj;
-            ret._time = obj.TimeEnd;
+            ret._spinner = spinner;
+            ret._time = spinner.TimeEnd;
 
             return ret;
+        }
+
+        public override void Init(OsuHitObject hitObjecet)
+        {
+            _spinner = hitObjecet as OsuSpinner;
         }
     }
 }

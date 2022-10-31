@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.OsuEditor.HitObjects;
+﻿using Assets.Scripts.MapInfo.HitObjects;
 using Assets.Scripts.OsuEditor.Timeline;
 using UnityEngine;
 
@@ -22,11 +22,11 @@ namespace Assets.Scripts.OsuEditor.Settings.Difficulty
         {
             base.ChangeValue();
 
-            foreach (var t in Global.Map.OsuHitObjects)
+            foreach (var hitObject in Global.Map.OsuHitObjects)
             {
-                if (t is OsuSlider)
+                if (hitObject is OsuSlider)
                 {
-                    (t as OsuSlider).UpdateTimeEnd();
+                    (hitObject as OsuSlider).UpdateTimeEnd(Global.Map);
                 }
             }
 
