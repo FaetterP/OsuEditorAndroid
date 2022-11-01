@@ -15,14 +15,14 @@ namespace Assets.Scripts.OsuEditor.AiMod.Modules
         {
             List<AiMessage> ret = new List<AiMessage>();
 
-            foreach (var t in Global.Map.OsuHitObjects)
+            foreach (var hitObject in Global.Map.OsuHitObjects)
             {
-                if (t is OsuSpinner)
+                if (hitObject is OsuSpinner)
                     continue;
 
-                if (Global.Map.GetComboInfo(t.Time).Number >= 25)
+                if (hitObject.ComboNumber >= 25)
                 {
-                    ret.Add(new Warning(_message.GetValue(), t.Time));
+                    ret.Add(new Warning(_message.GetValue(), hitObject.Time));
                 }
             }
 

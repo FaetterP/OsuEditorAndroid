@@ -14,6 +14,7 @@ namespace Assets.Scripts.OsuEditor.HitObjects
         [SerializeField] private SliderArrow _reverseArrow;
         [SerializeField] private LineRenderer _sliderPointsLineRenderer;
         [SerializeField] private LineRenderer _sliderLineRenderer;
+        [SerializeField] private Image _lastCircle;
 
         private OsuSlider _slider;
 
@@ -28,11 +29,13 @@ namespace Assets.Scripts.OsuEditor.HitObjects
             gameObject.transform.localPosition = OsuMath.OsuCoordsToUnity(new Vector2(_slider.X, _slider.Y));
             GetComponent<PrinterNumber>().Print(_slider.ComboNumber);
             GetComponent<Image>().color = _slider.ComboColor;
+            _lastCircle.color = _slider.ComboColor;
 
             _slider.UpdateBezierPoints();
             PrintSliderPoints();
-            PrintBezePoints();
+            PrintBezierPoints();
             PrintReverseArrow();
+            _lastCircle.transform.localPosition = OsuMath.OsuCoordsToUnity(_slider.BezierPoints.Last())-new Vector2(transform.localPosition.x,transform.localPosition.y);
         }
 
         private void OnMouseDown()
@@ -81,7 +84,7 @@ namespace Assets.Scripts.OsuEditor.HitObjects
             }
         }
 
-        public void PrintBezePoints()
+        public void PrintBezierPoints()
         {
             _sliderLineRenderer.positionCount = _slider.BezierPoints.Count;
             _sliderLineRenderer.startColor = _slider.ComboColor;

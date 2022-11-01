@@ -17,8 +17,6 @@ namespace Assets.Scripts.MapInfo
         public List<Color> Colors;
         public List<OsuHitObject> OsuHitObjects;
 
-        private Dictionary<int, ComboInfo> _comboInfos;
-
         private List<TimingPoint> _timingPoints;
         public ReadOnlyCollection<TimingPoint> TimingPoints => _timingPoints.AsReadOnly();
 
@@ -32,19 +30,16 @@ namespace Assets.Scripts.MapInfo
             _timingPoints = new List<TimingPoint>();
             Colors = new List<Color>();
             OsuHitObjects = new List<OsuHitObject>();
-            _comboInfos = new Dictionary<int, ComboInfo>();
         }
 
         public void UpdateComboInfos()
         {
-            //_comboInfos.Clear();
             OsuHitObjects.Sort();
 
             int lastColorIndex = 0, lastNumber = 1;
             foreach (OsuHitObject hitObject in OsuHitObjects)
             {
                 int newColorIndex = hitObject.UpdateComboColor(Colors.ToArray(), lastColorIndex, lastNumber);
-                Debug.Log($"{lastColorIndex} {newColorIndex}");
                 if (newColorIndex != lastColorIndex)
                 {
                     lastColorIndex = newColorIndex;
@@ -55,11 +50,6 @@ namespace Assets.Scripts.MapInfo
                     lastNumber++;
                 }
             }
-        }
-
-        public ComboInfo GetComboInfo(int time)
-        {
-            return _comboInfos[time];
         }
 
         public void AddHitObject(OsuHitObject obj)
