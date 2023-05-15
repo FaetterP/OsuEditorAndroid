@@ -6,12 +6,10 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.OsuEditor.Timeline.Timemarks
 {
-    class TimemarkCircle : TimemarkHitObject
+    class TimemarkCircleGO : TimemarkHitObjectGO
     {
         public OsuCircle _circle;
         private CanvasHolder _holder;
-
-        private static TimemarkCircle s_circleTimemark;
 
         void Awake()
         {
@@ -41,7 +39,7 @@ namespace Assets.Scripts.OsuEditor.Timeline.Timemarks
 
         void OnDestroy()
         {
-            _creator.RemoveCircleMarkFromScreen(_time);
+            _creator.RemoveTimemarkFromScreen(_timemark);
         }
 
         void OnTriggerEnter2D(Collider2D col)
@@ -54,34 +52,21 @@ namespace Assets.Scripts.OsuEditor.Timeline.Timemarks
 
         }
 
-        public override void Init(OsuHitObject circle)
+        public override void Init(Timemark timemark)
         {
-            _circle = circle as OsuCircle;
-            //base.Init(circle);
+            _circle = (timemark as TimemarkHitObject).HitObject as OsuCircle;
+            base.Init(timemark);
         }
 
-        public TimemarkCircle Clone()
+        public TimemarkCircleGO Clone()
         {
-            return (TimemarkCircle)MemberwiseClone();
+            return (TimemarkCircleGO)MemberwiseClone();
         }
 
         virtual protected void ActiveCanvases()
         {
             _holder.SetActiveCircle(true);
             _holder.SetActiveSlider(false);
-        }
-
-        public static TimemarkCircle GetCircleMark(OsuCircle circle)
-        {
-            if (s_circleTimemark == null)
-                s_circleTimemark = Resources.Load<TimemarkCircle>("CircleTimemark");
-
-            TimemarkCircle ret = s_circleTimemark.Clone();
-            ret._time = circle.Time;
-            ret._circle = circle;
-
-            ret.Init(circle);
-            return ret;
         }
     }
 }

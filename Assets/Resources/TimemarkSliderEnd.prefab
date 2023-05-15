@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114667186759248402}
   - component: {fileID: 58144121554915110}
   m_Layer: 5
-  m_Name: SliderTimemarkStart
+  m_Name: TimemarkSliderEnd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1877728921493076}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37a7bcf66f44c2343aff959f2f800fd1, type: 3}
+  m_Script: {fileID: 11500000, guid: 335c4157deb74504cbbca9fd718e77ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114803662423187256
@@ -75,7 +75,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 7976c64762c68cc42a0fab3862e1e64d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 84d478f79b98eed4ca6ed5926e3180cc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

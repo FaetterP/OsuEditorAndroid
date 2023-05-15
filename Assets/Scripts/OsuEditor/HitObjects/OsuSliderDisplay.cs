@@ -35,7 +35,8 @@ namespace Assets.Scripts.OsuEditor.HitObjects
             PrintSliderPoints();
             PrintBezierPoints();
             PrintReverseArrow();
-            _lastCircle.transform.localPosition = OsuMath.OsuCoordsToUnity(_slider.BezierPoints.Last())-new Vector2(transform.localPosition.x,transform.localPosition.y);
+            Vector2 localPosition = new Vector2(transform.localPosition.x, transform.localPosition.y);
+            _lastCircle.transform.localPosition = OsuMath.OsuCoordsToUnity(_slider.BezierPoints.Last()) - localPosition;
         }
 
         private void OnMouseDown()

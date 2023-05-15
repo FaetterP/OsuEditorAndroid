@@ -4,12 +4,10 @@ using UnityEngine;
 
 namespace Assets.Scripts.OsuEditor.Timeline.Timemarks
 {
-    class TimemarkSpinnerStart : TimemarkHitObject
+    class TimemarkSpinnerStartGO : TimemarkHitObjectGO
     {
         private OsuSpinner _spinner;
         private CanvasHolder _holder;
-
-        private static TimemarkSpinnerStart s_spinnerStartTimemark;
 
         void Awake()
         {
@@ -30,26 +28,10 @@ namespace Assets.Scripts.OsuEditor.Timeline.Timemarks
             _holder.SetActiveSlider(false);
         }
 
-        public new TimemarkSpinnerStart Clone()
+        public override void Init(Timemark timemark)
         {
-            return (TimemarkSpinnerStart)MemberwiseClone();
-        }
-
-        public static TimemarkSpinnerStart GetTimemark(OsuSpinner obj)
-        {
-            if (s_spinnerStartTimemark == null)
-                s_spinnerStartTimemark = Resources.Load<TimemarkSpinnerStart>("SpinnerTimemarkStart");
-
-            TimemarkSpinnerStart ret = s_spinnerStartTimemark.Clone();
-            ret._spinner = obj;
-            ret._time = obj.Time;
-
-            return ret;
-        }
-
-        public override void Init(OsuHitObject hitObjecet)
-        {
-            _spinner = hitObjecet as OsuSpinner;
+            _spinner = (timemark as TimemarkHitObject).HitObject as OsuSpinner;
+            base.Init(timemark);
         }
     }
 }

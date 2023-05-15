@@ -1,7 +1,7 @@
-﻿using Assets.Scripts.OsuEditor.Timeline.Timemarks;
-using UnityEngine;
+﻿using Assets.Scripts.OsuEditor.HitObjects;
+using Assets.Scripts.OsuEditor.Timeline.Timemarks;
 using System;
-using Assets.Scripts.OsuEditor.HitObjects;
+using UnityEngine;
 
 namespace Assets.Scripts.MapInfo.HitObjects
 {
@@ -59,10 +59,10 @@ namespace Assets.Scripts.MapInfo.HitObjects
         {
             TimemarkHitObject[] ret = new TimemarkHitObject[2];
 
-            TimemarkSpinnerStart toAdd = TimemarkSpinnerStart.GetTimemark(this);
+            TimemarkHitObject toAdd = new TimemarkHitObject(_timeStart, this, "Start");
             ret[0] = toAdd;
 
-            TimemarkSpinnerEnd toAdd2 = TimemarkSpinnerEnd.GetTimemark(this);
+            TimemarkHitObject toAdd2 = new TimemarkHitObject(_timeEnd, this, "End");
             ret[1] = toAdd2;
 
             return ret;

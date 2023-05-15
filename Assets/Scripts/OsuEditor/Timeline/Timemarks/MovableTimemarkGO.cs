@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.OsuEditor.Timeline.Timemarks
 {
-    abstract class MovableTimemark : Timemark
+    abstract class MovableTimemarkGO : TimemarkGO
     {
         private bool _isMoving;
 
@@ -50,7 +50,7 @@ namespace Assets.Scripts.OsuEditor.Timeline.Timemarks
 
         private void UpdateTime()
         {
-            TimemarkLine[] marks = FindObjectsOfType<TimemarkLine>();
+            TimemarkLineGO[] marks = FindObjectsOfType<TimemarkLineGO>();
             double dist = 1000000;
             int newTime = 0;
 

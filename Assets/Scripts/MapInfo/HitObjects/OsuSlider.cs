@@ -147,18 +147,18 @@ namespace Assets.Scripts.MapInfo.HitObjects
         {
             TimemarkHitObject[] ret = new TimemarkHitObject[_countOfSlides + 1];
 
-            TimemarkSliderStart toAdd = TimemarkSliderStart.GetSliderStartMark(this);
+            TimemarkHitObject toAdd = new TimemarkHitObject(_timeStart, this, "Start");
             ret[0] = toAdd;
 
 
-            TimemarkSlider toAdd1 = TimemarkSlider.GetSliderEndMark(this);
+            TimemarkHitObject toAdd1 = new TimemarkHitObject(_timeEnd, this, "End");
             ret[_countOfSlides] = toAdd1;
 
             TimingPoint timingPoint = Global.Map.GetNearestTimingPointLeft(Time, false);
             for (int i = 1; i < CountOfSlides; i++)
             {
                 int time = Time + (int)Global.Map.SliderLengthToAddedTime(_length, timingPoint.Mult, timingPoint.BeatLength) * i;
-                TimemarkSlider toAdd2 = TimemarkSlider.GetSliderMiddleMark(this, time);
+                TimemarkHitObject toAdd2 = new TimemarkHitObject(time, this, "");
                 ret[i] = toAdd2;
             }
 

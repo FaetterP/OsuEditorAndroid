@@ -1,84 +1,27 @@
-﻿using Assets.Scripts.MapInfo;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.OsuEditor.Timeline.Timemarks
 {
     class TimemarkLine : Timemark
     {
-        private Color _color;
-        private int _height;
+        public readonly Color Color;
+        public readonly int Height;
 
-        private static TimemarkLine s_TimemarkLine;
+        private static TimemarkLineGO s_TimemarkLine;
 
-        void Start()
+        public TimemarkLine(int time, Color color, int heigth) : base(time)
         {
-            GetComponent<Image>().color = _color;
-
-            var newScale = transform.localScale;
-            newScale.y = _height;
-            transform.localScale = newScale;
+            Color = color;
+            Height = heigth;
         }
 
-        public override void Init(Timemark other)
-        {
-            TimemarkLine otherLine = other as TimemarkLine;
-
-            _height = otherLine._height;
-            _color = otherLine._color;
-
-            base.Init(other);
-        }
-
-        public static TimemarkLine GetTimingPointMark(TimingPoint point)
+        public override void SpawnGameObject()
         {
             if (s_TimemarkLine == null)
-                s_TimemarkLine = Resources.Load<TimemarkLine>("TimemarkLine");
-
-            TimemarkLine mark = s_TimemarkLine.Clone();
-
-            mark._time = point.Offset;
-            mark._color = Color.green;
-            mark._height = 100;
+                s_TimemarkLine = Resources.Load<TimemarkLineGO>("TimemarkLine");
 
 
-            if (point.isParent)
-                mark._color = Color.red;
-
-            return mark;
-        }
-
-        public static TimemarkLine GetBeatMark(int time)
-        {
-            if (s_TimemarkLine == null)
-                s_TimemarkLine = Resources.Load<TimemarkLine>("TimemarkLine");
-
-            TimemarkLine mark = s_TimemarkLine.Clone();
-
-            mark._time = time;
-            mark._color = Color.white;
-            mark._height = 50;
-
-            return mark;
-        }
-
-        public static TimemarkLine GetMiddleMark(int time, Color color)
-        {
-            if (s_TimemarkLine == null)
-                s_TimemarkLine = Resources.Load<TimemarkLine>("TimemarkLine");
-
-            TimemarkLine mark = s_TimemarkLine.Clone();
-
-            mark._time = time;
-            mark._color = color;
-            mark._height = 30;
-
-            return mark;
-        }
-
-        public new TimemarkLine Clone()
-        {
-            return (TimemarkLine)MemberwiseClone();
+            GameObject.Instantiate(s_TimemarkLine, GameObject.Find("TimeMarksLine").transform).Init(this);
         }
     }
 }

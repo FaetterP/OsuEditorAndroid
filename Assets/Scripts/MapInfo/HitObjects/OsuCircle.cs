@@ -149,10 +149,9 @@ namespace Assets.Scripts.MapInfo.HitObjects
 
         public override TimemarkHitObject[] GetTimemark()
         {
-            TimemarkCircle[] ret = new TimemarkCircle[1];
+            TimemarkHitObject[] ret = new TimemarkHitObject[1];
 
-            TimemarkCircle toAdd = TimemarkCircle.GetCircleMark(this);
-            toAdd.Init(this);
+            TimemarkHitObject toAdd = new TimemarkHitObject(_time, this, "");
             ret[0] = toAdd;
 
             return ret;
