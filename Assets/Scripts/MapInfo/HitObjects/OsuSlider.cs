@@ -21,7 +21,7 @@ namespace Assets.Scripts.MapInfo.HitObjects
         private double _length;
 
         private int _timeEnd;
-        private List<Vector2> _bezierPoints = new List<Vector2>();
+        private List<Vector2> _printedPoints = new List<Vector2>();
 
         private static OsuSliderDisplay s_sliderDisplay;
 
@@ -72,6 +72,8 @@ namespace Assets.Scripts.MapInfo.HitObjects
 
         public int TimeEnd => _timeEnd;
 
+        public double Length => _length;
+
         public int ComboSum
         {
             get
@@ -88,7 +90,7 @@ namespace Assets.Scripts.MapInfo.HitObjects
             }
         }
 
-        public ReadOnlyCollection<Vector2> BezierPoints => _bezierPoints.AsReadOnly();
+        public ReadOnlyCollection<Vector2> PrintedPoints => _printedPoints.AsReadOnly();
 
         public ReadOnlyCollection<SliderPoint> SliderPoints => _sliderPoints.AsReadOnly();
 
@@ -127,7 +129,7 @@ namespace Assets.Scripts.MapInfo.HitObjects
 
             _xStart = (int)coords.x;
             _yStart = (int)coords.y;
-            UpdateBezierPoints();
+            UpdatePrintedPoints();
         }
 
         public void SetTimeStart(int newTime)
@@ -199,21 +201,23 @@ namespace Assets.Scripts.MapInfo.HitObjects
             }
         }
 
-        public void UpdateBezierPoints()
+        public void UpdatePrintedPoints()
         {
-            _bezierPoints.Clear();
+            _printedPoints.Clear();
             List<SliderPoint> toBeze = new List<SliderPoint>();
+            List<Vector2> bezierPoints;
+
             toBeze.Add(new SliderPoint(X, Y));
             foreach (var t in SliderPoints)
             {
                 if (t.IsStatic)
                 {
                     toBeze.Add(t);
-                    List<Vector2> vec = OsuMath.GetInterPointBeze(toBeze, 100);
+                    List<Vector2> vec = OsuMath.GetInterPointBeze(toBeze, toBeze.Count * 5);
 
                     for (int i = vec.Count - 1; i >= 0; i--)
                     {
-                        _bezierPoints.Add(vec[i]);
+                        _printedPoints.Add(vec[i]);
                     }
 
                     toBeze.Clear();
@@ -225,19 +229,70 @@ namespace Assets.Scripts.MapInfo.HitObjects
                 }
             }
 
-            List<Vector2> vec2 = OsuMath.GetInterPointBeze(toBeze, 100);
+            List<Vector2> vec2 = OsuMath.GetInterPointBeze(toBeze, toBeze.Count * 5);
             for (int i = vec2.Count - 1; i >= 0; i--)
             {
-                _bezierPoints.Add(vec2[i]);
+                _printedPoints.Add(vec2[i]);
             }
+
+            //var firstPoint = SliderPoints[0];
+            //toBeze.Add(new SliderPoint(X, Y));
+            //_printedPoints.Add(new Vector2(X, Y));
+            //if (firstPoint.IsStatic)
+            //{
+            //    _printedPoints.Add(new Vector2((float)firstPoint.x, (float)firstPoint.y));
+            //}
+
+            //for (int i = 1; i < SliderPoints.Count; i++)
+            //{
+            //    SliderPoint sliderPoint = SliderPoints[i];
+
+            //    if (SliderPoints[i - 1].IsStatic && sliderPoint.IsStatic)
+            //    {
+            //        _printedPoints.Add(new Vector2((float)sliderPoint.x, (float)sliderPoint.y));
+            //        //bezierPoints = OsuMath.GetInterPointBeze(new List<SliderPoint>() { sliderPoint, SliderPoints[i - 1] }, 10);
+
+            //        //for (int i0 = bezierPoints.Count - 1; i0 >= 0; i0--)
+            //        //{
+            //        //    _printedPoints.Add(bezierPoints[i0]);
+            //        //}
+            //        toBeze.Clear();
+            //        toBeze.Add(sliderPoint);
+            //        continue;
+            //    }
+
+            //    if (sliderPoint.IsStatic)
+            //    {
+            //        bezierPoints = OsuMath.GetInterPointBeze(toBeze, 10);
+
+            //        for (int i0 = bezierPoints.Count - 1; i0 >= 0; i0--)
+            //        {
+            //            _printedPoints.Add(bezierPoints[i0]);
+            //        }
+
+            //        toBeze.Clear();
+            //        toBeze.Add(sliderPoint);
+            //    }
+            //    else
+            //    {
+            //        toBeze.Add(sliderPoint);
+            //    }
+            //}
+            //bezierPoints = OsuMath.GetInterPointBeze(toBeze, 100);
+
+            //for (int i0 = bezierPoints.Count - 1; i0 >= 0; i0--)
+            //{
+            //    _printedPoints.Add(bezierPoints[i0]);
+            //}
+
         }
 
         public void UpdateLength()
         {
             _length = 0;
-            for (int i = 0; i < _bezierPoints.Count - 1; i++)
+            for (int i = 0; i < _printedPoints.Count - 1; i++)
             {
-                _length += Vector2.Distance(_bezierPoints[i], _bezierPoints[i + 1]);
+                _length += Vector2.Distance(_printedPoints[i], _printedPoints[i + 1]);
             }
         }
 

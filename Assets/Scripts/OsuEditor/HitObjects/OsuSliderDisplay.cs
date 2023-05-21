@@ -31,12 +31,12 @@ namespace Assets.Scripts.OsuEditor.HitObjects
             GetComponent<Image>().color = _slider.ComboColor;
             _lastCircle.color = _slider.ComboColor;
 
-            _slider.UpdateBezierPoints();
+            _slider.UpdatePrintedPoints();
             PrintSliderPoints();
-            PrintBezierPoints();
+            PrintSlider();
             PrintReverseArrow();
             Vector2 localPosition = new Vector2(transform.localPosition.x, transform.localPosition.y);
-            _lastCircle.transform.localPosition = OsuMath.OsuCoordsToUnity(_slider.BezierPoints.Last()) - localPosition;
+            _lastCircle.transform.localPosition = OsuMath.OsuCoordsToUnity(_slider.PrintedPoints.Last()) - localPosition;
         }
 
         private void OnMouseDown()
@@ -85,15 +85,15 @@ namespace Assets.Scripts.OsuEditor.HitObjects
             }
         }
 
-        public void PrintBezierPoints()
+        public void PrintSlider()
         {
-            _sliderLineRenderer.positionCount = _slider.BezierPoints.Count;
+            _sliderLineRenderer.positionCount = _slider.PrintedPoints.Count;
             _sliderLineRenderer.startColor = _slider.ComboColor;
             _sliderLineRenderer.endColor = _slider.ComboColor;
 
-            for (int i = 0; i < _slider.BezierPoints.Count; i++)
+            for (int i = 0; i < _slider.PrintedPoints.Count; i++)
             {
-                Vector2 vec = OsuMath.OsuCoordsToUnity(_slider.BezierPoints[i]);
+                Vector2 vec = OsuMath.OsuCoordsToUnity(_slider.PrintedPoints[i]);
                 vec -= new Vector2(transform.localPosition.x, transform.localPosition.y);
                 _sliderLineRenderer.SetPosition(i, vec);
             }
@@ -140,50 +140,69 @@ namespace Assets.Scripts.OsuEditor.HitObjects
 
         public Vector2 GetCurrentPoint()
         {
-            int timeLength = _slider.TimeEnd - _slider.Time;
-            int time1 = timeLength / _slider.CountOfSlides;
-            int currentTime = Global.MusicTime - _slider.Time;
+            //int timeLength = _slider.TimeEnd - _slider.Time;
+            //int time1 = timeLength / _slider.CountOfSlides;
+            //int currentTime = Global.MusicTime - _slider.Time;
 
-            int currentSlide = currentTime / time1;
-            currentTime %= time1;
-            int index = 0;
+            //int currentSlide = currentTime / time1;
+            //currentTime %= time1;
+            //int index = 0;
 
-            if (currentSlide < 0)
+            //if (currentSlide < 0)
+            //{
+            //    return new Vector2(1000, 1000);
+            //}
+            //else if (currentSlide % 2 == 0)
+            //{
+            //    index = OsuMath.ResizeValue(0, time1, 0, _slider.PrintedPoints.Count - 1, currentTime);
+            //}
+            //else
+            //{
+            //    index = _slider.PrintedPoints.Count - OsuMath.ResizeValue(0, time1, 0, _slider.PrintedPoints.Count, currentTime) - 1;
+            //}
+
+            //if (index < 0)
+            //    return new Vector2(1000, 1000);
+
+            //return _slider.PrintedPoints[index];
+            if (Global.MusicTime < _slider.Time)
             {
-                return new Vector2(1000, 1000);
+                return new Vector2(1000,1000);
             }
-            else if (currentSlide % 2 == 0)
+            float need = OsuMath.GetMarkX(Global.MusicTime, 0, (int)_slider.Length, _slider.Time, _slider.TimeEnd);
+            var points = _slider.PrintedPoints;
+            for (int i = 0; i < points.Count - 1; i++)
             {
-                index = OsuMath.ResizeValue(0, time1, 0, _slider.BezierPoints.Count - 1, currentTime);
-            }
-            else
-            {
-                index = _slider.BezierPoints.Count - OsuMath.ResizeValue(0, time1, 0, _slider.BezierPoints.Count, currentTime) - 1;
-            }
+                float distance = Vector2.Distance(points[i], points[i + 1]);
+                if (need - distance > 0)
+                {
+                    need -= distance;
+                    continue;
+                }
+                Vector2 ret = points[i] + (points[i + 1] - points[i]) * (need / distance);
+                return ret;
 
-            if (index < 0)
-                return new Vector2(1000, 1000);
-
-            return _slider.BezierPoints[index];
+            }
+            return points.Last();
         }
 
         private void PrintReverseArrow()
         {
             if (_slider.CountOfSlides > 1)
             {
-                Vector2 vec = _slider.BezierPoints[_slider.BezierPoints.Count - 1] - _slider.BezierPoints[_slider.BezierPoints.Count - 2];
+                Vector2 vec = _slider.PrintedPoints[_slider.PrintedPoints.Count - 1] - _slider.PrintedPoints[_slider.PrintedPoints.Count - 2];
                 int minus = Math.Sign(vec.y);
                 float angle = 180 - minus * Vector2.Angle(vec, Vector2.right);
 
                 var t = Instantiate(_reverseArrow, transform);
-                t.transform.localPosition = OsuMath.OsuCoordsToUnity(_slider.BezierPoints.Last()) - (Vector2)transform.localPosition;
+                t.transform.localPosition = OsuMath.OsuCoordsToUnity(_slider.PrintedPoints.Last()) - (Vector2)transform.localPosition;
                 t.transform.eulerAngles = new Vector3(0, 0, angle);
             }
         }
 
         public void UpdateBezier()
         {
-            _slider.UpdateBezierPoints();
+            _slider.UpdatePrintedPoints();
             _slider.UpdateLength();
             _slider.UpdateTimeEnd(Global.Map);
         }

@@ -73,10 +73,10 @@ namespace Assets
         public static double GetLengthOfSlider(OsuSlider slider)
         {
             double ret = 0;
-            for (int i = 0; i < slider.BezierPoints.Count - 1; i++)
+            for (int i = 0; i < slider.PrintedPoints.Count - 1; i++)
             {
-                Vector2 vec1 = UnityCoordsToOsu(slider.BezierPoints[i]);
-                Vector2 vec2 = UnityCoordsToOsu(slider.BezierPoints[i + 1]);
+                Vector2 vec1 = UnityCoordsToOsu(slider.PrintedPoints[i]);
+                Vector2 vec2 = UnityCoordsToOsu(slider.PrintedPoints[i + 1]);
                 ret += Math.Sqrt(Math.Pow(vec1.x - vec2.x, 2) + Math.Pow(vec1.y - vec2.y, 2));
             }
             return ret;

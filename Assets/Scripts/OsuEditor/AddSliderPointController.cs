@@ -18,7 +18,7 @@ namespace Assets.Scripts.OsuEditor
                     pos = OsuMath.UnityCoordsToOsu(pos);
                     SliderPoint added = new SliderPoint((int)pos.x, (int)pos.y);
                     (Global.SelectedHitObject as OsuSlider).AddSliderPoint(added);
-                    (Global.SelectedHitObject as OsuSlider).UpdateBezierPoints();
+                    (Global.SelectedHitObject as OsuSlider).UpdatePrintedPoints();
 
                     OsuSliderDisplay[] arr = FindObjectsOfType<OsuSliderDisplay>();
                     foreach (var t in arr)

@@ -10,6 +10,9 @@ namespace Assets.Scripts.OsuEditor.Timeline
 {
     class CreatorTimemarks : MonoBehaviour
     {
+        private List<Timemark> _timemarkLines = new List<Timemark>();
+        private List<Timemark> _timemarkHtObjects = new List<Timemark>();
+
         private List<Timemark> _marksToCreate = new List<Timemark>();
         private List<Timemark> _marksOnScreen = new List<Timemark>();
 
@@ -40,7 +43,7 @@ namespace Assets.Scripts.OsuEditor.Timeline
                 Destroy(t.gameObject);
             }
 
-            _marksToCreate = _marksToCreate.Where(val => val is TimemarkLine).ToList();
+            _timemarkHtObjects.Clear();
 
             foreach (OsuHitObject hitObject in Global.Map.OsuHitObjects)
             {
@@ -52,10 +55,14 @@ namespace Assets.Scripts.OsuEditor.Timeline
                         continue;
                     }
                     //Debug.Log($"{hitObject.Time} {_marksToCreate.Contains(timemark)} {timemark.Time}");
-                    _marksToCreate.Add(timemark);
+                    _timemarkHtObjects.Add(timemark);
                 }
             }
 
+            //_marksToCreate.Sort();
+            _marksToCreate.Clear();
+            _marksToCreate.AddRange(_timemarkLines);
+            _marksToCreate.AddRange(_timemarkHtObjects);
             _marksToCreate.Sort();
         }
 
@@ -72,7 +79,7 @@ namespace Assets.Scripts.OsuEditor.Timeline
                 Destroy(t.gameObject);
             }
 
-            _marksToCreate = _marksToCreate.Where(val => val is TimemarkHitObject).ToList();
+            _timemarkLines = _marksToCreate.Where(val => val is TimemarkHitObject).ToList();
             AddMainStepMarks();
 
             switch (step)
@@ -103,6 +110,11 @@ namespace Assets.Scripts.OsuEditor.Timeline
                     Devide(2, Color.magenta);
                     break;
             }
+
+            _marksToCreate.Clear();
+            _marksToCreate.AddRange(_timemarkLines);
+            _marksToCreate.AddRange(_timemarkHtObjects);
+            _marksToCreate.Sort();
         }
 
         private void AddMainStepMarks()
@@ -112,7 +124,7 @@ namespace Assets.Scripts.OsuEditor.Timeline
                 Color color = point.isParent ? Color.red : Color.green;
                 Timemark added = new TimemarkLine(point.Offset, color, 100);
 
-                _marksToCreate.Add(added);
+                _timemarkLines.Add(added);
             }
 
             ReadOnlyCollection<TimingPoint> parents = Global.Map.GetParentTimingPoints();
@@ -123,7 +135,7 @@ namespace Assets.Scripts.OsuEditor.Timeline
                 while (time < parents[i + 1].Offset)
                 {
                     Timemark added = new TimemarkLine((int)time, Color.white, 50);
-                    _marksToCreate.Add(added);
+                    _timemarkLines.Add(added);
                     time += parents[i].BeatLength;
                 }
             }
@@ -132,17 +144,17 @@ namespace Assets.Scripts.OsuEditor.Timeline
             while (time < Global.MusicLength)
             {
                 Timemark added = new TimemarkLine((int)time, Color.white, 50);
-                _marksToCreate.Add(added);
+                _timemarkLines.Add(added);
                 time += parents[parents.Count - 1].BeatLength;
             }
         }
         private void Devide(ushort num, Color color)
         {
             List<Timemark> toaddList = new List<Timemark>();
-            int count = _marksToCreate.Count;
+            int count = _timemarkLines.Count;
             for (int i = 0; i < count - 1; i++)
             {
-                Timemark prev = _marksToCreate[i];
+                Timemark prev = _timemarkLines[i];
                 if (prev is TimemarkLine == false)
                 {
                     continue;
@@ -150,27 +162,14 @@ namespace Assets.Scripts.OsuEditor.Timeline
 
                 for (int i0 = 1; i0 < num; i0++)
                 {
-                    Timemark next = GetNextLine(prev);
+                    Timemark next = _timemarkLines[i + 1];
                     int time = next.Time - prev.Time;
                     Timemark added = new TimemarkLine((int)(1f * prev.Time + time * i0 / num), color, 50);
                     toaddList.Add(added);
                 }
             }
-            _marksToCreate.AddRange(toaddList);
-            _marksToCreate.Sort();
-        }
-
-        private Timemark GetNextLine(Timemark timemark)
-        {
-            Debug.Log(_marksToCreate.IndexOf(timemark));
-            for (int i = _marksToCreate.IndexOf(timemark); i < _marksToCreate.Count; i++)
-            {
-                Timemark tm = _marksToCreate[i + 1];
-                if (tm is TimemarkLine)
-                    return tm;
-            }
-
-            return null;
+            _timemarkLines.AddRange(toaddList);
+            _timemarkLines.Sort();
         }
     }
 }

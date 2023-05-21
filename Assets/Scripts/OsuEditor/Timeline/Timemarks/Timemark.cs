@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.OsuEditor.Timeline.Timemarks
 {
-    abstract class Timemark: IComparable<Timemark>
+    abstract class Timemark : IComparable<Timemark>
     {
         private int _time;
         public int Time
@@ -25,7 +25,17 @@ namespace Assets.Scripts.OsuEditor.Timeline.Timemarks
 
         public int CompareTo(Timemark other)
         {
-            return _time.CompareTo(other._time);
+            int result = _time.CompareTo(other._time);
+            if (result != 0)
+                return result;
+
+            if (this is TimemarkHitObject && other is TimemarkLine)
+                return 1;
+
+            if (this is TimemarkLine && other is TimemarkHitObject)
+                return -1;
+
+            return 0;
         }
 
         public abstract void SpawnGameObject();
