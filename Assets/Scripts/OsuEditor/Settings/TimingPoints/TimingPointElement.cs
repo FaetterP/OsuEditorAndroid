@@ -34,7 +34,7 @@ namespace Assets.Scripts.OsuEditor.Settings.TimingPoints
                 isParent.color = new Color(91f / 255, 209f / 255, 11f / 255);
                 BPM.text = "x" + timingPoint.Mult;
             }
-            Offset.text = OsuMath.ConvertTimestampToSring(timingPoint.Offset);
+            Offset.text = OsuMath.ConvertTimestampToString(timingPoint.Offset);
             Meter.text = timingPoint.Meter + "/4";
             Volume.text = timingPoint.Volume.ToString();
             if (timingPoint.Kiai) { isKiai.sprite = kiai; }

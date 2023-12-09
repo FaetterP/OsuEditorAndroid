@@ -25,7 +25,7 @@ namespace Assets.Scripts.OsuEditor.AiMod.Messages
         public string GetTime()
         {
             if (_time.HasValue)
-                return OsuMath.ConvertTimestampToSring(_time.Value);
+                return OsuMath.ConvertTimestampToString(_time.Value);
             else
                 return "";
         }

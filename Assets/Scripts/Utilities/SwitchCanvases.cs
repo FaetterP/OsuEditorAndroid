@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.Utilities
 {
-    class SwitchCanvases : MonoBehaviour
+    class SwitchCanvases : MonoBehaviour // TODO: remove class
     {
         [SerializeField] private Canvas[] toEnable;
         [SerializeField] private Canvas[] toDisable;

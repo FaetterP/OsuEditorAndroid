@@ -10,7 +10,6 @@ namespace Assets.Scripts.OsuEditor.Settings
     class SaveMetadataAndGoBackButton : MonoBehaviour
     {
         [SerializeField] InputField artist, artistU, title, titleU, creator, difficulty, source, tags;
-        [SerializeField] Canvas toDisable, toEnable;
 
         void OnEnable()
         {
@@ -34,9 +33,6 @@ namespace Assets.Scripts.OsuEditor.Settings
             Global.Map.Metadata.Version = difficulty.text;
             Global.Map.Metadata.Source = source.text;
             Global.Map.Metadata.Tags = tags.text;
-
-            toEnable.gameObject.SetActive(true);
-            toDisable.gameObject.SetActive(false);
         }
     }
 }

@@ -6,7 +6,15 @@ namespace Assets.Scripts.OsuEditor
 {
     class CreatorHitObjects : MonoBehaviour
     {
+        private static CreatorHitObjects s_instance;
         private static List<OsuHitObject> _hitObjectsOnScreen = new List<OsuHitObject>();
+
+        public static CreatorHitObjects Instance => s_instance;
+
+        private void Awake()
+        {
+            s_instance = this;
+        }
 
         void Update()
         {

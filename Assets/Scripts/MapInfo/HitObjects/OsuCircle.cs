@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.OsuEditor.HitObjects;
+﻿using Assets.Scripts.OsuEditor;
+using Assets.Scripts.OsuEditor.HitObjects;
 using Assets.Scripts.OsuEditor.Timeline.Timemarks;
 using System;
 using UnityEngine;
@@ -118,7 +119,7 @@ namespace Assets.Scripts.MapInfo.HitObjects
             if (s_circleDisplay == null)
                 s_circleDisplay = Resources.Load<OsuCircleDisplay>("OsuCircle");
 
-            GameObject.Instantiate(s_circleDisplay, GameObject.Find("HitObjectsCanvas").transform).Init(this);
+            GameObject.Instantiate(s_circleDisplay, CreatorHitObjects.Instance.transform).Init(this);
         }
 
         public override int UpdateComboColor(Color[] colors, int lastColorIndex, int lastNumber)

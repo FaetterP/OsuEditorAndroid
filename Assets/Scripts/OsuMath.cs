@@ -16,7 +16,7 @@ namespace Assets
             return comb(n - 1, k - 1) + comb(n - 1, k);
         }
 
-        public static List<Vector2> GetInterPointBeze(List<SliderPoint> points, int n)
+        public static List<Vector2> GetInterPointBezier(List<SliderPoint> points, int n)
         {
             List<Vector2> ret = new List<Vector2>();
             double h = 1.0 / n;
@@ -59,7 +59,7 @@ namespace Assets
 
         }
 
-        public static string ConvertTimestampToSring(int timestamp)
+        public static string ConvertTimestampToString(int timestamp)
         {
             string ret = "";
             ret += timestamp / 60000 + ":";

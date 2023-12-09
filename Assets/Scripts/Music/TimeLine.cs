@@ -30,7 +30,7 @@ namespace Assets.Scripts.Music
             {
                 music.time = (float)(1.0 * thisSlider.value / 1000);
             }
-            timer.text = OsuMath.ConvertTimestampToSring((int)(music.time * 1000));
+            timer.text = OsuMath.ConvertTimestampToString((int)(music.time * 1000));
         }
     }
 }
