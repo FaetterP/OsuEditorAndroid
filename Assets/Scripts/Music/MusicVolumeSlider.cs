@@ -7,8 +7,8 @@ namespace Assets.Scripts.Music
     class MusicVolumeSlider : MonoBehaviour
     {
         [SerializeField] private AudioSource _music;
-                         private Slider _thisSlider;
-        
+        private Slider _thisSlider;
+
         void Awake()
         {
             _thisSlider = GetComponent<Slider>();

@@ -46,7 +46,6 @@ namespace Assets.Scripts.OsuEditor.HitObjects
 
         private void Update()
         {
-            int razn = _slider.Time - Global.MusicTime;
             if (_slider.Time - Global.MusicTime > Global.AR_ms || _slider.TimeEnd - Global.MusicTime < 0)
             {
                 Destroy(gameObject);

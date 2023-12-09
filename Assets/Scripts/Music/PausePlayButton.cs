@@ -1,9 +1,4 @@
-﻿using Assets.Scripts.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Music
@@ -12,12 +7,13 @@ namespace Assets.Scripts.Music
     {
         [SerializeField] private Sprite toPlay = null, toPause = null;
         [SerializeField] private AudioSource music;
-                         private Image thisImage = null;
+        private Image thisImage = null;
 
         void Awake()
         {
             thisImage = GetComponent<Image>();
         }
+
         void Start()
         {
             thisImage.sprite = toPlay;

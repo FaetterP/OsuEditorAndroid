@@ -7,7 +7,7 @@ namespace Assets.Scripts.Music
     class MusicSpeedSlider : MonoBehaviour
     {
         [SerializeField] private AudioSource _music;
-                         private Slider _thisSlider;
+        private Slider _thisSlider;
 
         void Awake()
         {

@@ -11,7 +11,7 @@ namespace Assets.Scripts.MapInfo.HitObjects
         private int _x, _y;
         private int _time;
         private int _comboSum;
-        public bool Clap, Finish, Whisle;
+        public bool Clap, Finish, Whistle;
         private int _sampleset;
         private int _additions;
 
@@ -31,7 +31,7 @@ namespace Assets.Scripts.MapInfo.HitObjects
             int soundsBinary = int.Parse(param[4]);
             if (soundsBinary >= 8) { Clap = true; soundsBinary -= 8; }
             if (soundsBinary >= 4) { Finish = true; soundsBinary -= 4; }
-            if (soundsBinary >= 2) { Whisle = true; }
+            if (soundsBinary >= 2) { Whistle = true; }
 
             string[] otherParams = param[5].Split(':');
             _sampleset = int.Parse(otherParams[0]);

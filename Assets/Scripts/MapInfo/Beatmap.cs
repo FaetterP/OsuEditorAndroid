@@ -123,7 +123,7 @@ namespace Assets.Scripts.MapInfo
                 "\n" +
                 "[Events]\n" +
                 "//Background and Video events\n" +
-                "0,0,\"" + Events.BackgroungImage + "\",0,0\n" +
+                "0,0,\"" + Events.BackgroundImage + "\",0,0\n" +
                 "//Break Periods\n" +
                 "//Storyboard Layer 0 (Background)\n" +
                 "//Storyboard Layer 1 (Fail)\n" +

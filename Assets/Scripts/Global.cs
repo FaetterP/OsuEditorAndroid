@@ -18,8 +18,8 @@ namespace Assets
             }
         }
 
-        public static string FullPathToMapFolder = @"C:\Users\FaetterP\AppData\LocalLow\faetterp\osueditor\beatmap-637254798315041883-NieR Automata OST Amusement Park Dynamic Vocals/";
-        public static string FullPathToMap = @"C:\Users\FaetterP\AppData\LocalLow\faetterp\osueditor\beatmap-637254798315041883-NieR Automata OST Amusement Park Dynamic Vocals/NieRAutomata - Amusement park (FaetterP) [Easy].osu";
+        public static string FullPathToMapFolder = "";
+        public static string FullPathToMap = "";
 
         public static LeftStatus? LeftStatus = null;
         public static OsuHitObject SelectedHitObject;

@@ -15,7 +15,7 @@ namespace Assets.Scripts.CreateLoad
         {
             if (IsContainsFiles())
             {
-                FndlMusicAndBackground();
+                FindMusicAndBackground();
                 SceneManager.LoadScene((int)Scenes.CreateMap);
             }
             else
@@ -32,7 +32,7 @@ namespace Assets.Scripts.CreateLoad
             return containsMusic && containsImage;
         }
 
-        private void FndlMusicAndBackground()
+        private void FindMusicAndBackground()
         {
             var files = new DirectoryInfo(Global.FullPathToMapFolder).GetFiles();
             foreach (var file in files)
@@ -41,7 +41,7 @@ namespace Assets.Scripts.CreateLoad
                     Global.Map.General.AudioFilename = file.Name;
 
                 if (file.Name.EndsWith(".jpg"))
-                    Global.Map.Events.BackgroungImage = file.Name;
+                    Global.Map.Events.BackgroundImage = file.Name;
             }
         }
     }

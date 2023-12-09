@@ -1,6 +1,4 @@
 ﻿using Assets.Scripts.MapInfo.HitObjects;
-using Assets.Scripts.OsuEditor.HitObjects;
-using Assets.Scripts.OsuEditor.HitObjects.SliderStuff;
 using System;
 using System.Collections.Generic;
 using UnityEngine;

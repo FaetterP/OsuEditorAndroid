@@ -20,7 +20,7 @@ namespace Assets.Scripts.OsuEditor.AiMod.Modules
                 if(hitObject is OsuCircle)
                 {
                     OsuCircle circle = hitObject as OsuCircle;
-                    if (circle.Clap || circle.Finish || circle.Whisle)
+                    if (circle.Clap || circle.Finish || circle.Whistle)
                     {
                         return ret;
                     }

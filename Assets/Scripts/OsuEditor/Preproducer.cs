@@ -18,7 +18,7 @@ namespace Assets.Scripts.Editor
 
         void Awake()
         {
-            _wwwBackground = new WWW("file:///" + Global.FullPathToMapFolder + Global.Map.Events.BackgroungImage);
+            _wwwBackground = new WWW("file:///" + Global.FullPathToMapFolder + Global.Map.Events.BackgroundImage);
         }
 
         void Start()

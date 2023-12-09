@@ -7,7 +7,7 @@ namespace Assets.Scripts.Music
     {
         [SerializeField] private AudioSource music;
         [SerializeField] private Text timer;
-                         private Slider thisSlider;
+        private Slider thisSlider;
 
         void Awake()
         {

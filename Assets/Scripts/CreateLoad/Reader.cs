@@ -65,7 +65,7 @@ namespace Assets.Scripts.CreateLoad
             map.Difficulty.SliderTickRate = GetIntValue("SliderTickRate:");
 
             string[] backgroundParams = GetValue("0,0,").Split(',');
-            map.Events.BackgroungImage = backgroundParams[0].Remove(backgroundParams[0].Length - 1, 1).Remove(0, 1);
+            map.Events.BackgroundImage = backgroundParams[0].Remove(backgroundParams[0].Length - 1, 1).Remove(0, 1);
             map.Events.xOffset = int.Parse(backgroundParams[1]);
             map.Events.yOffset = int.Parse(backgroundParams[2]);
 

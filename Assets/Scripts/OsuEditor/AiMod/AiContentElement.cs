@@ -9,7 +9,7 @@ namespace Assets.Scripts.OsuEditor.AiMod
         [SerializeField] private Image _icon;
         [SerializeField] private Text _text;
         [SerializeField] private Text _time;
-                         private AiMessage _message;
+        private AiMessage _message;
 
         private void Start()
         {

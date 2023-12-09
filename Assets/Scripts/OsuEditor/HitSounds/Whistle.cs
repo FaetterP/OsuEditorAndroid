@@ -16,7 +16,7 @@ namespace Assets.Scripts.OsuEditor.HitSounds
 
         void OnEnable()
         {
-            if ((Global.SelectedHitObject as OsuCircle).Whisle)
+            if ((Global.SelectedHitObject as OsuCircle).Whistle)
             {
                 _thisImage.color = new Color(1, 1, 1, 1);
             }
@@ -28,14 +28,14 @@ namespace Assets.Scripts.OsuEditor.HitSounds
         void OnMouseDown()
         {
             OsuCircle c = (Global.SelectedHitObject as OsuCircle);
-            if (c.Whisle)
+            if (c.Whistle)
             {
-                c.Whisle = false;
+                c.Whistle = false;
                 _thisImage.color = new Color(1, 1, 1, 0.5f);
             }
             else
             {
-                c.Whisle = true;
+                c.Whistle = true;
                 _thisImage.color = new Color(1, 1, 1, 1);
             }
         }

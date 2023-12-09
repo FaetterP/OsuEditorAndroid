@@ -6,7 +6,7 @@ namespace Assets.Scripts.OsuEditor.AiMod
     class AiMessagesLoader : MonoBehaviour
     {
         [SerializeField] private AiContentElement _element;
-                         private SearchEngine _search = new SearchEngine(new SeekerClassic());
+        private SearchEngine _search = new SearchEngine(new SeekerClassic());
 
         private void Start()
         {

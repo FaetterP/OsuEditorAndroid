@@ -5,7 +5,7 @@ namespace Assets.Scripts.MapInfo
 {
     class Events
     {
-        public string BackgroungImage;
+        public string BackgroundImage;
         public int xOffset, yOffset; //TODO
         public List<int> BreakPeriods = new List<int>(); //TODO
         public string storyboard; //TODO

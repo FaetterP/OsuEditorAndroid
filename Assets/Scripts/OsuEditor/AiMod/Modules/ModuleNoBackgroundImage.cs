@@ -14,7 +14,7 @@ namespace Assets.Scripts.OsuEditor.AiMod.Modules
         {
             List<AiMessage> ret = new List<AiMessage>();
 
-            if (Global.Map.Events.BackgroungImage == "")
+            if (Global.Map.Events.BackgroundImage == "")
                 ret.Add(new Error(_message.GetValue(), null));
 
             return ret;

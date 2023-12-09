@@ -55,6 +55,14 @@
     "dotnet.defaultSolution": "OsuEditorAndroid.sln",
     "cSpell.words": [
         "beatmap",
+        "colour",
+        "colours",
+        "fieldname",
+        "hitsounds",
+        "kiai",
+        "mapset",
+        "mapsets",
+        "sampleset",
         "timemark",
         "timemarks"
     ]
